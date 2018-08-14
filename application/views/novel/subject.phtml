@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="/css/pintuer.css">
+<link rel="stylesheet" href="/css/admin.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/pintuer.js"></script>
+</head>
+<body>
+
+<div class="panel admin-panel">
+    <div class="panel-head"><strong class="icon-reorder"> 小说临时目录管理</strong></div>
+    <div class="button-group">
+        <a href="/novel/subjectStatus?id=<?=$_GET['id']?>" class="button"> 就绪</a>
+    </div>
+    <table class="table table-hover text-center">
+        <tr>
+            <th>ID</th>
+            <th>目录名称</th>
+            <th>目录url</th>
+            <th>状态</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+        <?php foreach($list as $key=>$value){ ?>
+            <tr>
+                <td><?=$key+1?></td>
+                <td><?=$value['title']?></td>
+                <td><?=$value['url']?></td>
+                <td><?=isset(NovelTmpModel::$_novel_tmp_status[$value['status']])?NovelTmpModel::$_novel_tmp_status[$value['status']]:""?></td>
+                <td><?=date("Y-m-d H:i:s",$value['create_time'])?></td>
+                <td>
+                    <div class="button-group">
+                        <a class="button edit_button" data-novel_class="<?=$value['novel_class_id']?>" data-author_id="<?=$value['author_id'].'_'.$value['author_name']?>" data-novel_id="<?=$value['id']?>" data-name="<?=$value['name']?>" data-description="<?=$value['content']?>">编辑</a>
+                        </div>
+                </td>
+            </tr>
+        <?php }?>
+        <tr>
+
+            <td colspan="8">
+                <?=$pageHtml?>
+            </td>
+        </tr>
+    </table>
+</div>
+<script>
+    $(".edit_button").click(
+        function () {
+            var id = $(this).data("novel_id");
+            $("#novel_id").val(id);
+            $("#name").val($(this).data("name"));
+            $("#description").val($(this).data("description"));
+            $("#author").val($(this).data("author_id"));
+            $("#novel_class").val($(this).data("novel_class"))
+            $("#edit_window").show();
+
+        }
+    );
+    $("#add_button").click(
+        function () {
+            $("#novel_id").val("");
+            $("#edit_window").show();
+        }
+    );
+    $(".del_button").click(function () {
+        var name = $(this).data("name");
+        if(confirm("确定要删除吗？（"+name+"）")){
+            return true;
+        }else{
+            return false;
+        }
+    });
+
+    $(".limit_button").click(function () {
+        var name = $(this).data("name");
+        if(confirm("确定要冻结吗？（"+name+"）")){
+            return true;
+        }else{
+            return false;
+        }
+    });
+
+</script>
+</body>
+</html>

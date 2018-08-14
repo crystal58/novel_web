@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="/css/pintuer.css">
+<link rel="stylesheet" href="/css/admin.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/pintuer.js"></script>
+</head>
+<body>
+<div class="panel admin-panel margin-top" id="add">
+  <div class="panel-head"><input type="button" value="添加小说" id="add_button"></div>
+  <div class="body-content" style="display: none"  id="edit_window">
+    <form method="post" class="form-x" action="/novel/add" id="edit_window_form">
+      <div class="form-group" >
+        <div class="label">
+          <label>小说名称：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="" id="name" name="name" data-validate="required:请输入小说名称" />
+          <div class="tips"></div>
+        </div>
+      </div>
+        <div class="form-group">
+          <div class="label">
+              <label>小说简介：</label>
+          </div>
+          <div class="field">
+              <textarea class="" style="width:350px;height: 100px" value="" id="description" name="description"></textarea>
+              <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+              <label>小说作者：</label>
+          </div>
+          <div class="field">
+              <div class="field">
+                  <select name="author" id="author">
+                      <option value=""></option>
+                      <?php foreach ($this->author_list as $value){ ?>
+                          <option value="<?=$value['id']."_".$value['author_name']?>"><?=$value['author_name']?></option>
+                      <?php }?>
+                  </select>
+              </div>
+              <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+              <label>小说类型：</label>
+          </div>
+          <div class="field">
+              <div class="field">
+                  <select name="novel_class" id="novel_class">
+                      <option value=""></option>
+                      <?php foreach (NovelModel::$_novel_class_type as $key=>$value){ ?>
+                          <option value="<?=$key?>"><?=$value?></option>
+                      <?php }?>
+                  </select>
+              </div>
+              <div class="tips"></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <div class="label">
+                <label>小说录入状态：</label>
+            </div>
+            <div class="field">
+                <div class="field">
+                    <select name="record_status" id="record_status">
+                        <option value=""></option>
+                        <?php foreach (NovelModel::$_novel_flag_txt as $key=>$value){ ?>
+                            <option value="<?=$key?>"><?=$value?></option>
+                        <?php }?>
+                    </select>
+                </div>
+                <div class="tips"></div>
+            </div>
+        </div>
+
+          <input type="hidden" value="" name="novel_id" id="novel_id">
+          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+
+      </div>
+
+    </form>
+  </div>
+</div>
+<div class="panel admin-panel">
+    <div class="panel-head"><strong class="icon-reorder"> 小说列表管理</strong></div>
+    <table class="table table-hover text-center">
+        <tr>
+            <th>ID</th>
+            <th>小说名称</th>
+            <th>作者名称</th>
+            <th>小说类型</th>
+            <th>状态</th>
+            <th>创建时间</th>
+            <th>更新时间</th>
+            <th>操作</th>
+        </tr>
+        <?php foreach($novel_list as $value){ ?>
+            <tr>
+                <td><?=$value['id']?></td>
+                <td><?=$value['name']?></td>
+                <td><?=$value['author_name']?></td>
+                <td><?=isset(NovelModel::$_novel_class_type[$value['novel_class_id']])?NovelModel::$_novel_class_type[$value['novel_class_id']]:""?></td>
+                <td><?=$value['status'] == NovelModel::NOVEL_STATUS_OK ? "正常" : ($value['status'] == NovelModel::NOVEL_STATUS_DEL ? "删除": "冻结")?></td>
+                <td><?=date("Y-m-d H:i:s",$value['create_time'])?></td>
+                <td><?=date("Y-m-d H:i:s",$value['update_time'])?></td>
+                <td>
+                    <div class="button-group">
+                        <a class="button edit_button" data-novel_class="<?=$value['novel_class_id']?>" data-author_id="<?=$value['author_id'].'_'.$value['author_name']?>" data-novel_id="<?=$value['id']?>" data-name="<?=$value['name']?>" data-description="<?=$value['content']?>" data-record_status="<?=$value['record_status']?>">编辑</a>
+                        <a href="/novel/editStatus?id=<?=$value['id']?>&type=del" data-name="<?=$value['name']?>" class="button del_button"> 删除</a>
+                        <a href="/novel/editStatus?id=<?=$value['id']?>&type=limit" data-name="<?=$value['name']?>" class="button limit_button"> 冻结</a>
+                        <a href="/novel/subject?id=<?=$value['id']?>" class="button"> 目录</a>
+                    </div>
+                </td>
+            </tr>
+        <?php }?>
+        <tr>
+            <td colspan="8"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
+        </tr>
+    </table>
+</div>
+<script>
+    $(".edit_button").click(
+        function () {
+            var id = $(this).data("novel_id");
+            $("#novel_id").val(id);
+            $("#name").val($(this).data("name"));
+            $("#description").val($(this).data("description"));
+            $("#author").val($(this).data("author_id"));
+            $("#novel_class").val($(this).data("novel_class"));
+            $("#record_status").val($(this).data("record_status"));
+            $("#edit_window").show();
+
+
+
+        }
+    );
+    $("#add_button").click(
+        function () {
+            $("#novel_id").val("");
+            $('form')[0].reset();
+            $("#edit_window").show();
+        }
+    );
+    $(".del_button").click(function () {
+        var name = $(this).data("name");
+        if(confirm("确定要删除吗？（"+name+"）")){
+            return true;
+        }else{
+            return false;
+        }
+    });
+
+    $(".limit_button").click(function () {
+        var name = $(this).data("name");
+        if(confirm("确定要冻结吗？（"+name+"）")){
+            return true;
+        }else{
+            return false;
+        }
+    });
+
+</script>
+</body>
+</html>
