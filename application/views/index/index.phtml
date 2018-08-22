@@ -29,49 +29,33 @@
 <div class="content">
     <div class="sidebar">
     	<div class="side">
-            <h3>Web Templates</h3>
+            <h3>作者</h3>
             <ul>
-                <li><a href="category.html">Abstract</a></li>
-                <li><a href="category.html">Animals & Pets</a></li>
-                <li><a href="category.html">Art & Photography</a></li>
-                <li><a href="category.html">Beauty & Fashion</a></li>
-                <li><a href="category.html">Business</a></li>
-                <li><a href="category.html">Communications</a></li>
-                <li><a href="category.html">Computers & Technologys</a></li>
-                <li><a href="category.html">Shopping</a></li>
-                <li><a href="category.html">Sports & Fitness</a></li>
-                <li><a href="category.html">Travel & Hotel</a></li>
-                <li><a href="category.html">Web Hosting</a></li>
+                <?php foreach($this->author_list as $value){?>
+                <li><a href="category.html"><?=$value['author_name']?></a></li>
+                <?php }?>
             </ul>
         </div>
         <div class="side">
-            <h3>Mobile Templates</h3>
+            <h3>最新</h3>
             <ul>
-                <li><a href="category.html">Abstract</a></li>
-                <li><a href="category.html">Animals & Pets</a></li>
-                <li><a href="category.html">Art & Photography</a></li>
-                <li><a href="category.html">Beauty & Fashion</a></li>
-                <li><a href="category.html">Business</a></li>
-                <li><a href="category.html">Communications</a></li>
-                <li><a href="category.html">Computers & Technologys</a></li>
-                <li><a href="category.html">Shopping</a></li>
-                <li><a href="category.html">Sports & Fitness</a></li>
-                <li><a href="category.html">Travel & Hotel</a></li>
-                <li><a href="category.html">Web Hosting</a></li>
+                <?php foreach($this->novel_list as $value){?>
+                    <li><a href="category.html"><?=$value['name']?></a></li>
+                <?php }?>
             </ul>
         </div>
     </div>
     <div class="nav">
                 <ul>
-                    <li><a href="#">Flash Web Templates</a></li>
-                    <li><a href="#">Blog Web Templates</a></li>
-                    <li><a href="#">Mobile Web Templates</a></li>
-                    <li><a href="#">More</a></li>
+                    <li><a href="#">言情</a></li>
+                    <li><a href="#">武侠</a></li>
+                    <li><a href="#">现代</a></li>
+                    <li><a href="#">剧情</a></li>
                 </ul>
             </div>
 	<div class="main">
         <div class="grid">
-        	<div class="prev"><a href="single.html"><img src="http://lorempixel.com/150/150/food/" alt="" /></a></div>
+        	<div class="prev"><a href="single.html"><img src="" alt="" /></a></div>
             <ul class="details">
                 <li><a href="single.html">Corporate WebSites</a></li>
                 <li><a href="#">Html</a></li>

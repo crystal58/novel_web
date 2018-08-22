@@ -1,6 +1,21 @@
 <?php
 
 class TestController extends AbstractController{
+
+
+
+    public function testAction(){
+
+    }
+
+
+
+
+
+
+
+
+
     
    public $config = array(
             'host' => '127.0.0.1',

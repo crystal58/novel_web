@@ -9,6 +9,7 @@ use Service\AuthService;
 class AbstractController extends Yaf_Controller_Abstract {
     protected $_operatorName;
     protected $_operatorId;
+    protected $_json = false;
 
     public function getParam($key,$default = ""){
         return $this->getRequest()->getQuery( $key , $default );
@@ -21,8 +22,9 @@ class AbstractController extends Yaf_Controller_Abstract {
         $h = new \Yaf_Request_Http();
         return $h->get($key,$default);
     }
-//    public function init(){
-//
+    public function init(){
+
+
 //        $controllerName = $this->getRequest()->getControllerName();
 //        $auth = new AuthService();
 //        $data = $auth->Auth();
@@ -33,19 +35,27 @@ class AbstractController extends Yaf_Controller_Abstract {
 //        }
 //        $this->_operatorId = $data['i'];
 //        $this->_operatorName = $data['n'];
-//
-//    }
+
+    }
     protected function processException($class, $method, $e) {
         \YC\LoggerHelper::ERR('ACCESS_' . strtolower($class) . "_" . strtolower($method), $e->__toString());
         $result = array(
             "code" => $e->getCode(),
             "msg" => $e->getMessage()
         );
-        $this->_view->message = $result;
+        if($this->_json){
+            return $result;
+        }
+        $this->_view->message = "出错了";
         Yaf_Dispatcher::getInstance()->autoRender(FALSE);
         $this->getView()->display($this->getView()->getScriptPath() . "/error/error.phtml");
-
-//        return $result;
     }
-    
+
+    protected function renderJson(array $parameters = null) {
+        header("Content-Type: application/json; charset=utf8");
+        echo json_encode($parameters, JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
+
 }

@@ -8,16 +8,23 @@
 class IndexController extends AbstractController {
 
 	/** 
-     * 默认动作
-     * Yaf支持直接把Yaf_Request_Abstract::getParam()得到的同名参数作为Action的形参
-     * 对于如下的例子, 当访问http://yourhost/yafweb/index/index/index/name/crystal 的时候, 你就会发现不同
+     * 首页
      */
     public function indexAction() {
+        try{
+            $authorModel = new AuthorModel();
+            $params = array('status' => 1);
+            $authorList = $authorModel->getList($params);
+            $this->_view->author_list = $authorList['list'];
 
+            $novelModel = new NovelModel();
+            $result = $novelModel->novelList(array('status' => 1));
+            $this->_view->novel_list = $result['list'];
+
+        }catch (Exception $e) {
+            $this->processException($this->getRequest()->getControllerName(),$this->getRequest()->getActionName(),$e);
+        }
 
     }
-    public function infoAction(){
-        
-		$this->getView()->assign("message","Hello , Welcome ".$this->_operatorName);
-    }
+
 }
