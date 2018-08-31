@@ -40,7 +40,7 @@
             <h3>最新</h3>
             <ul>
                 <?php foreach($this->novel_list as $value){?>
-                    <li><a href="category.html"><?=$value['name']?></a></li>
+                    <li><a href="/xiaoshuo/detail_<?=$value['id']?>".html><?=$value['name']?></a></li>
                 <?php }?>
             </ul>
         </div>
@@ -56,10 +56,10 @@
 	<div class="main">
         <?php foreach($this->novel_list as $value){?>
         <div class="grid">
-        	<div class="prev"><a href="/xiaoshuo/detail_<?=$value['id']?>.html"><img src="" alt="" /></a></div>
+        	<div class="prev"><a href="/xiaoshuo/list_<?=$value['id']?>.html"><img src="" alt="" /></a></div>
             <ul class="details">
-                <li><a href="/xiaoshuo/detail_<?=$value['id']?>.html"><?=$value['name']?></a></li>
-                <li><a href="/xiaoshuo/detail_<?=$value['id']?>.html"><?=mb_substr($value['content'],0,80,"UTF-8")?></a></li>
+                <li><a href="/xiaoshuo/list_<?=$value['id']?>.html"><?=$value['name']?></a></li>
+                <li><a href="/xiaoshuo/list_<?=$value['id']?>.html"><?=mb_substr($value['content'],0,80,"UTF-8")?></a></li>
             </ul>
             <div class="clear"></div>
         </div>
