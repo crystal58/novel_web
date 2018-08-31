@@ -21,6 +21,8 @@ class IndexController extends AbstractController {
             $result = $novelModel->novelList(array('status' => 1));
             $this->_view->novel_list = $result['list'];
 
+
+
         }catch (Exception $e) {
             $this->processException($this->getRequest()->getControllerName(),$this->getRequest()->getActionName(),$e);
         }

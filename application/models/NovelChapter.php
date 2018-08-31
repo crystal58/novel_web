@@ -19,4 +19,29 @@ class NovelChapterModel extends AbstractModel {
         return $this->insert($data);
     }
 
+    public function chaptersList($params = array(),$offset = 0, $pageSize=20, $isCount=false){
+        if(empty($params) && empty($pageSize)){
+            return array();
+        }
+        $where = array();
+        foreach($params as $key=>$value){
+            $where['AND'] = array(
+                $key => $value
+            );
+        }
+
+        $result = array();
+        if($isCount){
+            $result['cnt'] = $this->count($where);
+        }
+        if($pageSize){
+            $where['LIMIT'] = array($offset,$pageSize);
+        }
+        $where['ORDER'] = array(
+            "chapter_order"=>"ASC"
+        );
+        $result['list'] = $this->fetchAll($where);
+        return $result;
+    }
+
 }

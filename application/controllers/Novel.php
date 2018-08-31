@@ -33,6 +33,25 @@ class NovelController extends AbstractController{
 
     public function detailAction(){
 
+        try{
+            $page = $this->get("page");
+            $page = $page > 0 ? $page : 1;
+            $offset = ($page-1)*50;
+            $novelId = $this->get("id");
+            $novelModel = new NovelModel();
+            $novelInfo = $novelModel->find($novelId);
+
+            $novelChapters = new NovelChapterModel();
+            $chaptersList = $novelChapters->chaptersList(array(),$offset,50,true);
+            echo json_encode($chaptersList);exit;
+            $page = new \YC\Page($chaptersList['count'],$page,50);
+            $pageHtml = $page->getPageHtml();
+
+            echo json_encode($novelInfo);exit;
+
+        }catch (Exception $e){
+            $this->processException($this->getRequest()->getControllerName(),$this->getRequest()->getActionName(),$e);
+        }
     }
 
 }

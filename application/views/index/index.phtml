@@ -54,100 +54,21 @@
                 </ul>
             </div>
 	<div class="main">
+        <?php foreach($this->novel_list as $value){?>
         <div class="grid">
-        	<div class="prev"><a href="single.html"><img src="" alt="" /></a></div>
+        	<div class="prev"><a href="/xiaoshuo/detail_<?=$value['id']?>.html"><img src="" alt="" /></a></div>
             <ul class="details">
-                <li><a href="single.html">Corporate WebSites</a></li>
-                <li><a href="#">Html</a></li>
-                <li><a href="#">Css</a></li>
-                <li><a href="#">Images</a></li>
-                <li><a href="#">More</a></li>
+                <li><a href="/xiaoshuo/detail_<?=$value['id']?>.html"><?=$value['name']?></a></li>
+                <li><a href="/xiaoshuo/detail_<?=$value['id']?>.html"><?=mb_substr($value['content'],0,80,"UTF-8")?></a></li>
             </ul>
             <div class="clear"></div>
         </div>
-        <div class="grid">
-        	<div class="prev"><a href="#"><img src="http://lorempixel.com/150/150/food/" alt="" /></a></div>
-            <ul class="details">
-                <li><a href="#">Corporate WebSites</a></li>
-                <li><a href="#">Html</a></li>
-                <li><a href="#">Css</a></li>
-                <li><a href="#">Images</a></li>
-                <li><a href="#">More</a></li>
-            </ul>
-            <div class="clear"></div>
-        </div>
-        <div class="grid">
-        	<div class="prev"><a href="#"><img src="http://lorempixel.com/150/150/food/" alt="" /></a></div>
-            <ul class="details">
-                <li><a href="#">Corporate WebSites</a></li>
-                <li><a href="#">Html</a></li>
-                <li><a href="#">Css</a></li>
-                <li><a href="#">Images</a></li>
-                <li><a href="#">More</a></li>
-            </ul>
-            <div class="clear"></div>
-        </div>
-        <div class="grid">
-        	<div class="prev"><a href="#"><img src="http://lorempixel.com/150/150/food/" alt="" /></a></div>
-            <ul class="details">
-                <li><a href="#">Corporate WebSites</a></li>
-                <li><a href="#">Html</a></li>
-                <li><a href="#">Css</a></li>
-                <li><a href="#">Images</a></li>
-                <li><a href="#">More</a></li>
-            </ul>
-            <div class="clear"></div>
-        </div>
-        <div class="grid">
-        	<div class="prev"><a href="#"><img src="http://lorempixel.com/150/150/food/" alt="" /></a></div>
-            <ul class="details">
-                <li><a href="#">Corporate WebSites</a></li>
-                <li><a href="#">Html</a></li>
-                <li><a href="#">Css</a></li>
-                <li><a href="#">Images</a></li>
-                <li><a href="#">More</a></li>
-            </ul>
-            <div class="clear"></div>
-        </div>
-        <div class="grid">
-        	<div class="prev"><a href="#"><img src="http://lorempixel.com/150/150/food/" alt="" /></a></div>
-            <ul class="details">
-                <li><a href="#">Corporate WebSites</a></li>
-                <li><a href="#">Html</a></li>
-                <li><a href="#">Css</a></li>
-                <li><a href="#">Images</a></li>
-                <li><a href="#">More</a></li>
-            </ul>
-            <div class="clear"></div>
-        </div>
-        <div class="grid">
-        	<div class="prev"><a href="#"><img src="http://lorempixel.com/150/150/food/" alt="" /></a></div>
-            <ul class="details">
-                <li><a href="#">Corporate WebSites</a></li>
-                <li><a href="#">Html</a></li>
-                <li><a href="#">Css</a></li>
-                <li><a href="#">Images</a></li>
-                <li><a href="#">More</a></li>
-            </ul>
-            <div class="clear"></div>
-        </div>
-        <div class="grid">
-        	<div class="prev"><a href="#"><img src="http://lorempixel.com/150/150/food/" alt="" /></a></div>
-            <ul class="details">
-                <li><a href="#">Corporate WebSites</a></li>
-                <li><a href="#">Html</a></li>
-                <li><a href="#">Css</a></li>
-                <li><a href="#">Images</a></li>
-                <li><a href="#">More</a></li>
-            </ul>
-            <div class="clear"></div>
-        </div>
+        <?php } ?>
         <div class="clear"></div>
     </div>
     <div class="clear"></div>
 </div>
 </div>
-<div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >企业网站模板</a></div>
 <!--------------------------------------->
 <div class="wrap">
 <div id="bg_footer">	
