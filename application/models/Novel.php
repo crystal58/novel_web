@@ -13,11 +13,13 @@ class NovelModel extends AbstractModel {
     protected $_primary = "id";
 
     const NOVEL_CLASS_WUXIA = 1;
-    const NOVEL_CLASS_JIANQING = 2;
+    const NOVEL_CLASS_YANQING = 2;
+    const NOVEL_CLASS_XIANDAI = 3;
 
     public static $_novel_class_type = array(
-      self::NOVEL_CLASS_WUXIA => "武侠",
-      self::NOVEL_CLASS_JIANQING => "言情"
+        self::NOVEL_CLASS_WUXIA => "武侠",
+        self::NOVEL_CLASS_YANQING => "言情",
+        self::NOVEL_CLASS_XIANDAI => "现代"
     );
 
     public static $_novel_flag_txt = array(

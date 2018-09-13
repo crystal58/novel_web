@@ -4,7 +4,7 @@ namespace YC;
 
 class LoggerHelper {
 
-    const LOGERPREFIX = '/var/log/noval/';
+    const LOGERPREFIX = '/var/log/novel/';
 
     private static $_logs = [];
     private static $logLevel = [
@@ -138,7 +138,7 @@ class LoggerHelper {
             if (!self::Mkdirs(dirname($dir))) {
                 return false;
             }
-            if (!mkdir($dir, 0777)) {
+            if (!mkdir($dir, 0777,true)) {
                 return false;
             } else {
                 chmod($dir, 0777);
