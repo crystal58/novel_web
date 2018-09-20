@@ -1,112 +1,23 @@
 <?php $this->display('section/header.phtml');?>
 
-<header class="am-topbar am-topbar-fixed-top wos-header">
-    <div class="am-container">
-        <h1 class="am-topbar-brand">
-            <a href="http://eeeaaa.cn/" title="文学星空"><img src="/images/logo_red.png" alt="文学星空"></a>
-        </h1>
-
-        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-warning am-show-sm-only"
-                data-am-collapse="{target: '#collapse-head'}">
-            <span class="am-sr-only">导航切换</span>
-            <span class="am-icon-bars"></span>
-        </button>
-
-        <div class="am-collapse am-topbar-collapse" id="collapse-head">
-            <ul class="am-nav am-nav-pills am-topbar-nav">
-                <li class="am-nav-active"><a href="http://eeeaaa.cn/" title="文学星空">首页</a></li>
-                <li class="am-dropdown" data-am-dropdown>
-                    <a class="am-dropdown-toggle" title="小说" data-am-dropdown-toggle href="javascript:;">
-                        小说 <span class="am-icon-caret-down"></span>
-                    </a>
-                    <ul class="am-dropdown-content">
-                        <li class="am-dropdown-header">分类</li>
-                        <li><a href="#" title="武侠小说">武侠小说</a></li>
-                        <li><a href="#" title="言情小说">言情小说</a></li>
-                        <li><a href="#" title="校园小说">校园小说</a></li>
-                        <li><a href="#" title="恐怖小说">恐怖小说</a></li>
-                        <li><a href="#" title="玄幻小说">玄幻小说</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" title="先秦文学">先秦</a></li>
-                <li><a href="#" title="两汉文学">两汉</a></li>
-                <li><a href="#" title="魏晋文学">魏晋</a></li>
-                <li><a href="#" title="隋唐文学">隋唐</a></li>
-                <li><a href="#" title="宋元文学">宋元</a></li>
-                <li><a href="#" title="明清文学">明清</a></li>
-                <li><a href="#" title="近代文学">近代</a></li>
-                <li><a href="#" title="现代文学">现代</a></li>
-                <li><a href="#" title="外国文学">外国</a></li>
-            </ul>
-        </div>
-    </div>
-</header>
-
 <h2 class="star am-container mcenter"><span><img src="images/star.png" alt="小说">小说文学</span></h2>
 <div class="am-container">
     <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-gallery-bordered" data-am-gallery="{  }" >
+        <?php foreach ($this->novel_list as $value){?>
         <li>
             <div class="am-gallery-item">
-                <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="" title="专辑名称">
-                    <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" alt="专辑名称"/>
-                    <h3 class="am-gallery-title">专辑作品书籍名称</h3>
-                    <div class="am-gallery-desc">作者名称</div>
+                <a href="/xiaoshuo/chapter_<?=$value['id']?>_1.html" class="" title="<?=$value['name']?>">
+                    <img src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$value['name']?>"/>
+                    <h3 class="am-gallery-title"><?=$value['name']?></h3>
+                    <div class="am-gallery-desc"><?=$value['author_name']?></div>
                 </a>
             </div>
         </li>
-        <li>
-            <div class="am-gallery-item">
-                <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="" title="专辑名称">
-                    <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" alt="专辑名称"/>
-                    <h3 class="am-gallery-title">专辑作品书籍名称</h3>
-                    <div class="am-gallery-desc">作者名称</div>
-                </a>
-            </div>
-        </li>
-        <li>
-            <div class="am-gallery-item">
-                <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="" title="专辑名称">
-                    <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" alt="专辑名称"/>
-                    <h3 class="am-gallery-title">专辑作品书籍名称</h3>
-                    <div class="am-gallery-desc">作者名称</div>
-                </a>
-            </div>
-        </li>
-        <li>
-            <div class="am-gallery-item">
-                <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="" title="专辑名称">
-                    <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" alt="专辑名称"/>
-                    <h3 class="am-gallery-title">专辑作品书籍名称</h3>
-                    <div class="am-gallery-desc">作者名称</div>
-                </a>
-            </div>
-        </li>
-        <li>
-            <div class="am-gallery-item">
-                <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="" title="专辑名称">
-                    <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" alt="专辑名称"/>
-                    <h3 class="am-gallery-title">专辑作品书籍名称</h3>
-                    <div class="am-gallery-desc">作者名称</div>
-                </a>
-            </div>
-        </li>
-        <li>
-            <div class="am-gallery-item">
-                <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="" title="专辑名称">
-                    <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" alt="专辑名称"/>
-                    <h3 class="am-gallery-title">专辑作品书籍名称</h3>
-                    <div class="am-gallery-desc">作者名称</div>
-                </a>
-            </div>
-        </li>
+    <?php }?>
+
     </ul>
-    <a class="am-btn am-btn-default am-btn-block mtb20" title="查看更多小说" href="#">查看更多</a>
+    <a class="am-btn am-btn-default am-btn-block mtb20" title="查看更多小说" href="/author/list.html">查看更多</a>
 </div>
 
-<div data-am-widget="gotop" class="am-gotop am-gotop-fixed" >
-    <a href="#top" title="回到顶部">
-        <span class="am-gotop-title">回到顶部</span>
-        <i class="am-gotop-icon am-icon-chevron-up"></i>
-    </a>
-</div>
+
 <?php $this->display('section/footer.phtml');?>

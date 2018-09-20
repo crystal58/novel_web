@@ -39,3 +39,44 @@
     <script src="/js/public.js"></script>
 </head>
 <body>
+<header class="am-topbar am-topbar-fixed-top wos-header">
+    <div class="am-container">
+        <div class="am-topbar-brand">
+            <a href="<?=$this->web_url?>" title="文学星空"><img src="/images/logo_red.png" alt="文学星空"></a>
+        </div>
+
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-warning am-show-sm-only"
+                data-am-collapse="{target: '#collapse-head'}">
+            <span class="am-sr-only">导航切换</span>
+            <span class="am-icon-bars"></span>
+        </button>
+
+        <div class="am-collapse am-topbar-collapse" id="collapse-head">
+            <ul class="am-nav am-nav-pills am-topbar-nav">
+                <li class="am-nav-active"><a href="<?=$this->web_url?>" title="文学星空">首页</a></li>
+                <li class="am-dropdown" data-am-dropdown>
+                    <a class="am-dropdown-toggle" title="小说" data-am-dropdown-toggle href="javascript:;">
+                        小说 <span class="am-icon-caret-down"></span>
+                    </a>
+                    <ul class="am-dropdown-content">
+                        <li class="am-dropdown-header">分类</li>
+                        <li><a href="#" title="武侠小说">武侠小说</a></li>
+                        <li><a href="#" title="言情小说">言情小说</a></li>
+                        <li><a href="#" title="校园小说">校园小说</a></li>
+                        <li><a href="#" title="恐怖小说">恐怖小说</a></li>
+                        <li><a href="#" title="玄幻小说">玄幻小说</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" title="先秦文学">先秦</a></li>
+                <li><a href="#" title="两汉文学">两汉</a></li>
+                <li><a href="#" title="魏晋文学">魏晋</a></li>
+                <li><a href="#" title="隋唐文学">隋唐</a></li>
+                <li><a href="#" title="宋元文学">宋元</a></li>
+                <li><a href="#" title="明清文学">明清</a></li>
+                <li><a href="#" title="近代文学">近代</a></li>
+                <li><a href="#" title="现代文学">现代</a></li>
+                <li><a href="#" title="外国文学">外国</a></li>
+            </ul>
+        </div>
+    </div>
+</header>

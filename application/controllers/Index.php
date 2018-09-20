@@ -21,13 +21,9 @@ class IndexController extends AbstractController {
             $searchParam = array(
                 "AND" => array(
                     'status' => 1,
-                    "novel_class_id" => NovelModel::NOVEL_CLASS_WUXIA
                 )
             );
-            $wuXiaNovel = $novelModel->novelList($searchParam,0,8);
-            $searchParam['AND']['novel_class_id'] = NovelModel::NOVEL_CLASS_YANQING;
-            $yanQingNovel = $novelModel->novelList($searchParam,0,8);
-
+            $result = $novelModel->novelList($searchParam,0,8);
             $this->_view->novel_list = $result['list'];
 
 

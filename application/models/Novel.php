@@ -50,7 +50,6 @@ class NovelModel extends AbstractModel {
                 $key => $value
             );
         }
-
         $result = array();
         if($isCount){
             $result['cnt'] = $this->count($where);

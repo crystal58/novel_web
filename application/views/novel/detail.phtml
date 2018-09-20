@@ -1,0 +1,95 @@
+<?php $this->display('section/header.phtml');?>
+
+<div class="am-g am-container">
+    <div class="am-u-sm-12 am-u-md-12 am-u-lg-8">
+        <ol class="am-breadcrumb breadcrumb">
+            <li><a href="<?=$this->web_url?>" class="am-icon-home">首页</a></li>
+            <li><a href="#"><?=NovelModel::$_novel_class_type[$this->novel['novel_class_id']]?></a></li>
+            <li class="am-active"><strong class="fn"><?=$this->novel['name']?></strong></li>
+        </ol>
+        <div>
+            <h1><?=$this->chapter['title']?></h1>
+        </div>
+        <div class="contents">
+            <?=$this->chapter['content']?>
+        </div>
+        <ul data-am-widget="pagination" class="am-pagination am-pagination-default">
+            <?php if($this->chapter['pre']){?>
+            <li class="am-pagination-prev ">
+                <a href="/xiaoshuo/detail_<?=$this->chapter['pre']?>.html" class="">上一章</a>
+            </li>
+            <?php }?>
+            <li class="">
+                <a href="/xiaoshuo/chapter_<?=$this->novel['id']?>.html" class="">回目录</a>
+            </li>
+            <?php if($this->chapter['next']){?>
+            <li class="am-pagination-next ">
+                <a href="/xiaoshuo/detail_<?=$this->chapter['next']?>.html" class="">下一章</a>
+            </li>
+            <?php }?>
+        </ul>
+    </div>
+    <div class="am-u-sm-0 am-u-md-0 am-u-lg-4">
+        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+            <h2 class="am-titlebar-title ">
+                <?=$this->novel['name']?>作品
+            </h2>
+            <nav class="am-titlebar-nav">
+                <a href="#more" title="<?=$this->novel['name']?>">more &raquo;</a>
+            </nav>
+        </div>
+        <div data-am-widget="list_news" class="am-list-news am-list-news-default right-bg">
+            <ul class="am-list">
+                <?php foreach ($this->author_novel as $value){
+                        if($value['id'] == $this->novel['id'])continue;
+                    ?>
+                <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">
+                    <div class="am-u-sm-4 am-list-thumb">
+                        <a href="/xiaoshuo/chapter_<?=$value['id']?>_1.html" title="<?=$value['name']?>">
+                            <img src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$value['name']?>" class="face"/>
+                        </a>
+                    </div>
+                    <div class=" am-u-sm-8 am-list-main">
+                        <h3 class="am-list-item-hd"><a href="/xiaoshuo/chapter_<?=$value['id']?>_1.html" title="<?=$value['name']?>"><?=$value['name']?></a></h3>
+                        <div class="am-list-item-text"><?=mb_substr($value['content'],0,80,"UTF-8")?></div>
+                    </div>
+                </li>
+                <?php }?>
+            </ul>
+        </div>
+
+        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+            <h2 class="am-titlebar-title ">
+                相关作品
+            </h2>
+            <nav class="am-titlebar-nav">
+                <a href="#more">more &raquo;</a>
+            </nav>
+        </div>
+
+        <div data-am-widget="list_news" class="am-list-news am-list-news-default right-bg">
+            <ul class="am-list"  >
+                <?php foreach ($this->relate_novel as $value) {
+                    if($value['id'] == $this->novel['id'])continue;
+                    ?>
+                <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">
+                    <div class="am-u-sm-4 am-list-thumb">
+                        <a href="/xiaoshuo/chapter_<?=$value['id']?>_1.html" title="<?=$value['author_name']?>/<?=$value['name']?>">
+                            <img src="<?=\YC\Common::getUrl($value['pic'])?>" class="face" alt="<?=$value['author_name']?>/<?=$value['name']?>"/>
+                        </a>
+                    </div>
+                    <div class=" am-u-sm-8 am-list-main">
+                        <h3 class="am-list-item-hd" title="<?=$value['author_name']?>/<?=$value['name']?>"><a href="/xiaoshuo/chapter_<?=$value['id']?>_1.html"><?=$value['author_name']?>/<?=$value['name']?></a></h3>
+
+                        <div class="am-list-item-text"><?=mb_substr($value['content'],0,80,"UTF-8")?></div>
+                    </div>
+                </li>
+                <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
+                <?php } ?>
+
+            </ul>
+        </div>
+
+    </div>
+</div>
+<?php $this->display('section/footer.phtml');?>

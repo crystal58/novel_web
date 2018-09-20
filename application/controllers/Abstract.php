@@ -23,6 +23,8 @@ class AbstractController extends Yaf_Controller_Abstract {
         return $h->get($key,$default);
     }
     public function init(){
+        $config = Yaf_Registry::get("dbconfig");
+        $this->_view->web_url = $config['web_url'];
 
 
 //        $controllerName = $this->getRequest()->getControllerName();

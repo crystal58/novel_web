@@ -33,6 +33,7 @@ class upFile{
     }
 
     public function get($file){
+        if(empty($file))return "";
         if(strpos($file,"group1") !== false){
             $baseUrl = $this->_config['group1'];
         }else{

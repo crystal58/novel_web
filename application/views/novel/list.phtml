@@ -1,131 +1,46 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <title><?=$this->novel_info['name']?></title>
-    <meta name="keywords" content="$this->novel_info['content']" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="/css/style.css" rel="stylesheet" type="text/css"  media="all" />
-</head>
-<body>
-<div class="wrap">
-    <div class="header">
-        <div class="logo"><a href="index.html"><img src="/images/logo.png" /></a></div>
-        <div class="search">
-            <form>
-                <input type="text" value="" />
-                <input type="submit" value="" />
-            </form>
-        </div>
-        <div class="social">
-            <ul>
-                <li>Follow us</li>
-                <li><a href="#"><span class="icon facebook"></span></a></li>
-                <li><a href="#"><span class="icon twitter"></span></a></li>
-                <li><a href="#"><span class="icon fav"></span></a></li>
-            </ul>
-        </div>
-        <div class="clear"></div>
-    </div>
-    <div class="content">
-<!--        <div class="sidebar">-->
-<!--            <div class="side">-->
-<!--                <h3>作者</h3>-->
-<!--                <ul>-->
-<!--                    --><?php //foreach($this->author_list as $value){?>
-<!--                        <li><a href="category.html">--><?//=$value['author_name']?><!--</a></li>-->
-<!--                    --><?php //}?>
-<!--                </ul>-->
-<!--            </div>-->
-<!--            <div class="side">-->
-<!--                <h3>最新</h3>-->
-<!--                <ul>-->
-<!--                    --><?php //foreach($this->novel_list as $value){?>
-<!--                        <li><a href="/xiaoshuo/detail_--><?//=$value['id']?><!--".html>--><?//=$value['name']?><!--</a></li>-->
-<!--                    --><?php //}?>
-<!--                </ul>-->
-<!--            </div>-->
-<!--        </div>-->
-        <div class="nav">
-            <ul>
-                <li><a href="#">言情</a></li>
-                <li><a href="#">武侠</a></li>
-                <li><a href="#">现代</a></li>
-                <li><a href="#">剧情</a></li>
-            </ul>
-        </div>
-        <div class="main">
-            <div class="">
-                <div class="prev"><img src="" alt="" /></a></div>
-                <ul class="">
-                    <li><?=$this->novel_info['name']?></li>
-                    <li><?=mb_substr($this->novel_info['content'],0,180,"UTF-8")?></a></li>
-                </ul>
-                <div class="clear"></div>
+<?php $this->display('section/header.phtml');?>
+
+<div class="category2top">
+    <div class="am-g am-container userinfo">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-5 userinfo_left">
+            <div class="am-g">
+                <div class="am-u-md-12 am-u-lg-6 userface">
+                    <img src="<?=\YC\Common::getUrl($this->author_info['pic'])?>" alt="<?=$this->author_info['author_name']?>">
+                </div>
+                <div class="am-u-md-12 am-u-lg-6 userin">
+                    <h1><?=$this->author_info['author_name']?></h1>
+                </div>
             </div>
-            <ul>
-            <?php foreach($this->list as $value){?>
-                <li><a href="/xiaoshuo/detail_<?=$value['id']?>.html"><?=$value['title']?></a></li>
-            <?php } ?>
-            </ul>
-            <div>
-                <?=$this->pageHtml?>
-            </div>
-            <div class="clear"></div>
-
         </div>
-
-        <div class="clear"></div>
-
+        <div class="am-u-sm-0 am-u-md-12 am-u-lg-7 am-show-lg-only userinfo_center">
+            <?=$this->author_info['description']?>
+        </div>
     </div>
 </div>
-<!--------------------------------------->
-<div class="wrap">
-    <div id="bg_footer">
-        <div id="footer">
-            <div class="column-4-1">
-                <h3>Fundaaz</h3>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="feedback.html">Contact us</a></li>
-                    <li><a href="#">Help</a></li>
-                    <li><a href="#">Links</a></li>
-                    <li><a href="#">Sitemap</a></li>
-                </ul>
-            </div>
-            <div class="column-4-1">
-                <h3>Fundaaz</h3>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="feedback.html">Contact us</a></li>
-                    <li><a href="#">Help</a></li>
-                    <li><a href="#">Links</a></li>
-                    <li><a href="#">Sitemap</a></li>
-                </ul>
-            </div>
-            <div class="column-4-1">
-                <h3>Fundaaz</h3>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="feedback.html">Contact us</a></li>
-                    <li><a href="#">Help</a></li>
-                    <li><a href="#">Links</a></li>
-                    <li><a href="#">Sitemap</a></li>
-                </ul>
-            </div>
-            <div class="column-4-1">
-                <h3>Fundaaz</h3>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="feedback.html">Contact us</a></li>
-                    <li><a href="#">Help</a></li>
-                    <li><a href="#">Links</a></li>
-                    <li><a href="#">Sitemap</a></li>
+
+<div class="am-g">
+    <div class="am-u-sm-0 am-u-md-2 am-u-lg-3">&nbsp;</div>
+    <div class="am-u-sm-12 am-u-md-8 am-u-lg-6">
+        <div data-am-widget="list_news" class="am-list-news am-list-news-default ">
+            <div class="am-list-news-bd">
+                <ul class="am-list">
+                    <?php foreach ($this->novel_list as $value){?>
+                    <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left" >
+                        <div class="am-u-sm-5 am-list-thumb">
+                            <a href="/xiaoshuo/charpter_<?=$value['id']?>.html" title="<?=$value['name']?>">
+                                <img src="<?=\YC\Common::getUrl($this->author_info['pic'])?>" alt="<?=$value['name']?>"/>
+                            </a>
+                        </div>
+                        <div class="am-u-sm-7 am-list-main">
+                            <h2 class="am-list-item-hd fs16"><a href="/xiaoshuo/charpter_<?=$value['id']?>.html" title="<?=$value['name']?>"><?=$value['name']?></a></h2>
+                            <div class="am-list-item-text"><?=mb_substr($value['content'],0,80,"UTF-8")?></div>
+                        </div>
+                    </li>
+                    <?php }?>
                 </ul>
             </div>
         </div>
-        <div class="clear"></div>
-        <div class="copy">Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="http://www.cssmoban.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></div>
     </div>
+    <div class="am-u-sm-0 am-u-md-2 am-u-lg-3">&nbsp;</div>
 </div>
-</body>
-</html>
+<?php $this->display('section/footer.phtml');?>
