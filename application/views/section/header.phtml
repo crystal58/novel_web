@@ -60,11 +60,11 @@
                     </a>
                     <ul class="am-dropdown-content">
                         <li class="am-dropdown-header">分类</li>
-                        <li><a href="#" title="武侠小说">武侠小说</a></li>
-                        <li><a href="#" title="言情小说">言情小说</a></li>
-                        <li><a href="#" title="校园小说">校园小说</a></li>
-                        <li><a href="#" title="恐怖小说">恐怖小说</a></li>
-                        <li><a href="#" title="玄幻小说">玄幻小说</a></li>
+                        <?php foreach ($this->novel_class as $key=>$value){
+                                if($key == NovelModel::NOVEL_CLASS_XIANDAI)continue;
+                            ?>
+                        <li><a href="#" title="<?=$value?>小说"><?=$value?>小说</a></li>
+                        <?php } ?>
                     </ul>
                 </li>
                 <li><a href="#" title="先秦文学">先秦</a></li>

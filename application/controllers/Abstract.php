@@ -25,6 +25,8 @@ class AbstractController extends Yaf_Controller_Abstract {
     public function init(){
         $config = Yaf_Registry::get("dbconfig");
         $this->_view->web_url = $config['web_url'];
+        $novelClass = NovelModel::$_novel_class_type;
+        $this->_view->novel_class = $novelClass;
 
 
 //        $controllerName = $this->getRequest()->getControllerName();
