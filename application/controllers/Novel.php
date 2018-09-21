@@ -5,16 +5,16 @@ class NovelController extends AbstractController{
     const PAGESIZE = 50;
 
     /**
-     * 小说列表
+     * 作者小说列表
      */
-    public function listAction(){
+    public function authorlistAction(){
 
         try {
             $page = $this->get("page", 1);
             $page = $page > 0 ? $page : 1;
             $offset = ($page - 1) * self::PAGESIZE;
             $authorId = $this->get("author_id");
-            if($authorId <= 0 ){
+            if($authorId <= 0){
                 throw new Exception("出错了");
             }
             $authorModel = new AuthorModel();
@@ -29,6 +29,28 @@ class NovelController extends AbstractController{
             //$this->_view->pageHtml = $ph->getPageHtml();
 
 
+        }catch (Exception $e){
+            $this->processException($this->getRequest()->getControllerName(),$this->getRequest()->getActionName(),$e);
+        }
+    }
+
+    /**
+     * 分类小说列表
+     */
+    public function listAction(){
+        try {
+            $page = $this->get("page", 1);
+            $page = $page > 0 ? $page : 1;
+            $offset = ($page - 1) * self::PAGESIZE;
+            $classTypeId = $this->get("id");
+            if ($classTypeId <= 0) {
+                throw new Exception("出错了");
+            }
+            $novelModel = new NovelModel();
+            $novelData = $novelModel->novelList(array("novel_class_id"=>$classTypeId));
+            $this->_view->novel_list = $novelData['list'];
+
+            $this->_view->class_type_id = $classTypeId;
         }catch (Exception $e){
             $this->processException($this->getRequest()->getControllerName(),$this->getRequest()->getActionName(),$e);
         }

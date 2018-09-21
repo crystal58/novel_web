@@ -4,7 +4,7 @@
     <div class="am-u-sm-12 am-u-md-12 am-u-lg-8">
         <ol class="am-breadcrumb breadcrumb">
             <li><a href="<?=$this->web_url?>" class="am-icon-home">首页</a></li>
-            <li><a href="#"><?=NovelModel::$_novel_class_type[$this->novel['novel_class_id']]?></a></li>
+            <li><a href="/xiaoshuo/<?=NovelModel::$_novel_class_pinxie[$this->novel['novel_class_id']]?>_<?=$this->novel['novel_class_id']?>.html"><?=NovelModel::$_novel_class_type[$this->novel['novel_class_id']]?></a></li>
             <li class="am-active"><strong class="fn"><?=$this->novel['name']?></strong></li>
         </ol>
         <div>
@@ -20,7 +20,7 @@
             </li>
             <?php }?>
             <li class="">
-                <a href="/xiaoshuo/chapter_<?=$this->novel['id']?>.html" class="">回目录</a>
+                <a href="/xiaoshuo/chapter_<?=$this->novel['id']?>_1.html" class="">回目录</a>
             </li>
             <?php if($this->chapter['next']){?>
             <li class="am-pagination-next ">
@@ -32,7 +32,7 @@
     <div class="am-u-sm-0 am-u-md-0 am-u-lg-4">
         <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
             <h2 class="am-titlebar-title ">
-                <?=$this->novel['name']?>作品
+                <?=$this->novel['author_name']?>作品
             </h2>
             <nav class="am-titlebar-nav">
                 <a href="#more" title="<?=$this->novel['name']?>">more &raquo;</a>

@@ -1,46 +1,33 @@
 <?php $this->display('section/header.phtml');?>
 
-<div class="category2top">
-    <div class="am-g am-container userinfo">
-        <div class="am-u-sm-12 am-u-md-12 am-u-lg-5 userinfo_left">
-            <div class="am-g">
-                <div class="am-u-md-12 am-u-lg-6 userface">
-                    <img src="<?=\YC\Common::getUrl($this->author_info['pic'])?>" alt="<?=$this->author_info['author_name']?>">
+<h1 class="star am-container mcenter"><span><img src="/images/star.png" alt="<?=NovelModel::$_novel_class_type[$class_type_id]?>小说"><?=NovelModel::$_novel_class_type[$class_type_id]?>小说</span></h1>
+<div id="cattlist" class="am-container">
+    <ul class="am-avg-sm-1 am-avg-md-3 am-avg-lg-4">
+        <?php foreach ($this->novel_list as $value){?>
+        <li>
+            <div class="cattlist_0">
+                <div class="cattlist_1">
+                    <div class="am-g">
+                        <div class="am-u-sm-4 am-u-md-5 am-u-lg-5 am-vertical-align">
+                            <div class="am-vertical-align-middle">
+                                <img src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$value['name']?>">
+                            </div>
+                        </div>
+                        <div class="am-u-sm-8 am-u-md-7 am-u-lg-7">
+                            <h2><?=$value['name']?></h2>
+                        </div>
+                    </div>
                 </div>
-                <div class="am-u-md-12 am-u-lg-6 userin">
-                    <h1><?=$this->author_info['author_name']?></h1>
+                <div class="cattlist_2">
+                    <p><?=mb_substr($value['content'],0,80,"UTF-8")?></p>
+                </div>
+                <div class="cattlist_3">
+                    <a class="am-btn am-btn-warning" title="<?=$value['name']?>" href="/xiaoshuo/chapter_<?=$value['id']?>_1.html">开始阅读</a>
                 </div>
             </div>
-        </div>
-        <div class="am-u-sm-0 am-u-md-12 am-u-lg-7 am-show-lg-only userinfo_center">
-            <?=$this->author_info['description']?>
-        </div>
-    </div>
+        </li>
+    <?php }?>
+    </ul>
 </div>
 
-<div class="am-g">
-    <div class="am-u-sm-0 am-u-md-2 am-u-lg-3">&nbsp;</div>
-    <div class="am-u-sm-12 am-u-md-8 am-u-lg-6">
-        <div data-am-widget="list_news" class="am-list-news am-list-news-default ">
-            <div class="am-list-news-bd">
-                <ul class="am-list">
-                    <?php foreach ($this->novel_list as $value){?>
-                    <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left" >
-                        <div class="am-u-sm-5 am-list-thumb">
-                            <a href="/xiaoshuo/charpter_<?=$value['id']?>.html" title="<?=$value['name']?>">
-                                <img src="<?=\YC\Common::getUrl($this->author_info['pic'])?>" alt="<?=$value['name']?>"/>
-                            </a>
-                        </div>
-                        <div class="am-u-sm-7 am-list-main">
-                            <h2 class="am-list-item-hd fs16"><a href="/xiaoshuo/charpter_<?=$value['id']?>.html" title="<?=$value['name']?>"><?=$value['name']?></a></h2>
-                            <div class="am-list-item-text"><?=mb_substr($value['content'],0,80,"UTF-8")?></div>
-                        </div>
-                    </li>
-                    <?php }?>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="am-u-sm-0 am-u-md-2 am-u-lg-3">&nbsp;</div>
-</div>
 <?php $this->display('section/footer.phtml');?>

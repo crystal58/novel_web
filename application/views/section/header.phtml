@@ -63,7 +63,7 @@
                         <?php foreach ($this->novel_class as $key=>$value){
                                 if($key == NovelModel::NOVEL_CLASS_XIANDAI)continue;
                             ?>
-                        <li><a href="#" title="<?=$value?>小说"><?=$value?>小说</a></li>
+                        <li><a href="/xiaoshuo/<?=$this->pinxie[$key]?>_<?=$key?>.html" title="<?=$value?>小说"><?=$value?>小说</a></li>
                         <?php } ?>
                     </ul>
                 </li>

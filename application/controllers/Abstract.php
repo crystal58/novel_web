@@ -27,6 +27,9 @@ class AbstractController extends Yaf_Controller_Abstract {
         $this->_view->web_url = $config['web_url'];
         $novelClass = NovelModel::$_novel_class_type;
         $this->_view->novel_class = $novelClass;
+        $novelClassPinXie = NovelModel::$_novel_class_pinxie;
+        $this->_view->pinxie = $novelClassPinXie;
+
 
 
 //        $controllerName = $this->getRequest()->getControllerName();

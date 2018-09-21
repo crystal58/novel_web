@@ -13,6 +13,7 @@ class AuthorsController extends AbstractController {
                 "status" => AuthorModel::AUTHOR_STATUS
 
             );
+
             $authorList = $authorModel->getList($params);
             $this->_view->author_list = $authorList['list'];
         }catch (Exception $e){
