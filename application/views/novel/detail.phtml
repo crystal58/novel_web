@@ -51,7 +51,7 @@
                     </div>
                     <div class=" am-u-sm-8 am-list-main">
                         <h3 class="am-list-item-hd"><a href="/xiaoshuo/chapter_<?=$value['id']?>_1.html" title="<?=$value['name']?>"><?=$value['name']?></a></h3>
-                        <div class="am-list-item-text"><?=mb_substr($value['content'],0,80,"UTF-8")?></div>
+                        <div class="am-list-item-text"><?=$value['content']?></div>
                     </div>
                 </li>
                 <?php }?>
@@ -81,7 +81,7 @@
                     <div class=" am-u-sm-8 am-list-main">
                         <h3 class="am-list-item-hd" title="<?=$value['author_name']?>/<?=$value['name']?>"><a href="/xiaoshuo/chapter_<?=$value['id']?>_1.html"><?=$value['author_name']?>/<?=$value['name']?></a></h3>
 
-                        <div class="am-list-item-text"><?=mb_substr($value['content'],0,80,"UTF-8")?></div>
+                        <div class="am-list-item-text"><?=$value['content']?></div>
                     </div>
                 </li>
                 <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
