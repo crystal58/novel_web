@@ -23,7 +23,7 @@ class IndexController extends AbstractController {
                     'status' => 1,
                 )
             );
-            $result = $novelModel->novelList($searchParam,0);
+            $result = $novelModel->novelList($searchParam,0,12);
             $this->_view->novel_list = $result['list'];
 
 
