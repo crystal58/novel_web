@@ -2,15 +2,13 @@
 <html class="no-js">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><?=!empty($this->seo['title'])?$this->seo['title']:"小说|诗歌|散文|文学网 - 做你最喜爱的小说在线阅读,文学网"?></title>
     <meta name="keywords" content="<?=!empty($this->seo['keywords'])?$this->seo['keywords']:"文学星空,文学网,小说,小说网,武侠小说,言情小说,校园小说,玄幻小说,恐怖小说,先秦文学,两汉文学,魏晋文学,隋唐文学,宋元文学,明清文学,近代文学,现代文学,外国文学,唐诗,宋词,元曲,诗歌,散文"?>" />
     <meta name="description" content="<?=!empty($this->seo['description'])?$this->seo['description']:"文学星空 - 中国最优质的小说，美文，文学网。做你最喜爱的在线阅读小说网，文学网。提供最人性化的阅读体验，诗歌小说散文，名人名言大全的文学网。让人们在宣泄的都市中体验阅读的乐趣，享受文学的熏陶。找诗歌散文小说美文在线阅读，上文学星空小说文学网。"?>" />
+    <meta name="author" content="www.eeeaaa.cn">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?=!empty($this->seo['title'])?$this->seo['title']:"小说|诗歌|散文|文学网 - 做你最喜爱的小说在线阅读,文学网"?></title>
-
-    <!--360 browser -->
     <meta name="renderer" content="webkit">
-    <meta name="author" content="wos">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="/images/i/app.png">
@@ -54,7 +52,7 @@
         <div class="am-collapse am-topbar-collapse" id="collapse-head">
             <ul class="am-nav am-nav-pills am-topbar-nav">
                 <li class="am-nav-active"><a href="<?=$this->web_url?>" title="文学星空">首页</a></li>
-                <li class="am-dropdown" data-am-dropdown>
+                <li class="am-dropdown" class="" data-am-dropdown>
                     <a class="am-dropdown-toggle" title="小说" data-am-dropdown-toggle href="javascript:;">
                         小说 <span class="am-icon-caret-down"></span>
                     </a>
@@ -63,7 +61,7 @@
                         <?php foreach ($this->novel_class as $key=>$value){
                                 if($key == NovelModel::NOVEL_CLASS_XIANDAI)continue;
                             ?>
-                        <li><a href="/xiaoshuo/<?=$this->pinxie[$key]?>_<?=$key?>.html" title="<?=$value?>小说"><?=$value?>小说</a></li>
+                        <li><a href="<?=$this->web_url?>/xiaoshuo/<?=$this->pinxie[$key]?>_<?=$key?>.html" title="<?=$value?>小说"><?=$value?>小说</a></li>
                         <?php } ?>
                     </ul>
                 </li>

@@ -6,7 +6,7 @@
         <?php foreach ($this->novel_list as $value){?>
         <li>
             <div class="am-gallery-item">
-                <a href="/xiaoshuo/chapter_<?=$value['id']?>_1.html" class="" title="<?=$value['name']?>">
+                <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" class="" title="<?=$value['name']?>">
                     <img src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$value['name']?>"/>
                     <h3 class="am-gallery-title"><?=$value['name']?></h3>
                     <div class="am-gallery-desc"><?=$value['author_name']?></div>
@@ -16,7 +16,7 @@
     <?php }?>
 
     </ul>
-    <a class="am-btn am-btn-default am-btn-block mtb20" title="查看更多小说" href="/xiaoshuo/author.html">查看更多</a>
+    <a class="am-btn am-btn-default am-btn-block mtb20" title="查看更多小说" href="<?=$this->web_url?>/xiaoshuo/author.html">查看更多</a>
 </div>
 
 
