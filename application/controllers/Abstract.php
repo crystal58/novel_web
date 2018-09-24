@@ -11,6 +11,7 @@ class AbstractController extends Yaf_Controller_Abstract {
     protected $_operatorId;
     protected $_json = false;
     protected $_seo = array();
+    protected $_active = "index";
 
     public function getParam($key,$default = ""){
         return $this->getRequest()->getQuery( $key , $default );
@@ -32,6 +33,7 @@ class AbstractController extends Yaf_Controller_Abstract {
         $this->_view->pinxie = $novelClassPinXie;
         $iniConfig = Yaf_Registry::get("config");
         $this->_seo = $iniConfig['seo'];
+        $this->_view->active = $this->_active;
 
 
 

@@ -5,9 +5,14 @@
         <ol class="am-breadcrumb breadcrumb">
             <li><a href="<?=$this->web_url?>" class="am-icon-home">首页</a></li>
             <li>
-                <a href="<?=$this->web_url?>/xiaoshuo/<?=NovelModel::$_novel_class_pinxie[$this->novel['novel_class_id']]?>_<?=$this->novel['novel_class_id']?>.html"><?=NovelModel::$_novel_class_type[$this->novel['novel_class_id']]?></a>
+                <a href="<?=$this->web_url?>/xiaoshuo/<?=NovelModel::$_novel_class_pinxie[$this->novel['novel_class_id']]?>_<?=$this->novel['novel_class_id']?>.html">
+                    <strong class="fn"><?=NovelModel::$_novel_class_type[$this->novel['novel_class_id']]?>小说</strong>
+                </a>
             </li>
-            <li class="am-active"><strong class="fn"><?=$this->novel['name']?></strong></li>
+            <li>
+                <a href="<?=$this->web_url?>/xiaoshuo/author_<?=$this->novel['author_id']?>_1.html" title="<?=$this->novel['author_name']?>"><strong class="fn">#<?=$this->novel['author_name']?>#</strong></a>
+                <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$this->novel['id']?>_1.html" title="<?=$this->novel['name']?>"><strong class="fn">#<?=$this->novel['name']?>#</strong></a>
+            </li>
         </ol>
         <div>
             <h1><?=$this->chapter['title']?></h1>
