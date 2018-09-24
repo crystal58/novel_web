@@ -25,6 +25,11 @@ class IndexController extends AbstractController {
             );
             $result = $novelModel->novelList($searchParam,0,12);
             $this->_view->novel_list = $result['list'];
+            $this->_view->seo = array(
+                "title" => $this->_seo['index']['title'],
+                "keywords" => $this->_seo['index']['keywords'],
+                "description" => $this->_seo['index']['description']
+            );
 
 
 

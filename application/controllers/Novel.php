@@ -24,6 +24,11 @@ class NovelController extends AbstractController{
             $novelModel = new NovelModel();
             $novelList = $novelModel->novelList(array("author_id" => $authorId));
             $this->_view->novel_list = $novelList['list'];
+            $this->_view->seo = array(
+                "title" => isset($authorInfo['author_name'])?str_replace(array("{author}","{novelclass}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$authorInfo['novel_class_id']]),$this->_seo['author']['title']):"",
+                "keywords" => isset($authorInfo['author_name'])?str_replace(array("{author}","{novelclass}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$authorInfo['novel_class_id']]),$this->_seo['author']['keywords']):"",
+                "description" => isset($authorInfo['author_name'])?str_replace(array("{author}","{novelclass}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$authorInfo['novel_class_id']]),$this->_seo['author']['description']):""
+            );
             //echo json_encode($novelList);exit;
             //$ph = new \YC\Page($result['cnt'], $page, self::PAGESIZE,"/xiaoshuo/list_{$novelId}_{num}.html");
             //$this->_view->pageHtml = $ph->getPageHtml();
@@ -35,7 +40,7 @@ class NovelController extends AbstractController{
     }
 
     /**
-     * 分类小说列表
+     * 分类小说列表 暂时屏蔽
      */
     public function listAction(){
         try {
@@ -110,7 +115,14 @@ class NovelController extends AbstractController{
             $this->_view->novel = $novelInfo;
             $this->_view->author_novel = $authorNovel['list'];
             $this->_view->relate_novel = $relateNovel['list'];
-
+            $authorModel = new AuthorModel();
+            $authorInfo = $authorModel->find($novelInfo['author_id']);
+            $a = $this->_view->seo = array(
+                "title" => (!empty($novelInfo))?str_replace(array("{author}","{novelclass}","{book}","{chaptertitle}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$novelInfo['novel_class_id']],$novelInfo['name'],$novelChapter['title']),$this->_seo['noveldetail']['title']):"",
+                "keywords" => !empty($novelInfo)?str_replace(array("{author}","{novelclass}","{book}","{chaptertitle}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$novelInfo['novel_class_id']],$novelInfo['name'],$novelChapter['title']),$this->_seo['noveldetail']['keywords']):"",
+                "description" => !empty($novelInfo)?str_replace(array("{author}","{novelclass}","{book}","{chaptertitle}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$novelInfo['novel_class_id']],$novelInfo['name'],$novelChapter['title']),$this->_seo['noveldetail']['description']):"",
+            );
+            echo json_encode($a);exit;
 
         }catch (Exception $e){
             $this->processException($this->getRequest()->getControllerName(),$this->getRequest()->getActionName(),$e);
@@ -132,6 +144,15 @@ class NovelController extends AbstractController{
             $novelModel = new NovelModel();
             $novelInfo = $novelModel->find($novelId);
             $this->_view->novel_info = $novelInfo;
+
+            $authorModel = new AuthorModel();
+            $authorInfo = $authorModel->find($novelInfo['author_id']);
+
+            $this->_view->seo = array(
+                "title" => isset($novelInfo['name'])?str_replace(array("{author}","{novelclass}","{book}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$authorInfo['novel_class_id']],$novelInfo['name']),$this->_seo['novelchapter']['title']):"",
+                "keywords" => isset($novelInfo['name'])?str_replace(array("{author}","{novelclass}","{book}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$authorInfo['novel_class_id']],$novelInfo['name']),$this->_seo['novelchapter']['keywords']):"",
+                "description" => $novelInfo['content']
+            );
             //echo json_encode($chaptersList);exit;
 
         }catch (Exception $e){
