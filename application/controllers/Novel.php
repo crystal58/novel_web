@@ -122,7 +122,6 @@ class NovelController extends AbstractController{
                 "keywords" => !empty($novelInfo)?str_replace(array("{author}","{novelclass}","{book}","{chaptertitle}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$novelInfo['novel_class_id']],$novelInfo['name'],$novelChapter['title']),$this->_seo['noveldetail']['keywords']):"",
                 "description" => !empty($novelInfo)?str_replace(array("{author}","{novelclass}","{book}","{chaptertitle}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$novelInfo['novel_class_id']],$novelInfo['name'],$novelChapter['title']),$this->_seo['noveldetail']['description']):"",
             );
-            echo json_encode($a);exit;
 
         }catch (Exception $e){
             $this->processException($this->getRequest()->getControllerName(),$this->getRequest()->getActionName(),$e);
