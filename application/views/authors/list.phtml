@@ -1,6 +1,6 @@
 <?php $this->display('section/header.phtml');?>
 
-<h1 class="star am-container mcenter"><span><img src="/images/star.png" alt="小说文学">小说文学</span></h1>
+<h1 class="star am-container mcenter"><span><img src="/images/star.png" alt="<?=$this->novel_class_name?>"><?=$this->novel_class_name?></span></h1>
 <div id="cattlist" class="am-container">
     <ul class="am-avg-sm-1 am-avg-md-3 am-avg-lg-4">
         <?php foreach ($this->author_list as $value){?>
