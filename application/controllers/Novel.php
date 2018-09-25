@@ -144,7 +144,10 @@ class NovelController extends AbstractController{
             $novelId = $this->get("id");
 
             $novelChapters = new NovelChapterModel();
-            $params = array("novel_id" => $novelId);
+            $params = array(
+                "novel_id" => $novelId,
+                "status" => 1
+            );
             $chaptersList = $novelChapters->chaptersList($params,$offset,100,true);
             $this->_view->list = $chaptersList['list'];
 
