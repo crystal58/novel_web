@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /conf
+Disallow: /public/assets
+Disallow: /public/css
+Disallow: /public/fonts
+Disallow: /public/images
+Disallow: /public/js
+Disallow: /application/library
+Disallow: /application/models
+Disallow: /application/plugins
+Disallow: /application/utils
