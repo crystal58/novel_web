@@ -25,9 +25,7 @@ class NovelChapterModel extends AbstractModel {
         }
         $where = array();
         foreach($params as $key=>$value){
-            $where['AND'] = array(
-                $key => $value
-            );
+            $where['AND'][$key] = $value;
         }
 
         $result = array();
