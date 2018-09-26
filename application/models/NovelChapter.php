@@ -46,9 +46,7 @@ class NovelChapterModel extends AbstractModel {
     public function chapter($params){
         if(empty($params)) return "";
         foreach($params as $key=>$value){
-            $where['AND'] = array(
-                $key => $value
-            );
+            $where['AND'][$key] = $value;
         }
         $result = $this->fetchRow($where);
         return $result;
