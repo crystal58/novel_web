@@ -38,7 +38,7 @@ class NovelChapterModel extends AbstractModel {
         $where['ORDER'] = array(
             "chapter_order"=>"ASC"
         );
-        $fields = array("id","title");
+        $fields = array("id","title","is_part");
         $result['list'] = $this->fetchAll($where,$fields);
         return $result;
     }
