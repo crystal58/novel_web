@@ -514,3 +514,9 @@ footer a:hover{
 .fn{
     font-weight: normal;
 }
+.mb0{
+    margin-bottom: 0;
+}
+.tc{
+    text-align: center;
+}
