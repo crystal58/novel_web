@@ -24,13 +24,11 @@
         reWriter:
         if($novelList[0]['is_part'] == 1) {
             $first = array_shift($novelList);
-        }
         ?>
         <ul class="am-avg-sm-1 am-avg-md-1 am-avg-lg-1 am-thumbnails am-list am-list-striped mb0 tc">
             <li><a class="am-text-truncate" title="<?=$first['title']?>"><i class="am-icon-home am-icon-fw"></i> <?=$first['title']?></a></li>
         </ul>
-
-        </div>
+            <?php }?>
         <ul class="am-avg-sm-1 am-avg-md-3 am-avg-lg-4 am-thumbnails am-list am-list-striped mb0">
             <?php
             foreach ($novelList as $key=>$value){
