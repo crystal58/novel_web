@@ -30,7 +30,12 @@ class NovelController extends AbstractController{
             $this->_view->author_info =$authorInfo;
 
             $novelModel = new NovelModel();
-            $novelList = $novelModel->novelList(array("author_id" => $authorId,"status"=>NovelModel::NOVEL_STATUS_OK),0,50);
+            $params = array(
+                "author_id" => $authorId,
+                "status"=>NovelModel::NOVEL_STATUS_OK,
+                "record_status" => NovelModel::NOVEL_RECORDING_FINISH
+            );
+            $novelList = $novelModel->novelList($params,0,50);
             $this->_view->novel_list = $novelList['list'];
             $this->_view->seo = array(
                 "title" => isset($authorInfo['author_name'])?str_replace(array("{author}","{novelclass}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$authorInfo['novel_class_id']]),$this->_seo['author']['title']):"",

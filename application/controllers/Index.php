@@ -21,6 +21,7 @@ class IndexController extends AbstractController {
             $searchParam = array(
                 "AND" => array(
                     'status' => 1,
+                    "record_status" => NovelModel::NOVEL_RECORDING_FINISH
                 )
             );
             $result = $novelModel->novelList($searchParam,0,12);
