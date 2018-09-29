@@ -22,7 +22,9 @@
         <?php
         $novelList = $this->list;
         reWriter:
-        $first = array_shift($novelList);
+        if($novelList[0]['is_part'] == 1) {
+            $first = array_shift($novelList);
+        }
         ?>
         <ul class="am-avg-sm-1 am-avg-md-1 am-avg-lg-1 am-thumbnails am-list am-list-striped mb0 tc">
             <li><a class="am-text-truncate" title="<?=$first['title']?>"><i class="am-icon-home am-icon-fw"></i> <?=$first['title']?></a></li>
