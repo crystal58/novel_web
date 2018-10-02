@@ -20,7 +20,8 @@ try{
     foreach ($list as $value){
         if(empty($value['title']))continue;
         $url = $value["url"];
-        $data = file_get_contents($url);
+
+        $data = preg_replace('/\s/', '', file_get_contents($url));
         $data = iconv('gb2312','UTF-8//IGNORE',$data);
         $contentRule = json_decode($value["content_url"],true);
         $rule = $contentRule['content'];

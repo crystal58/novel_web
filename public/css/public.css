@@ -90,6 +90,7 @@ html,body{
     color: #222;
 }
 .right-bg img {
+    height: 86px;
 }
 footer{
     background-color: #222222;
@@ -377,6 +378,7 @@ footer a:hover{
 .cattlist_1 img{
     width: 100%;
     border-radius: 210px;
+    height: 79px;
 }
 @media (max-width: 640px) {
     .cattlist_1 img{
@@ -435,6 +437,7 @@ footer a:hover{
     border: 5px solid #ffffff;
     padding: 5px;
     margin-top: -30px;
+    height: 166px;
 }
 @media (max-width: 1024px) {
     .category2top img{
@@ -519,4 +522,7 @@ footer a:hover{
 }
 .tc{
     text-align: center;
+}
+.index_img{
+    height: 200px!important;
 }
