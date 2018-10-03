@@ -18,29 +18,24 @@
     </div>
 </div>
 
-<div class="am-g">
-    <div class="am-u-sm-0 am-u-md-2 am-u-lg-3">&nbsp;</div>
-    <div class="am-u-sm-12 am-u-md-8 am-u-lg-6">
-        <div data-am-widget="list_news" class="am-list-news am-list-news-default ">
-            <div class="am-list-news-bd">
-                <ul class="am-list">
-                    <?php foreach ($this->novel_list as $value){?>
-                    <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left" >
-                        <div class="am-u-sm-5 am-list-thumb">
-                            <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" title="<?=$value['name']?>">
-                                <img src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$value['name']?>"/>
-                            </a>
-                        </div>
-                        <div class="am-u-sm-7 am-list-main">
-                            <h2 class="am-list-item-hd fs16"><a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" title="<?=$value['name']?>"><?=$value['name']?></a></h2>
-                            <div class="am-list-item-text"><?=$value['content']?></div>
-                        </div>
-                    </li>
-                    <?php }?>
-                </ul>
-            </div>
-        </div>
+    <div class="am-list-news-bd am-container">
+        <ul class="am-avg-sm-1 am-avg-md-3 am-avg-lg-5 am-thumbnails am-list">
+<?php foreach ($this->novel_list as $value){?>
+            <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-bottom-left">
+                <h3 class="am-list-item-hd author_book_til">
+                    <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" title="<?=$value['name']?>"><?=$value['name']?></a>
+                </h3>
+                <div class="am-u-sm-4 am-list-thumb author_book_left">
+                    <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" title="<?=$value['name']?>">
+                        <img class="am-thumbnail" src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$value['name']?>"/>
+                    </a>
+                </div>
+                <div class="am-u-sm-8 am-list-main author_book_right">
+                    <div class="am-list-item-text author_book_info"><?=$value['content']?></div>
+                </div>
+            </li>
+<?php }?>
+        </ul>
     </div>
-    <div class="am-u-sm-0 am-u-md-2 am-u-lg-3">&nbsp;</div>
-</div>
+
 <?php $this->display('section/footer.phtml');?>

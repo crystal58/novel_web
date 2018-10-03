@@ -526,3 +526,9 @@ footer a:hover{
 .index_img{
     height: 200px!important;
 }
+/*2018-10-03 author.html new modify*/
+.author_book_til{height: 26px;line-height: 26px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;margin: 1rem 0}
+.author_book_left{padding: 0}
+.author_book_left img{height: 110px;margin-bottom: 0}
+.author_book_right{padding: 0 1rem}
+.author_book_info{text-overflow: ellipsis;-webkit-line-clamp: 6;overflow: hidden;display: -webkit-box;-webkit-box-orient: vertical;max-height: 9rem}
