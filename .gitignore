@@ -1,4 +1,5 @@
-conf/dbConfig*.php
+conf/dbConfig.*
+conf/dbConfig.php.*
 *.swp
 *.DS_Store
 .idea/*
