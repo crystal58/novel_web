@@ -12,20 +12,18 @@ class IndexController extends AbstractController {
      */
     public function indexAction() {
         try{
-            $authorModel = new AuthorModel();
-            $params = array('status' => 1);
-            $authorList = $authorModel->getList($params);
-            $this->_view->author_list = $authorList['list'];
+//            $authorModel = new AuthorModel();
+//            $params = array('status' => 1);
+//            $authorList = $authorModel->getList($params);
+//            $this->_view->author_list = $authorList['list'];
 
-            $novelModel = new NovelModel();
-            $searchParam = array(
-                "AND" => array(
-                    'status' => 1,
-                    "record_status" => NovelModel::NOVEL_RECORDING_FINISH
-                )
-            );
-            $result = $novelModel->novelList($searchParam,0,12);
-            $this->_view->novel_list = $result['list'];
+            $keyValueModel = new keyValuesModel();
+            $wuxiaData = $keyValueModel->getData(array("keys"=>"recommend_wuxia"));
+            $yanqingData = $keyValueModel->getData(array("keys"=>"recommend_yanqing"));
+
+            //$a = json_decode($wuxiaData['value'],true);
+            $this->_view->wuxia_list = $wuxiaData ? json_decode($wuxiaData['value'],true) : array();
+            $this->_view->yanqing_list = $yanqingData ? json_decode($yanqingData['value'],true) : array();
             $this->_view->seo = array(
                 "title" => $this->_seo['index']['title'],
                 "keywords" => $this->_seo['index']['keywords'],

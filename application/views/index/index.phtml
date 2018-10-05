@@ -1,13 +1,13 @@
 <?php $this->display('section/header.phtml');?>
 
-<h2 class="star am-container mcenter"><span><img src="images/star.png" alt="小说">小说文学</span></h2>
+<h2 class="star am-container mcenter"><span><img src="images/star.png" alt="武侠小说">武侠小说</span></h2>
 <div class="am-container">
     <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-gallery-bordered" data-am-gallery="{  }" >
-        <?php foreach ($this->novel_list as $value){?>
+        <?php foreach ($this->wuxia_list as $value){?>
         <li>
             <div class="am-gallery-item">
                 <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" class="" title="<?=$value['name']?>">
-                    <img src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$value['name']?>" class="index_img"/>
+                    <img src="<?=empty($value['pic']) ? \YC\Common::getUrl($value['pic']) : $value['pic']?>" alt="<?=$value['name']?>" class="index_img"/>
                     <h3 class="am-gallery-title"><?=$value['name']?></h3>
                     <div class="am-gallery-desc"><?=$value['author_name']?></div>
                 </a>
