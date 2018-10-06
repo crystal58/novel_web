@@ -120,8 +120,8 @@ class NovelController extends AbstractController{
                 $novelChapter['pre'] = $preNovel['id'];
             }
 
-            $authorNovel = $novelModel->novelList(array("author_id"=>$novelInfo['author_id'],"record_status" => NovelModel::NOVEL_RECORDING_INIT),0,6);
-            $relateNovel = $novelModel->novelList(array("novel_class_id"=>$novelInfo['novel_class_id'],"record_status" => NovelModel::NOVEL_RECORDING_INIT),0,6);
+            $authorNovel = $novelModel->novelList(array("author_id"=>$novelInfo['author_id'],"record_status[!]" => NovelModel::NOVEL_RECORDING_INIT),0,6);
+            $relateNovel = $novelModel->novelList(array("novel_class_id"=>$novelInfo['novel_class_id'],"record_status[!]" => NovelModel::NOVEL_RECORDING_INIT),0,6);
 
 //echo json_encode($relateNovel);exit;
             $this->_view->chapter = $novelChapter;
