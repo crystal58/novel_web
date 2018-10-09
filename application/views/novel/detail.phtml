@@ -46,12 +46,11 @@
                 }
             }
 
-
                 if($location > 0){
 
-                    $novelContent = substr($content,0,$location)."<a style='color:black' href='".$this->web_url."'>文学星空</a>".substr($content,$location);
+                    $novelContent = substr($content,0,$location)."<strong><a id='eeeaaa' href='".$this->web_url."' title='文学星空'>文学星空</a ></strong>".substr($content,$location);
                 }else{
-                    $novelContent = $content."<a style='color:black' href='".$this->web_url."'>文学星空</a>";
+                    $novelContent = $content."<strong><a id='eeeaaa' href='".$this->web_url."' title='文学星空'>文学星空</a ></strong>";
                 }
                 echo $novelContent;
 
