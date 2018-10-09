@@ -18,7 +18,44 @@
             <h1><?=$this->chapter['title']?></h1>
         </div>
         <div class="contents">
-            <?=$this->chapter['content']?>
+
+            <?php
+                 $content = $this->chapter['content'];
+                 $num = substr_count($this->chapter['content'],"<div");
+                 if($num%2 != 0){
+                     $content = $content."</div>";
+                 }
+
+                 $pNum = substr_count($content,"</p>");
+                 $brNum = substr_count($content,"<br");
+                 $location = 0;
+                 if($pNum > $brNum){
+                     $lNum = ceil($pNum/2);
+                     $str = "</p>";
+                 }else if ($brNum > 0){
+                     $lNum = ceil($brNum/2);
+                     $str = "<br";
+                 }
+
+            $i = $l = 0;
+            while ($location = strpos($content,$str,$l)){
+                $i++;
+                $l = $location + strlen($str);
+                if($i == $lNum){
+                    break;
+                }
+            }
+
+
+                if($location > 0){
+
+                    $novelContent = substr($content,0,$location)."<a style='color:black' href='".$this->web_url."'>文学星空</a>".substr($content,$location);
+                }else{
+                    $novelContent = $content."<a style='color:black' href='".$this->web_url."'>文学星空</a>";
+                }
+                echo $novelContent;
+
+            ?>
         </div>
         <ul data-am-widget="pagination" class="am-pagination am-pagination-default">
             <?php if($this->chapter['pre']){?>
