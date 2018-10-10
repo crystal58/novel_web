@@ -25,6 +25,8 @@
                  if($num%2 != 0){
                      $content = $content."</div>";
                  }
+                $content = preg_replace('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', '', $content);
+                $content = preg_replace("/<a[^>]*>(.*?)<\/a*>/is", "", $content);
 
                  $pNum = substr_count($content,"</p>");
                  $brNum = substr_count($content,"<br");
@@ -52,6 +54,7 @@
                 }else{
                     $novelContent = $content."<strong><a id='eeeaaa' href='".$this->web_url."' title='文学星空'>文学星空</a ></strong>";
                 }
+
                 echo $novelContent;
 
             ?>
