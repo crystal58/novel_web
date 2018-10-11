@@ -532,4 +532,4 @@ footer a:hover{
 .author_book_left img{height: 110px;margin-bottom: 0}
 .author_book_right{padding: 0 1rem}
 .author_book_info{text-overflow: ellipsis;-webkit-line-clamp: 6;overflow: hidden;display: -webkit-box;-webkit-box-orient: vertical;max-height: 9rem}
-#eeeaaa{color: rgb(88, 88, 88);font-weight: normal}
+#eeeaaa{color: #333;font-weight: normal}
