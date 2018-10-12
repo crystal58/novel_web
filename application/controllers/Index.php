@@ -21,11 +21,14 @@ class IndexController extends AbstractController {
             $wuxiaData = $keyValueModel->getData(array("keys"=>"recommend_wuxia"));
             $yanqingData = $keyValueModel->getData(array("keys"=>"recommend_yanqing"));
             $schoolData = $keyValueModel->getData(array("keys"=>"recommend_xiaoyuan"));
+            $xuanhuanData = $keyValueModel->getData(array("keys"=>"recommend_xuanhuan"));
 
             //$a = json_decode($wuxiaData['value'],true);
             $this->_view->wuxia_list = $wuxiaData ? json_decode($wuxiaData['value'],true) : array();
             $this->_view->yanqing_list = $yanqingData ? json_decode($yanqingData['value'],true) : array();
-            $a = $this->_view->xiaoyuan_list = $schoolData ? json_decode($schoolData['value'],true) :array();
+            $this->_view->xiaoyuan_list = $schoolData ? json_decode($schoolData['value'],true) :array();
+            $this->_view->xuanhuan_list = $xuanhuanData ? json_decode($xuanhuanData['value'],true) :array();
+
             $this->_view->seo = array(
                 "title" => $this->_seo['index']['title'],
                 "keywords" => $this->_seo['index']['keywords'],
