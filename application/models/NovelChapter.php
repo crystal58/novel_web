@@ -19,7 +19,7 @@ class NovelChapterModel extends AbstractModel {
         return $this->insert($data);
     }
 
-    public function chaptersList($params = array(),$offset = 0, $pageSize=20, $isCount=false){
+    public function chaptersList($params = array(),$offset, $pageSize, $isCount){
         if(empty($params) && empty($pageSize)){
             return array();
         }
