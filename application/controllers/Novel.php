@@ -94,28 +94,28 @@ class NovelController extends AbstractController{
             $params = array(
                 "AND" => array(
                     "novel_id" => $novelId,
-                    "id[>]" =>$novelChapter['id']
+                    "chapter_order[>]" =>$novelChapter['chapter_order']
                 ),
                 "ORDER" => array(
                     "chapter_order" => "ASC",
                     "id" => "ASC"
                 )
             );
-            $nextNovel = $novelChapterModel->fetchRow($params,array("id"));
+            $nextNovel = $novelChapterModel->fetchRow($params,array("id","chapter_order"));
             if($nextNovel){
                 $novelChapter['next'] = $nextNovel['id'];
             }
             $params = array(
                 "AND" => array(
                     "novel_id" => $novelId,
-                    "id[<]" =>$novelChapter['id']
+                    "chapter_order[<]" =>$novelChapter['chapter_order']
                 ),
                 "ORDER" => array(
                     "chapter_order" => "DESC",
                     "id" => "DESC"
                 )
             );
-            $preNovel = $novelChapterModel->fetchRow($params,array("id"));
+            $preNovel = $novelChapterModel->fetchRow($params,array("id","chapter_order"));
             if($preNovel){
                 $novelChapter['pre'] = $preNovel['id'];
             }
