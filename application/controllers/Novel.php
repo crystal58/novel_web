@@ -153,7 +153,7 @@ class NovelController extends AbstractController{
                 "novel_id" => $novelId,
                 "status" => 1
             );
-            $chaptersList = $novelChapters->chaptersList($params);
+            $chaptersList = $novelChapters->chaptersList($params,false);
             $this->_view->list = $chaptersList['list'];
 
             $novelModel = new NovelModel();
