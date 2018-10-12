@@ -21,10 +21,20 @@
 
             <?php
                  $content = $this->chapter['content'];
-                 $num = substr_count($this->chapter['content'],"<div");
-                 if($num%2 != 0){
-                     $content = $content."</div>";
+                 $start_div_num = substr_count($this->chapter['content'],"<div");
+                 $end_div_num = substr_count($this->chapter['content'],"</div");
+                 if($start_div_num > $end_div_num){
+                     $num = $start_div_num - $end_div_num;
+                     for($i=0;$i<$num;$i++){
+                         $content = $content."</div>";
+                     }
                  }
+                if($start_div_num < $end_div_num){
+                    $num = $end_div_num - $start_div_num;
+                    for($i=0;$i<$num;$i++){
+                        $content = "<div>".$content;
+                     }
+                }
                 $content = preg_replace('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', '', $content);
                 $content = preg_replace("/<a[^>]*>(.*?)<\/a*>/is", "", $content);
 
