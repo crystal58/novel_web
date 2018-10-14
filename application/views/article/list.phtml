@@ -1,0 +1,33 @@
+<?php $this->display('section/header.phtml');?>
+
+<h1 class="star am-container mcenter"><span><img src="/images/star.png" alt="唐诗"><?=NovelModel::$_novel_class_type[$class_type_id]?>唐诗</span></h1>
+<div id="cattlist" class="am-container">
+    <ul class="am-avg-sm-1 am-avg-md-3 am-avg-lg-4">
+        <?php foreach ($this->article_type as $value){?>
+        <li>
+            <div class="cattlist_0">
+                <div class="cattlist_1">
+                    <div class="am-g">
+                        <div class="am-u-sm-4 am-u-md-5 am-u-lg-5 am-vertical-align">
+                            <div class="am-vertical-align-middle">
+                                <img src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$value['name']?>">
+                            </div>
+                        </div>
+                        <div class="am-u-sm-8 am-u-md-7 am-u-lg-7">
+                            <h2><?=$value['name']?></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="cattlist_2">
+                    <p><?=$value['content']?></p>
+                </div>
+                <div class="cattlist_3">
+                    <a class="am-btn am-btn-warning" title="<?=$value['name']?>" href="<?=$this->web_url?>/tangshi/chapter_<?=$value['id']?>_1.html">开始阅读</a>
+                </div>
+            </div>
+        </li>
+    <?php }?>
+    </ul>
+</div>
+
+<?php $this->display('section/footer.phtml');?>
