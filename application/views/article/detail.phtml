@@ -19,7 +19,19 @@
         <div>作者：<strong><?=$this->article_info['author']?></strong></div>
         <div class="contents">
             <?php
-                 echo $content = $this->article_info['content'];
+                 $content = $this->article_info['content'];
+                 $search = array(
+                         '<font color="#800080" face="黑体">[注解]</font>',
+                         '<font color="#800080" face="黑体">[韵译]</font>',
+                         '<font color="#800080" face="黑体">[评析]</font>'
+                 );
+                 $replace = array(
+                         '<strong style="color: #e1652f">[注解]</strong>',
+                         '<strong style="color: #e1652f">[韵译]</strong>',
+                         '<strong style="color: #e1652f">[评析]</strong>'
+                 );
+                 $content = str_replace($search,$replace,$content);
+                 echo $content;
             ?>
         </div>
         <ul data-am-widget="pagination" class="am-pagination am-pagination-default">
