@@ -147,7 +147,12 @@ class ArticleController extends AbstractController{
                 "class_type" => $articleTypeId,
                 "status" => 1
             );
-            $chaptersList = $articleModel->getList($params);
+            $order = array(
+                "article_order"=>"ASC",
+                "id" => "ASC"
+            );
+            $chaptersList = $articleModel->getList($params,0,false,$order);
+            //var_dump($chaptersList);exit;
             $this->_view->list = $chaptersList['list'];
 
             $articleTypeModel = new ArticlesTypeModel();

@@ -11,7 +11,7 @@ class ArticlesModel extends AbstractModel {
     /**
      * isCount   是否返回count
      */
-    public function getList($params,$offset = 0,$pagesize = false) {
+    public function getList($params,$offset = 0,$pagesize = false,$order=null) {
         $where = array();
         foreach($params as $key=>$value){
             $where['AND'] = array(
@@ -20,6 +20,9 @@ class ArticlesModel extends AbstractModel {
         }
         if($pagesize){
             $where['LIMIT'] = array($offset,$pagesize);
+        }
+        if($order){
+            $where['ORDER'] = $order;
         }
 
         $result['list'] = $this->fetchAll($where);

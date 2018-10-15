@@ -21,10 +21,6 @@ class ArticlesTypeModel extends AbstractModel {
                 $key => $value
             );
         }
-        $where['ORDER'] = array(
-            "article_order"=>"ASC",
-            "id" => "ASC"
-        );
         $result['list'] = $this->fetchAll($where);
         return $result;
     }
