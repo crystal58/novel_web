@@ -22,7 +22,7 @@ class ArticlesTypeModel extends AbstractModel {
             );
         }
         $where['ORDER'] = array(
-            "chapter_order"=>"ASC",
+            "article_order"=>"ASC",
             "id" => "ASC"
         );
         $result['list'] = $this->fetchAll($where);
