@@ -144,7 +144,7 @@ class ArticleController extends AbstractController{
 
             $articleModel = new ArticlesModel();
             $params = array(
-                "class_type" => $articleTypeId,
+                "class_type" => (int)$articleTypeId,
                 "status" => 1
             );
             $order = array(

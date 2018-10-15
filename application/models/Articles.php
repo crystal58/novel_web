@@ -14,9 +14,7 @@ class ArticlesModel extends AbstractModel {
     public function getList($params,$offset = 0,$pagesize = false,$order=null) {
         $where = array();
         foreach($params as $key=>$value){
-            $where['AND'] = array(
-                $key => $value
-            );
+            $where['AND'][$key] =  $value;
         }
         if($pagesize){
             $where['LIMIT'] = array($offset,$pagesize);
