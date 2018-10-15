@@ -169,11 +169,12 @@ class ArticleController extends AbstractController{
                     break;
 
             }
+            $description = $articleType['content']?$articleType['name']."简介及资料:".strip_tags($articleType['content']) :$this->_seo[$key]['description'];
 
             $this->_view->seo = array(
                 "title" => $this->_seo[$key]['title'],
                 "keywords" => $this->_seo[$key]['keywords'],
-                "description" => $articleType['content']?$articleType['name']."简介及资料:".strip_tags($articleType['content']) :$this->_seo[$key]['description']
+                "description" => mb_substr($description,0,95,'utf-8'),
             );
 
         }catch (Exception $e){
