@@ -13,7 +13,7 @@ class ArticleController extends AbstractController{
 
 
     /**
-     * 作者小说列表
+     *
      */
     public function listAction(){
 
@@ -22,21 +22,34 @@ class ArticleController extends AbstractController{
             $page = $page > 0 ? $page : 1;
             $offset = ($page - 1) * self::PAGESIZE;
 
+            $classTypeId = $this->get("id",1);
+
             $params = array(
                 "status" => ArticlesTypeModel::ARTICLE_CLASS_STATUS,
-                "parent_id" => ArticlesTypeModel::ARTICLE_TYPE_TANG
+                "parent_id" => $classTypeId
             );
             $articleTypeModel = new ArticlesTypeModel();
             $articleType = $articleTypeModel->getList($params);
-            $this->_view->article_type =$articleType;
+            $this->_view->article_type =$articleType['list'];
+
+            $key = "";
+            switch ($classTypeId){
+                case ArticlesTypeModel::ARTICLE_TYPE_TANG :
+                    $key = "suitang";
+                    break;
+                case ArticlesTypeModel::ARTICLE_TYPE_SONG:
+                    $key = "songyuan";
+                    break;
+
+            }
+
+            $this->_view->seo = array(
+                "title" => $this->_seo[$key]['title'],
+                "keywords" => $this->_seo[$key]['keywords'],
+                "description" => $this->_seo[$key]['description'],
+            );
 
 
-//            $this->_view->seo = array(
-//                "title" => isset($authorInfo['author_name'])?str_replace(array("{author}","{novelclass}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$authorInfo['novel_class_id']]),$this->_seo['author']['title']):"",
-//                "keywords" => isset($authorInfo['author_name'])?str_replace(array("{author}","{novelclass}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$authorInfo['novel_class_id']]),$this->_seo['author']['keywords']):"",
-//                "description" => isset($authorInfo['author_name'])?str_replace(array("{author}","{novelclass}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$authorInfo['novel_class_id']]),$this->_seo['author']['description']):""
-//            );
-            //echo json_encode($novelList);exit;
             //$ph = new \YC\Page($result['cnt'], $page, self::PAGESIZE,"/xiaoshuo/list_{$novelId}_{num}.html");
             //$this->_view->pageHtml = $ph->getPageHtml();
 
@@ -49,63 +62,72 @@ class ArticleController extends AbstractController{
     public function detailAction(){
 
         try{
-            $chapterId = $this->get("id");
-            $novelChapterModel = new NovelChapterModel();
-            $params = array("id" => $chapterId);
-            $novelChapter = $novelChapterModel->chapter($params);
+            $articleId = $this->get("id");
+            $articleModel = new ArticlesModel();
+            $articleInfo = $articleModel->find($articleId);
 
-            if(empty($novelChapter)){
+
+            if(empty($articleInfo)){
                 throw new Exception("章节不存在!",404);
             }
 
-            $novelId = $novelChapter['novel_id'];
-            $novelModel = new NovelModel();
-            $novelInfo = $novelModel->find($novelId);
+            $this->_view->article_info = $articleInfo;
+            $classId = $articleInfo['class_type'];
+            $articleTypeModel = new ArticlesTypeModel();
+            $articleType = $articleTypeModel->find($classId);
 
-            $novelChapter['next'] = $novelChapter['pre'] = false;
+            $this->_view->article_type = $articleType;
+
+            $params = array(
+                "status" => ArticlesModel::ARTICLE_CLASS_STATUS,
+                "id[!]" => $articleId
+            );
+            $relateArticle = $articleModel->getList($params,0,10);
+            $this->_view->relate_article = $relateArticle['list'];
+
+            $articleChapter['next'] = $articleChapter['pre'] = false;
             $params = array(
                 "AND" => array(
-                    "novel_id" => $novelId,
-                    "chapter_order[>]" =>$novelChapter['chapter_order']
+                    "id[>]" =>$articleId
                 ),
                 "ORDER" => array(
-                    "chapter_order" => "ASC",
                     "id" => "ASC"
                 )
             );
-            $nextNovel = $novelChapterModel->fetchRow($params,array("id","chapter_order"));
-            if($nextNovel){
-                $novelChapter['next'] = $nextNovel['id'];
+            $nextArticle = $articleModel->fetchRow($params,array("id"));
+            if($nextArticle){
+                $articleChapter['next'] = $nextArticle['id'];
             }
             $params = array(
                 "AND" => array(
-                    "novel_id" => $novelId,
-                    "chapter_order[<]" =>$novelChapter['chapter_order']
+                    "id[<]" =>$articleId
                 ),
                 "ORDER" => array(
-                    "chapter_order" => "DESC",
-                    "id" => "DESC"
+                    "id" => "ASC"
                 )
             );
-            $preNovel = $novelChapterModel->fetchRow($params,array("id","chapter_order"));
-            if($preNovel){
-                $novelChapter['pre'] = $preNovel['id'];
+            $preArticle = $articleModel->fetchRow($params,array("id"));
+            if($preArticle){
+                $articleChapter['pre'] = $preArticle['id'];
+            }
+            $this->_view->chapter = $articleChapter;
+
+            $key = "";
+            switch ($articleType['parent_id']){
+                case ArticlesTypeModel::ARTICLE_TYPE_TANG :
+                    $key = "suitangdetail";
+                    break;
+                case ArticlesTypeModel::ARTICLE_TYPE_SONG:
+                    $key = "songyuandetail";
+                    break;
+
             }
 
-            $authorNovel = $novelModel->novelList(array("author_id"=>$novelInfo['author_id'],"record_status[!]" => NovelModel::NOVEL_RECORDING_INIT),0,6);
-            $relateNovel = $novelModel->novelList(array("novel_class_id"=>$novelInfo['novel_class_id'],"record_status[!]" => NovelModel::NOVEL_RECORDING_INIT),0,6);
-
-//echo json_encode($relateNovel);exit;
-            $this->_view->chapter = $novelChapter;
-            $this->_view->novel = $novelInfo;
-            $this->_view->author_novel = $authorNovel['list'];
-            $this->_view->relate_novel = $relateNovel['list'];
-            $authorModel = new AuthorModel();
-            $authorInfo = $authorModel->find($novelInfo['author_id']);
-            $a = $this->_view->seo = array(
-                "title" => (!empty($novelInfo))?str_replace(array("{author}","{novelclass}","{book}","{chaptertitle}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$novelInfo['novel_class_id']],$novelInfo['name'],$novelChapter['title']),$this->_seo['noveldetail']['title']):"",
-                "keywords" => !empty($novelInfo)?str_replace(array("{author}","{novelclass}","{book}","{chaptertitle}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$novelInfo['novel_class_id']],$novelInfo['name'],$novelChapter['title']),$this->_seo['noveldetail']['keywords']):"",
-                "description" => !empty($novelInfo)?str_replace(array("{author}","{novelclass}","{book}","{chaptertitle}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$novelInfo['novel_class_id']],$novelInfo['name'],$novelChapter['title']),$this->_seo['noveldetail']['description']):"",
+            $content = strip_tags($articleInfo['content']);
+            $this->_view->seo = array(
+                "title" => str_replace(array("{name}","{author_name}"),array($articleInfo['name'],$articleInfo['author']),$this->_seo[$key]['title']),
+                "keywords" => str_replace(array("{name}","{author_name}"),array($articleInfo['name'],$articleInfo['author']),$this->_seo[$key]['keywords']),
+                "description" => str_replace(array("{name}","{author_name}","{content}"),array($articleInfo['name'],$articleInfo['author'],$content),$this->_seo[$key]['description']),
             );
 
         }catch (Exception $e){
@@ -118,29 +140,36 @@ class ArticleController extends AbstractController{
             $page = $this->get("page");
             $page = $page > 0 ? $page : 1;
             $offset = ($page-1)*50;
-            $novelId = $this->get("id");
+            $articleTypeId = $this->get("id");
 
-            $novelChapters = new NovelChapterModel();
+            $articleModel = new ArticlesModel();
             $params = array(
-                "novel_id" => $novelId,
+                "class_type" => $articleTypeId,
                 "status" => 1
             );
-            $chaptersList = $novelChapters->chaptersList($params);
+            $chaptersList = $articleModel->getList($params);
             $this->_view->list = $chaptersList['list'];
 
-            $novelModel = new NovelModel();
-            $novelInfo = $novelModel->find($novelId);
-            $this->_view->novel_info = $novelInfo;
+            $articleTypeModel = new ArticlesTypeModel();
+            $articleType = $articleTypeModel->find($articleTypeId);
+            $this->_view->article_type = $articleType;
 
-            $authorModel = new AuthorModel();
-            $authorInfo = $authorModel->find($novelInfo['author_id']);
+            $key = "";
+            switch ($articleType['parent_id']){
+                case ArticlesTypeModel::ARTICLE_TYPE_TANG :
+                    $key = "suitangchapter";
+                    break;
+                case ArticlesTypeModel::ARTICLE_TYPE_SONG:
+                    $key = "songyuanchapter";
+                    break;
+
+            }
 
             $this->_view->seo = array(
-                "title" => isset($novelInfo['name'])?str_replace(array("{author}","{novelclass}","{book}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$authorInfo['novel_class_id']],$novelInfo['name']),$this->_seo['novelchapter']['title']):"",
-                "keywords" => isset($novelInfo['name'])?str_replace(array("{author}","{novelclass}","{book}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$authorInfo['novel_class_id']],$novelInfo['name']),$this->_seo['novelchapter']['keywords']):"",
-                "description" => $novelInfo['content']
+                "title" => $this->_seo[$key]['title'],
+                "keywords" => $this->_seo[$key]['keywords'],
+                "description" => $articleType['content']?:$articleType['name']."简介及资料".$this->_seo[$key]['description']
             );
-            //echo json_encode($chaptersList);exit;
 
         }catch (Exception $e){
             $this->processException($this->getRequest()->getControllerName(),$this->getRequest()->getActionName(),$e);
