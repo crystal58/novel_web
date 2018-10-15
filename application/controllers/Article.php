@@ -173,7 +173,7 @@ class ArticleController extends AbstractController{
             $this->_view->seo = array(
                 "title" => $this->_seo[$key]['title'],
                 "keywords" => $this->_seo[$key]['keywords'],
-                "description" => $articleType['content']?:$articleType['name']."简介及资料".$this->_seo[$key]['description']
+                "description" => $articleType['content']?$articleType['name']."简介及资料:".strip_tags($articleType['content']) :$this->_seo[$key]['description']
             );
 
         }catch (Exception $e){
