@@ -123,7 +123,7 @@ class ArticleController extends AbstractController{
 
             }
 
-            $content = strip_tags($articleInfo['content']);
+            $content = mb_substr(strip_tags($articleInfo['content']),0,95,'utf-8');
             $this->_view->seo = array(
                 "title" => str_replace(array("{name}","{author_name}"),array($articleInfo['name'],$articleInfo['author']),$this->_seo[$key]['title']),
                 "keywords" => str_replace(array("{name}","{author_name}"),array($articleInfo['name'],$articleInfo['author']),$this->_seo[$key]['keywords']),
