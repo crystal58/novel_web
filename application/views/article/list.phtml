@@ -27,6 +27,30 @@
             </div>
         </li>
     <?php }?>
+        <?php foreach ($this->author_list as $value){?>
+            <li>
+                <div class="cattlist_0">
+                    <div class="cattlist_1">
+                        <div class="am-g">
+                            <div class="am-u-sm-4 am-u-md-5 am-u-lg-5 am-vertical-align">
+                                <div class="am-vertical-align-middle">
+                                    <img src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$value['name']?>">
+                                </div>
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-7 am-u-lg-7">
+                                <h2><?=$value['name']?></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cattlist_2">
+                        <p><?=$value['description']?></p>
+                    </div>
+                    <div class="cattlist_3">
+                        <a class="am-btn am-btn-warning" title="<?=$value['name']?>" href="<?=$this->web_url?>/tangshi/chapter_<?=$value['id']?>_1.html">开始阅读</a>
+                    </div>
+                </div>
+            </li>
+        <?php }?>
     </ul>
 </div>
 

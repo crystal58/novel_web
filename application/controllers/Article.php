@@ -32,6 +32,10 @@ class ArticleController extends AbstractController{
             $articleType = $articleTypeModel->getList($params);
             $this->_view->article_type =$articleType['list'];
 
+            $articleAuthorModel = new ArticleAuthorModel();
+            $articleAuthor = $articleAuthorModel->getAllAuthor();
+            $this->_view->author_list = $articleAuthor;
+
             $key = "";
             switch ($classTypeId){
                 case ArticlesTypeModel::ARTICLE_TYPE_TANG :
@@ -65,6 +69,7 @@ class ArticleController extends AbstractController{
             $articleId = $this->get("id");
             $articleModel = new ArticlesModel();
             $articleInfo = $articleModel->find($articleId);
+            //var_dump($articleInfo);exit;
 
 
             if(empty($articleInfo)){

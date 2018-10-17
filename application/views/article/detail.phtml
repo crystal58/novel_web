@@ -34,6 +34,39 @@
                  echo $content;
             ?>
         </div>
+        <?php if(isset($this->article_info['description']) && $this->article_info['description']){?>
+        <div class="contents">
+            <span>古诗简介</span>
+            <div>
+                <?=$this->article_info['description']?>
+            </div>
+        </div>
+        <?php }?>
+        <?php if($this->article_info['translate']){?>
+            <div class="contents">
+                <span>翻译/译文</span>
+                <div>
+                    <?=$this->article_info['translate']?>
+                </div>
+            </div>
+        <?php }?>
+        <?php if($this->article_info['notes']){?>
+            <div class="contents">
+                <span>注释</span>
+                <div>
+                    <?=$this->article_info['notes']?>
+                </div>
+            </div>
+        <?php }?>
+        <?php if($this->article_info['shangxi']){?>
+            <div class="contents">
+                <span>赏析/鉴赏</span>
+                <div>
+                    <?=$this->article_info['shangxi']?>
+                </div>
+            </div>
+        <?php }?>
+
         <ul data-am-widget="pagination" class="am-pagination am-pagination-default">
             <?php if($this->chapter['pre']){?>
             <li class="am-pagination-prev ">
