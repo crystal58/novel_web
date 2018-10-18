@@ -34,11 +34,11 @@
                         <div class="am-g">
                             <div class="am-u-sm-4 am-u-md-5 am-u-lg-5 am-vertical-align">
                                 <div class="am-vertical-align-middle">
-                                    <img src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$value['name']?>">
+                                    <img src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$value['author_name']?>">
                                 </div>
                             </div>
                             <div class="am-u-sm-8 am-u-md-7 am-u-lg-7">
-                                <h2><?=$value['name']?></h2>
+                                <h2><?=$value['author_name']?></h2>
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                         <p><?=$value['description']?></p>
                     </div>
                     <div class="cattlist_3">
-                        <a class="am-btn am-btn-warning" title="<?=$value['name']?>" href="<?=$this->web_url?>/tangshi/gushi_<?=$value['id']?>_1.html">开始阅读</a>
+                        <a class="am-btn am-btn-warning" title="<?=$value['author_name']?>" href="<?=$this->web_url?>/tangshi/gushi_<?=$value['id']?>_1.html">开始阅读</a>
                     </div>
                 </div>
             </li>

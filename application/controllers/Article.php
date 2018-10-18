@@ -118,7 +118,8 @@ class ArticleController extends AbstractController{
             $this->_view->chapter = $articleChapter;
 
             $key = "";
-            switch ($articleType['parent_id']){
+            $classType = $articleType['parent_id'] == 0 ? $articleType['id']:$articleType['parent_id'];
+            switch ($classType){
                 case ArticlesTypeModel::ARTICLE_TYPE_TANG :
                     $key = "suitangdetail";
                     break;
