@@ -17,9 +17,7 @@ class ArticlesTypeModel extends AbstractModel {
     public function getList($params) {
         $where = array();
         foreach($params as $key=>$value){
-            $where['AND'] = array(
-                $key => $value
-            );
+            $where['AND'][$key] = $value;
         }
         $result['list'] = $this->fetchAll($where);
         return $result;
