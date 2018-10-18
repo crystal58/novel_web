@@ -12,8 +12,7 @@
                 </li>
                 <li>
                     <a href="<?= $this->web_url ?>/tangshi/detail_<?= $this->article_info['id'] ?>.html"
-                       title="<?= $this->article_info['name'] ?>"><strong class="fn">#<?= $this->article_info['name'] ?>
-                            #</strong></a>
+                       title="<?= $this->article_info['name'] ?>"><strong class="fn">#<?= $this->article_info['name'] ?>#</strong></a>
                 </li>
             </ol>
             <div>
@@ -123,8 +122,7 @@
                             <div class=" am-u-sm-8 am-list-main">
                                 <h3 class="am-list-item-hd">
                                     <a href="<?= $this->web_url ?>/tangshi/chapter_<?= $value['id'] ?>_1.html"
-                                       title="<?= $value['author'] ?>/<?= $value['name'] ?>"><?= $value['author'] ?>
-                                        /<?= $value['name'] ?></a>
+                                       title="<?= $value['author'] ?>/<?= $value['name'] ?>"><?= $value['author'] ?>/<?= $value['name'] ?></a>
                                 </h3>
 
                                 <div class="am-list-item-text"><?= strip_tags($value['content'], "<p><br>") ?></div>
