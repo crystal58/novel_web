@@ -1,0 +1,50 @@
+<?php $this->display('section/header.phtml');?>
+<div class="category2top">
+    <div class="am-g am-container userinfo">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-5 userinfo_left">
+            <div class="am-g">
+                <div class="am-u-md-12 am-u-lg-6 userface">
+                    <img src="<?=\YC\Common::getUrl($this->author_info['pic'])?>" alt="<?=$this->author_info['author_name']?>">
+                </div>
+                <div class="am-u-md-12 am-u-lg-6 userin">
+                    <h1><?=$this->author_info['author_name']?></h1>
+                </div>
+            </div>
+        </div>
+        <div class="am-u-sm-0 am-u-md-12 am-u-lg-7 am-show-lg-only userinfo_center">
+            <?=$this->author_info['description']?>
+        </div>
+    </div>
+</div>
+
+<div class="am-g">
+    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+        <?php
+        $novelList = $this->list;
+        reWriter:
+        $first = array_shift($novelList);
+        if($first['is_part'] == 1) {
+        ?>
+        <ul class="am-avg-sm-1 am-avg-md-1 am-avg-lg-1 am-thumbnails am-list am-list-striped mb0 tc">
+            <li><a class="am-text-truncate" title="<?=$first['name']?>"><i class="am-icon-home am-icon-fw"></i> <?=$first['name']?></a></li>
+        </ul>
+        <?php }else{
+            array_unshift($novelList,$first);
+        }?>
+        <ul class="am-avg-sm-1 am-avg-md-3 am-avg-lg-4 am-thumbnails am-list am-list-striped mb0">
+            <?php
+            foreach ($novelList as $key=>$value){
+                if($value['is_part'] == 1){
+                    echo "</ul>";
+                    goto reWriter;
+                }
+
+            ?>
+            <li><a class="am-text-truncate" href="<?=$this->web_url?>/tangshi/detail_<?=$value['id']?>.html" title="<?=$value['name']?>"><i class="am-icon-book am-icon-fw"></i> <?=$value['name']?></a></li>
+            <?php
+                unset($novelList[$key]);
+            }?>
+        </ul>
+    </div>
+</div>
+<?php $this->display('section/footer.phtml');?>

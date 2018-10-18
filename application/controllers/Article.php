@@ -13,7 +13,7 @@ class ArticleController extends AbstractController{
 
 
     /**
-     *
+     * 专题、作者列表
      */
     public function listAction(){
 
@@ -179,6 +179,53 @@ class ArticleController extends AbstractController{
             $this->_view->seo = array(
                 "title" => str_replace("{name}",$articleType['name'],$this->_seo[$key]['title']),
                 "keywords" => str_replace("{name}",$articleType['name'],$this->_seo[$key]['keywords']),
+                "description" => mb_substr($description,0,95,'utf-8'),
+            );
+
+        }catch (Exception $e){
+            $this->processException($this->getRequest()->getControllerName(),$this->getRequest()->getActionName(),$e);
+        }
+
+    }
+
+    public function articlelistAction(){
+        try{
+            $page = $this->get("page");
+            $page = $page > 0 ? $page : 1;
+            $offset = ($page-1)*50;
+            $authorId = $this->get("id");
+
+            $articleModel = new ArticlesModel();
+            $params = array(
+                "author_id" => (int)$authorId,
+                "status" => 1
+            );
+            $order = array(
+                "article_order"=>"ASC",
+                "id" => "ASC"
+            );
+            $chaptersList = $articleModel->getList($params,0,false,$order);
+            //var_dump($chaptersList);exit;
+            $this->_view->list = $chaptersList['list'];
+
+            $authorModel = new ArticleAuthorModel();
+            $authorInfo = $authorModel->find($authorId);
+            $this->_view->author_info = $authorInfo;
+
+            $key = "";
+            switch ($authorInfo['class_type_id']){
+                case ArticlesTypeModel::ARTICLE_TYPE_TANG :
+                    $key = "suitangchapter";
+                    break;
+                case ArticlesTypeModel::ARTICLE_TYPE_SONG:
+                    $key = "songyuanchapter";
+                    break;
+            }
+            $description = $authorInfo['description']?$authorInfo['author_name']."简介及资料:".strip_tags($authorInfo['description']) :$this->_seo[$key]['description'];
+
+            $this->_view->seo = array(
+                "title" => str_replace("{name}",$authorInfo['author_name'],$this->_seo[$key]['title']),
+                "keywords" => str_replace("{name}",$authorInfo['author_name'],$this->_seo[$key]['keywords']),
                 "description" => mb_substr($description,0,95,'utf-8'),
             );
 
