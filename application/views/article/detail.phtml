@@ -5,15 +5,19 @@
             <ol class="am-breadcrumb breadcrumb">
                 <li><a href="<?= $this->web_url ?>" title="文学星空" class="am-icon-home">首页</a></li>
                 <li>
-                    <a href="<?= $this->web_url ?>/tangshi/chapter_<?= $this->article_type['id'] ?>_1.html"
-                       title="<?= $this->article_type['name'] ?>">
-                        <strong class="fn"><?= $this->article_type['name'] ?></strong>
-                    </a>
+                    <?php if($this->article_type['parent_id'] == 0){?>
+                        <a href="<?= $this->web_url ?>/tangshi/gushi_<?= $this->article_info['author_id'] ?>_1.html" title="<?= $this->article_info['author'] ?>">
+                            <strong class="fn"><?= $this->article_info['author'] ?></strong>
+                        </a>
+                    <?php }else{?>
+                        <a href="<?= $this->web_url ?>/tangshi/chapter_<?= $this->article_type['id'] ?>_1.html" title="<?= $this->article_type['name'] ?>">
+                            <strong class="fn"><?= $this->article_type['name'] ?></strong>
+                        </a>
+                    <?php }?>
+
                 </li>
                 <li>
-                    <a href="<?= $this->web_url ?>/tangshi/detail_<?= $this->article_info['id'] ?>.html"
-                       title="<?= $this->article_info['name'] ?>"><strong class="fn">#<?= $this->article_info['name'] ?>
-                            #</strong></a>
+                    <a href="<?= $this->web_url ?>/tangshi/detail_<?= $this->article_info['id'] ?>.html" title="<?= $this->article_info['name'] ?>"><strong class="fn">#<?= $this->article_info['name'] ?>#</strong></a>
                 </li>
             </ol>
             <div>
@@ -85,18 +89,19 @@
             <ul data-am-widget="pagination" class="am-pagination am-pagination-default">
                 <?php if ($this->chapter['pre']) { ?>
                     <li class="am-pagination-prev ">
-                        <a href="<?= $this->web_url ?>/tangshi/detail_<?= $this->chapter['pre'] ?>.html"
-                           class="">上一章</a>
+                        <a href="<?= $this->web_url ?>/tangshi/detail_<?= $this->chapter['pre'] ?>.html" class="">上一章</a>
                     </li>
                 <?php } ?>
                 <li class="">
-                    <a href="<?= $this->web_url ?>/tangshi/gushi_<?= $this->article_info['author_id'] ?>_1.html"
-                       class="">回目录</a>
+                    <?php if ($this->article_type['parent_id'] == 0) { ?>
+                        <a href="<?= $this->web_url ?>/tangshi/gushi_<?= $this->article_info['author_id'] ?>_1.html" class="">回目录</a>
+                    <?php }else{?>
+                        <a href="<?= $this->web_url ?>/tangshi/chapter_<?= $this->article_info['class_type'] ?>_1.html" class="">回目录</a>
+                    <?php }?>
                 </li>
                 <?php if ($this->chapter['next']) { ?>
                     <li class="am-pagination-next ">
-                        <a href="<?= $this->web_url ?>/tangshi/detail_<?= $this->chapter['next'] ?>.html"
-                           class="">下一章</a>
+                        <a href="<?= $this->web_url ?>/tangshi/detail_<?= $this->chapter['next'] ?>.html" class="">下一章</a>
                     </li>
                 <?php } ?>
             </ul>
@@ -128,9 +133,9 @@
                             <div class=" am-u-sm-8 am-list-main">
                                 <h3 class="am-list-item-hd">
                                 <?php if ($this->article_type['parent_id'] == 0) { ?>
-                                    <a href="<?= $this->web_url ?>/tangshi/detail_<?= $value['id'] ?>.html" title="<?= $value['author'] ?>/<?= $value['name'] ?>"><?= $value['author'] ?>/<?= $value['name'] ?></a>
+                                    <a href="<?= $this->web_url ?>/tangshi/detail_<?= $value['id'] ?>.html" title="<?= empty($value['author']) ?"" : $value['author']."/"?><?= $value['name'] ?>"><?= empty($value['author']) ?"" : $value['author']."/"?><?= $value['name'] ?></a>
                                 <?php }else{?>
-                                    <a href="<?= $this->web_url ?>/tangshi/detail_<?= $value['id'] ?>.html" title="<?= $value['author'] ?>/<?= $value['name'] ?>"><?= $value['author'] ?>/<?= $value['name'] ?></a>
+                                    <a href="<?= $this->web_url ?>/tangshi/detail_<?= $value['id'] ?>.html" title="<?= empty($value['author']) ?"" : $value['author']."/"?><?= $value['name'] ?>"><?= empty($value['author']) ?"" : $value['author']."/"?><?= $value['name'] ?></a>
                                 <?php }?>
                                 </h3>
 

@@ -85,9 +85,17 @@ class ArticleController extends AbstractController{
 
             $params = array(
                 "status" => ArticlesModel::ARTICLE_CLASS_STATUS,
-                "id[!]" => $articleId
+                "id[>]" => $articleInfo['id']
             );
             $relateArticle = $articleModel->getList($params,0,10);
+            if(count($relateArticle['list']) < 10){
+                $params = array(
+                    "status" => ArticlesModel::ARTICLE_CLASS_STATUS,
+                    "id[<]" => $articleInfo['id']
+                );
+                $relate = $articleModel->getList($params,0,10,array("id" => "DESC"));
+                $relateArticle = array_merge($relateArticle,$relate);
+            }
             $this->_view->relate_article = $relateArticle['list'];
 
             $articleChapter['next'] = $articleChapter['pre'] = false;
