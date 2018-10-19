@@ -116,7 +116,7 @@ class ArticleController extends AbstractController{
                     "id[<]" =>$articleId
                 ),
                 "ORDER" => array(
-                    "id" => "ASC"
+                    "id" => "DESC"
                 )
             );
             $preArticle = $articleModel->fetchRow($params,array("id"));
