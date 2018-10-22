@@ -46,17 +46,19 @@ class ArticleController extends AbstractController{
                 case ArticlesTypeModel::ARTICLE_TYPE_TANG :
                     $key = "suitang";
                     $urlType = "tangshi";
+                    $chapterUrlType = "sushi";
                     $tabName = "唐诗";
                     break;
                 case ArticlesTypeModel::ARTICLE_TYPE_SONG:
                     $key = "songyuan";
                     $urlType = "ciqu";
+                    $chapterUrlType = "songci";
                     $tabName = "宋词";
                     break;
 
             }
             $this->_view->url_type = $urlType?:"tangshi";
-
+            $this->_view->chapter_url_type = $chapterUrlType?:"gushi";
             $this->_view->seo = array(
                 "title" => $this->_seo[$key]['title'],
                 "keywords" => $this->_seo[$key]['keywords'],
@@ -254,11 +256,14 @@ class ArticleController extends AbstractController{
             switch ($authorInfo['class_type_id']){
                 case ArticlesTypeModel::ARTICLE_TYPE_TANG :
                     $key = "suitangchapter";
+                    $urlType = "tangshi";
                     break;
                 case ArticlesTypeModel::ARTICLE_TYPE_SONG:
                     $key = "songyuanchapter";
+                    $urlType = "ciqu";
                     break;
             }
+            $this->_view->url_type =$urlType?:"tangshi";
             $description = $authorInfo['description']?$authorInfo['author_name']."简介及资料:".strip_tags($authorInfo['description']) :$this->_seo[$key]['description'];
 
             $this->_view->seo = array(

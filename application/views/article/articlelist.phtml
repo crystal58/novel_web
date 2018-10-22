@@ -40,7 +40,7 @@
                 }
 
             ?>
-            <li><a class="am-text-truncate" href="<?=$this->web_url?>/tangshi/detail_<?=$value['id']?>.html" title="<?=$value['name']?>"><i class="am-icon-book am-icon-fw"></i> <?=$value['name']?></a></li>
+            <li><a class="am-text-truncate" href="<?=$this->web_url?>/<?=$this->url_type?>/detail_<?=$value['id']?>.html" title="<?=$value['name']?>"><i class="am-icon-book am-icon-fw"></i> <?=$value['name']?></a></li>
             <?php
                 unset($novelList[$key]);
             }?>
