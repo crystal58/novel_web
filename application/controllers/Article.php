@@ -28,30 +28,41 @@ class ArticleController extends AbstractController{
                 "status" => ArticlesTypeModel::ARTICLE_CLASS_STATUS,
                 "parent_id" => $classTypeId
             );
+
             $articleTypeModel = new ArticlesTypeModel();
             $articleType = $articleTypeModel->getList($params);
             $this->_view->article_type =$articleType['list'];
 
+            $authorParams = array(
+                "status" => ArticleAuthorModel::AUTHOR_STATUS,
+                "class_type_id" => $classTypeId
+            );
             $articleAuthorModel = new ArticleAuthorModel();
-            $articleAuthor = $articleAuthorModel->getAllAuthor();
-            $this->_view->author_list = $articleAuthor;
+            $articleAuthor = $articleAuthorModel->getList($authorParams);
+            $this->_view->author_list = $articleAuthor['list'];
 
             $key = "";
             switch ($classTypeId){
                 case ArticlesTypeModel::ARTICLE_TYPE_TANG :
                     $key = "suitang";
+                    $urlType = "tangshi";
+                    $tabName = "唐诗";
                     break;
                 case ArticlesTypeModel::ARTICLE_TYPE_SONG:
                     $key = "songyuan";
+                    $urlType = "ciqu";
+                    $tabName = "宋词";
                     break;
 
             }
+            $this->_view->url_type = $urlType?:"tangshi";
 
             $this->_view->seo = array(
                 "title" => $this->_seo[$key]['title'],
                 "keywords" => $this->_seo[$key]['keywords'],
                 "description" => $this->_seo[$key]['description'],
             );
+            $this->_view->tab_name = $tabName;
 
 
             //$ph = new \YC\Page($result['cnt'], $page, self::PAGESIZE,"/xiaoshuo/list_{$novelId}_{num}.html");
@@ -85,41 +96,50 @@ class ArticleController extends AbstractController{
 
             $params = array(
                 "status" => ArticlesModel::ARTICLE_CLASS_STATUS,
-                "id[>]" => $articleInfo['id']
+                "id[>]" => $articleInfo['id'],
+                "class_type" => $articleInfo['class_type']
             );
             $relateArticle = $articleModel->getList($params,0,10);
             if(count($relateArticle['list']) < 10){
                 $params = array(
                     "status" => ArticlesModel::ARTICLE_CLASS_STATUS,
-                    "id[<]" => $articleInfo['id']
+                    "id[<]" => $articleInfo['id'],
+                    "class_type" => $articleInfo['class_type']
                 );
                 $relate = $articleModel->getList($params,0,10,array("id" => "DESC"));
-                $relateArticle = array_merge($relateArticle,$relate);
+                $relateArticle['list'] = array_merge($relateArticle['list'],$relate['list']);
             }
             $this->_view->relate_article = $relateArticle['list'];
-
+            $paramsExtra = array();
+            if($articleType['parent_id'] != 0 && $articleInfo['author_id'] > 0){
+                $paramsExtra = array(
+                    "author_id" => $articleInfo['author_id']
+                );
+            }
             $articleChapter['next'] = $articleChapter['pre'] = false;
             $params = array(
                 "AND" => array(
-                    "id[>]" =>$articleId
+                    "id[>]" =>$articleId,
+                    "class_type" => $articleInfo['class_type']
                 ),
                 "ORDER" => array(
                     "id" => "ASC"
                 )
             );
-            $nextArticle = $articleModel->fetchRow($params,array("id"));
+            $nextArticle = $articleModel->fetchRow(array_merge($params,$paramsExtra),array("id"));
             if($nextArticle){
                 $articleChapter['next'] = $nextArticle['id'];
             }
             $params = array(
                 "AND" => array(
-                    "id[<]" =>$articleId
+                    "id[<]" =>$articleId,
+                    "class_type" => $articleInfo['class_type']
                 ),
                 "ORDER" => array(
                     "id" => "DESC"
                 )
             );
-            $preArticle = $articleModel->fetchRow($params,array("id"));
+            $preArticle = $articleModel->fetchRow(array_merge($params,$paramsExtra),array("id"));
             if($preArticle){
                 $articleChapter['pre'] = $preArticle['id'];
             }
@@ -130,12 +150,18 @@ class ArticleController extends AbstractController{
             switch ($classType){
                 case ArticlesTypeModel::ARTICLE_TYPE_TANG :
                     $key = "suitangdetail";
+                    $urlType = "tangshi";
+                    $chapterUrlType = "gushi";
                     break;
                 case ArticlesTypeModel::ARTICLE_TYPE_SONG:
                     $key = "songyuandetail";
+                    $urlType = "ciqu";
+                    $chapterUrlType = "songci";
                     break;
 
             }
+            $this->_view->url_type = $urlType?:"tangshi";
+            $this->_view->chapter_url_type = $chapterUrlType?:"gushi"; //作者作品列表
 
             $content = mb_substr(strip_tags($articleInfo['content']),0,95,'utf-8');
             $this->_view->seo = array(
@@ -177,12 +203,15 @@ class ArticleController extends AbstractController{
             switch ($articleType['parent_id']){
                 case ArticlesTypeModel::ARTICLE_TYPE_TANG :
                     $key = "suitangchapter";
+                    $urlType = "tangshi";
                     break;
                 case ArticlesTypeModel::ARTICLE_TYPE_SONG:
                     $key = "songyuanchapter";
+                    $urlType = "ciqu";
                     break;
 
             }
+            $this->_view->url_type = $urlType?:"tangshi";
             $description = $articleType['content']?$articleType['name']."简介及资料:".strip_tags($articleType['content']) :$this->_seo[$key]['description'];
 
             $this->_view->seo = array(

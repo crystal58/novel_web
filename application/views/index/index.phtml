@@ -1,4 +1,37 @@
 <?php $this->display('section/header.phtml');?>
+    <?php if(!empty($this->wenxue_list['recommend_tang'])){?>
+    <h2 class="star am-container mcenter"><span><img src="images/star.png" alt="隋唐文学">隋唐文学</span></h2>
+    <div class="am-container">
+        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-gallery-bordered" data-am-gallery="{  }" >
+            <?php foreach ($this->wenxue_list['recommend_tang'] as $value){?>
+                <li>
+                    <div class="cattlist_0">
+                        <div class="cattlist_1">
+                            <div class="am-g">
+                                <div class="am-u-sm-4 am-u-md-5 am-u-lg-5 am-vertical-align">
+                                    <div class="am-vertical-align-middle">
+                                        <img src="<?=$value['pic']?:\YC\Common::getUrl('')?>" alt="<?=$value['author_name']?>">
+                                    </div>
+                                </div>
+                                <div class="am-u-sm-8 am-u-md-7 am-u-lg-7">
+                                    <h2><?=$value['author_name']?></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cattlist_2">
+                            <p><?=$value['description']?></p>
+                        </div>
+                        <div class="cattlist_3">
+                            <a class="am-btn am-btn-warning" title="<?=$value['author_name']?>" href="<?=$this->web_url?>/tangshi/gushi_<?=$value['id']?>_1.html">开始阅读</a>
+                        </div>
+                    </div>
+                </li>
+            <?php }?>
+
+        </ul>
+        <a class="am-btn am-btn-default am-btn-block mtb20" title="查看更多隋唐文学" href="<?=$this->web_url?>/tangshi/list_<?=ArticlesTypeModel::ARTICLE_TYPE_TANG?>.html">查看更多隋唐文学</a>
+    </div>
+    <?php }?>
 
 <h2 class="star am-container mcenter"><span><img src="images/star.png" alt="武侠小说">武侠小说</span></h2>
 <div class="am-container">

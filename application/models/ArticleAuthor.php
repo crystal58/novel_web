@@ -43,7 +43,7 @@ class ArticleAuthorModel extends AbstractModel {
             $where['LIMIT'] = array($offset,$pageSize);
         }
         $where['ORDER'] = array(
-            "id"=>"DESC"
+            "id"=>"ASC"
         );
         $result['list'] = $this->fetchAll($where);
         return $result;

@@ -1,6 +1,6 @@
 <?php $this->display('section/header.phtml');?>
 
-<h1 class="star am-container mcenter"><span><img src="/images/star.png" alt="唐诗"><?=NovelModel::$_novel_class_type[$class_type_id]?>唐诗</span></h1>
+<h1 class="star am-container mcenter"><span><img src="/images/star.png" alt="<?=$this->tab_name?>"><?=$this->tab_name?></span></h1>
 <div id="cattlist" class="am-container">
     <ul class="am-avg-sm-1 am-avg-md-3 am-avg-lg-4">
         <?php foreach ($this->article_type as $value){?>
@@ -22,7 +22,7 @@
                     <p><?=$value['content']?></p>
                 </div>
                 <div class="cattlist_3">
-                    <a class="am-btn am-btn-warning" title="<?=$value['name']?>" href="<?=$this->web_url?>/tangshi/chapter_<?=$value['id']?>_1.html">开始阅读</a>
+                    <a class="am-btn am-btn-warning" title="<?=$value['name']?>" href="<?=$this->web_url?>/<?=$this->url_type?>/chapter_<?=$value['id']?>_1.html">开始阅读</a>
                 </div>
             </div>
         </li>
@@ -46,7 +46,7 @@
                         <p><?=$value['description']?></p>
                     </div>
                     <div class="cattlist_3">
-                        <a class="am-btn am-btn-warning" title="<?=$value['author_name']?>" href="<?=$this->web_url?>/tangshi/gushi_<?=$value['id']?>_1.html">开始阅读</a>
+                        <a class="am-btn am-btn-warning" title="<?=$value['author_name']?>" href="<?=$this->web_url?>/<?=$this->url_type?>/gushi_<?=$value['id']?>_1.html">开始阅读</a>
                     </div>
                 </div>
             </li>

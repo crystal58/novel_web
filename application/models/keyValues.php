@@ -14,4 +14,12 @@ class keyValuesModel extends AbstractModel {
         return $result;
     }
 
+    public function getValues($params){
+        if(empty($params)){
+            return array();
+        }
+        $result= $this->fetchAll($params);
+        return $result;
+    }
+
 }

@@ -31,6 +31,14 @@ class IndexController extends AbstractController {
             $this->_view->xuanhuan_list = $xuanhuanData ? json_decode($xuanhuanData['value'],true) :array();
             $this->_view->wangluo_list = $xuanhuanData ? json_decode($wangluoData['value'],true) :array();
 
+            $wenxue = $keyValueModel->getValues(array("keys" => array("recommend_tang","recommend_song")));
+            $wenxueList = array();
+            foreach($wenxue as $value){
+                $wenxueList[$value['keys']] = json_decode($value['value'],true);
+            }
+            //var_dump($wenxueList);exit;
+            $this->_view->wenxue_list = $wenxueList;
+
             $this->_view->seo = array(
                 "title" => $this->_seo['index']['title'],
                 "keywords" => $this->_seo['index']['keywords'],
