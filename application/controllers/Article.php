@@ -46,7 +46,7 @@ class ArticleController extends AbstractController{
                 case ArticlesTypeModel::ARTICLE_TYPE_TANG :
                     $key = "suitang";
                     $urlType = "tangshi";
-                    $chapterUrlType = "sushi";
+                    $chapterUrlType = "gushi";
                     $tabName = "唐诗";
                     break;
                 case ArticlesTypeModel::ARTICLE_TYPE_SONG:
