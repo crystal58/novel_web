@@ -56,8 +56,8 @@
 
         <div class="am-collapse am-topbar-collapse" id="collapse-head">
             <ul class="am-nav am-nav-pills am-topbar-nav">
-                <li <?=$this->active == "index" ? 'class="am-nav-active"' : ""?>><a href="<?=$this->web_url?>" title="文学星空">首页</a></li>
-                <li <?=$this->active == "novel" ? 'class="am-nav-active"' : ""?> class="am-dropdown"  data-am-dropdown>
+                <li id="index"><a href="<?=$this->web_url?>" title="文学星空">首页</a></li>
+                <li id="novel" class="am-dropdown"  data-am-dropdown>
                     <a class="am-dropdown-toggle" title="小说" data-am-dropdown-toggle href="javascript:;">
                         小说 <span class="am-icon-caret-down"></span>
                     </a>
@@ -70,15 +70,15 @@
                         <?php } ?>
                     </ul>
                 </li>
-                <li><a href="#" title="先秦文学">先秦</a></li>
-                <li><a href="#" title="两汉文学">两汉</a></li>
-                <li><a href="#" title="魏晋文学">魏晋</a></li>
-                <li <?=$this->active == "tang" ? 'class="am-nav-active"' : ""?>><a href="<?=$this->web_url?>/tangshi/list_<?=ArticlesTypeModel::ARTICLE_TYPE_TANG?>.html" title="隋唐文学">隋唐</a></li>
-                <li><a href="#" title="宋元文学">宋元</a></li>
-                <li><a href="#" title="明清文学">明清</a></li>
-                <li><a href="#" title="近代文学">近代</a></li>
-                <li><a href="#" title="现代文学">现代</a></li>
-                <li><a href="#" title="外国文学">外国</a></li>
+                <li id="xianqin"><a href="#" title="先秦文学">先秦</a></li>
+                <li id="lianghan"><a href="#" title="两汉文学">两汉</a></li>
+                <li id="weijin"><a href="#" title="魏晋文学">魏晋</a></li>
+                <li id="tangshi" ><a href="<?=$this->web_url?>/tangshi/list_<?=ArticlesTypeModel::ARTICLE_TYPE_TANG?>.html" title="隋唐文学">隋唐</a></li>
+                <li id="songyuan"><a href="#" title="宋元文学">宋元</a></li>
+                <li id="mingqing"><a href="#" title="明清文学">明清</a></li>
+                <li id="jindai"><a href="#" title="近代文学">近代</a></li>
+                <li id="xiandai"><a href="#" title="现代文学">现代</a></li>
+                <li id="waiguo"><a href="#" title="外国文学">外国</a></li>
             </ul>
         </div>
     </div>

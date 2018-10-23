@@ -17,5 +17,20 @@
         <p><a href="<?=$this->web_url?>/" title="文学星空">文学星空</a> eeeaaa.cn © 京ICP备17057981号-1<br> >>本站作品均从网络收集，如有不妥，敬请联系本站以便及时撤除<<</p>
     </div>
 </footer>
+<script>
+    var href = location.href;
+    if( href.search("tangshi") > 0){
+        $("#tangshi").addClass("am-nav-active");
+    }else if(href.search("xiaoshuo") >0){
+        $("#novel").removeClass("am-dropdown");
+        $("#novel").addClass("am-nav-active");
+        $("#novel").addClass("am-dropdown");
+    }else if(href.search("ciqu") > 0){
+        $("#songyuan").addClass("am-nav-active");
+    }else{
+        $("#index").addClass("am-nav-active");
+    }
+
+</script>
 </body>
 </html>
