@@ -235,7 +235,7 @@ class ArticleController extends AbstractController{
         try{
             $page = $this->get("page");
             $page = $page > 0 ? $page : 1;
-            $offset = ($page-1)*50;
+            $offset = ($page-1)*self::PAGESIZE;
             $authorId = $this->get("id");
 
             $articleModel = new ArticlesModel();
@@ -247,7 +247,7 @@ class ArticleController extends AbstractController{
                 "article_order"=>"ASC",
                 "id" => "ASC"
             );
-            $chaptersList = $articleModel->getList($params,0,false,$order);
+            $chaptersList = $articleModel->getList($params,$offset,self::PAGESIZE,$order,true);
             //var_dump($chaptersList);exit;
             $this->_view->list = $chaptersList['list'];
 
@@ -260,13 +260,18 @@ class ArticleController extends AbstractController{
                 case ArticlesTypeModel::ARTICLE_TYPE_TANG :
                     $key = "suitangchapter";
                     $urlType = "tangshi";
+                    $chapterUrlType = "gushi";
                     break;
                 case ArticlesTypeModel::ARTICLE_TYPE_SONG:
                     $key = "songyuanchapter";
                     $urlType = "ciqu";
+                    $chapterUrlType = "songci";
                     break;
             }
             $this->_view->url_type =$urlType?:"tangshi";
+            $this->_view->page_num = ceil($chaptersList['cnt']/self::PAGESIZE);
+            $this->_view->page_url = $this->_webUrl."/".$this->_view->url_type."/".$chapterUrlType."_".$authorId."_{page}.html";
+            $this->_view->cur_page = $page;
             $description = $authorInfo['description']?$authorInfo['author_name']."简介及资料:".strip_tags($authorInfo['description']) :$this->_seo[$key]['description'];
 
             $this->_view->seo = array(

@@ -2,7 +2,7 @@
 
 
 class NovelController extends AbstractController{
-    const PAGESIZE = 50;
+    const PAGESIZE = 48;
 
     public function init()
     {
@@ -145,7 +145,7 @@ class NovelController extends AbstractController{
         try{
             $page = $this->get("page");
             $page = $page > 0 ? $page : 1;
-            $offset = ($page-1)*50;
+            $offset = ($page-1)*self::PAGESIZE;
             $novelId = $this->get("id");
 
             $novelChapters = new NovelChapterModel();
@@ -153,7 +153,7 @@ class NovelController extends AbstractController{
                 "novel_id" => $novelId,
                 "status" => 1
             );
-            $chaptersList = $novelChapters->chaptersList($params);
+            $chaptersList = $novelChapters->chaptersList($params,$offset,self::PAGESIZE,true);
             $this->_view->list = $chaptersList['list'];
 
             $novelModel = new NovelModel();
@@ -162,6 +162,10 @@ class NovelController extends AbstractController{
 
             $authorModel = new AuthorModel();
             $authorInfo = $authorModel->find($novelInfo['author_id']);
+
+            $this->_view->page_num = ceil($chaptersList['cnt']/self::PAGESIZE);
+            $this->_view->page_url = $this->_webUrl."/xiaoshuo/chapter_".$novelId."_{page}.html";
+            $this->_view->cur_page = $page;
 
             $this->_view->seo = array(
                 "title" => isset($novelInfo['name'])?str_replace(array("{author}","{novelclass}","{book}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$authorInfo['novel_class_id']],$novelInfo['name']),$this->_seo['novelchapter']['title']):"",
