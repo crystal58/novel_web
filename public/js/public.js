@@ -17,8 +17,8 @@ $(document).ready(function(){
         }
     });
     //分页
-    var prevnum=2;
-    var nextnum=2;
+    var prevnum=3;
+    var nextnum=3;
     var dqnum=parseInt($('.am-pagination .am-active a').text());
 
     $('.am-pagination-next').before('<li id="wos-pagination-next-more" style="display: none"><a class="am-hide-sm">...</a></li>')

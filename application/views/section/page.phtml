@@ -1,0 +1,29 @@
+<div class="am-container" style="margin: 20px auto">
+    <ul data-am-widget="pagination" class="am-pagination am-pagination-default am-text-center">
+
+        <li class="am-pagination-first ">
+            <a href="<?=str_replace('{page}',1,$this->page_url)?>" class="">第一页</a >
+        </li>
+
+        <?php if($this->cur_page > 1){?>
+        <li class="am-pagination-prev ">
+            <a href="<?=str_replace('{page}',$this->cur_page-1,$this->page_url)?>" class="">上一页</a >
+        </li>
+        <?php }?>
+
+        <?php for ($i=1;$i<=$this->page_num;$i++){?>
+        <li class="<?=$i==$this->cur_page?'am-active':''?>">
+            <a href="<?=str_replace('{page}',$i,$this->page_url)?>" class=""><?=$i?></a >
+        </li>
+        <?php }?>
+
+        <?php if($this->cur_page < $this->page_num){?>
+        <li class="am-pagination-next ">
+            <a href="<?=str_replace('{page}',$this->cur_page+1,$this->page_url)?>" class="">下一页</a >
+        </li>
+        <?php }?>
+        <li class="am-pagination-last ">
+            <a href="<?=str_replace('{page}',$this->page_num,$this->page_url)?>" class="">最末页</a >
+        </li>
+    </ul>
+</div>

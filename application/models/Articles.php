@@ -11,10 +11,13 @@ class ArticlesModel extends AbstractModel {
     /**
      * isCount   是否返回count
      */
-    public function getList($params,$offset = 0,$pagesize = false,$order=null) {
+    public function getList($params,$offset = 0,$pagesize = false,$order=null,$isCount = false) {
         $where = array();
         foreach($params as $key=>$value){
             $where['AND'][$key] =  $value;
+        }
+        if ($isCount){
+            $result['cnt'] = $this->count($where);
         }
         if($pagesize){
             $where['LIMIT'] = array($offset,$pagesize);
