@@ -193,7 +193,8 @@ class ArticleController extends AbstractController{
                 "article_order"=>"ASC",
                 "id" => "ASC"
             );
-            $chaptersList = $articleModel->getList($params,$offset,self::PAGESIZE,$order,true);
+            //$chaptersList = $articleModel->getList($params,$offset,self::PAGESIZE,$order,true);
+            $chaptersList = $articleModel->getList($params);
             //var_dump($chaptersList);exit;
             $this->_view->list = $chaptersList['list'];
 
@@ -214,9 +215,9 @@ class ArticleController extends AbstractController{
 
             }
             $this->_view->url_type = $urlType?:"tangshi";
-            $this->_view->page_num = ceil($chaptersList['cnt']/self::PAGESIZE);
-            $this->_view->page_url = $this->_webUrl."/".$this->_view->url_type."/chapter_".$articleTypeId."_{page}.html";
-            $this->_view->cur_page = $page;
+//            $this->_view->page_num = ceil($chaptersList['cnt']/self::PAGESIZE);
+//            $this->_view->page_url = $this->_webUrl."/".$this->_view->url_type."/chapter_".$articleTypeId."_{page}.html";
+//            $this->_view->cur_page = $page;
             $description = $articleType['content']?$articleType['name']."简介及资料:".strip_tags($articleType['content']) :$this->_seo[$key]['description'];
 
             $this->_view->seo = array(
@@ -247,7 +248,8 @@ class ArticleController extends AbstractController{
                 "article_order"=>"ASC",
                 "id" => "ASC"
             );
-            $chaptersList = $articleModel->getList($params,$offset,self::PAGESIZE,$order,true);
+            //$chaptersList = $articleModel->getList($params,$offset,self::PAGESIZE,$order,true);
+            $chaptersList = $articleModel->getList($params);
             //var_dump($chaptersList);exit;
             $this->_view->list = $chaptersList['list'];
 
@@ -269,9 +271,9 @@ class ArticleController extends AbstractController{
                     break;
             }
             $this->_view->url_type =$urlType?:"tangshi";
-            $this->_view->page_num = ceil($chaptersList['cnt']/self::PAGESIZE);
-            $this->_view->page_url = $this->_webUrl."/".$this->_view->url_type."/".$chapterUrlType."_".$authorId."_{page}.html";
-            $this->_view->cur_page = $page;
+//            $this->_view->page_num = ceil($chaptersList['cnt']/self::PAGESIZE);
+//            $this->_view->page_url = $this->_webUrl."/".$this->_view->url_type."/".$chapterUrlType."_".$authorId."_{page}.html";
+//            $this->_view->cur_page = $page;
             $description = $authorInfo['description']?$authorInfo['author_name']."简介及资料:".strip_tags($authorInfo['description']) :$this->_seo[$key]['description'];
 
             $this->_view->seo = array(
