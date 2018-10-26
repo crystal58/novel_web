@@ -1,57 +1,58 @@
 <?php $this->display('section/header.phtml');?>
 
-<h1 class="star am-container mcenter"><span><img src="/images/star.png" alt="<?=$this->tab_name?>"><?=$this->tab_name?></span></h1>
+<?php foreach($this->list as $value){?>
+<h1 class="star am-container mcenter"><span><img src="/images/star.png" alt="<?=$value['tab_name']?>"><?=$value['tab_name']?></span></h1>
 <div id="cattlist" class="am-container">
     <ul class="am-avg-sm-1 am-avg-md-3 am-avg-lg-4">
-        <?php foreach ($this->article_type as $value){?>
+        <?php foreach ($value['article_type'] as $item){?>
         <li>
             <div class="cattlist_0">
                 <div class="cattlist_1">
                     <div class="am-g">
                         <div class="am-u-sm-4 am-u-md-5 am-u-lg-5 am-vertical-align">
                             <div class="am-vertical-align-middle">
-                                <img src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$value['name']?>">
+                                <img src="<?=\YC\Common::getUrl($item['pic'])?>" alt="<?=$item['name']?>">
                             </div>
                         </div>
                         <div class="am-u-sm-8 am-u-md-7 am-u-lg-7">
-                            <h2><?=$value['name']?></h2>
+                            <h2><?=$item['name']?></h2>
                         </div>
                     </div>
                 </div>
                 <div class="cattlist_2">
-                    <p><?=$value['content']?></p>
+                    <p><?=$item['content']?></p>
                 </div>
                 <div class="cattlist_3">
-                    <a class="am-btn am-btn-warning" title="<?=$value['name']?>" href="<?=$this->web_url?>/<?=$this->url_type?>/chapter_<?=$value['id']?>_1.html">开始阅读</a>
+                    <a class="am-btn am-btn-warning" title="<?=$item['name']?>" href="<?=$this->web_url?>/<?=$value['path']?>/chapter_<?=$item['id']?>_1.html">开始阅读</a>
                 </div>
             </div>
         </li>
     <?php }?>
-        <?php foreach ($this->author_list as $value){?>
+        <?php foreach ($value['author_list'] as $item){?>
             <li>
                 <div class="cattlist_0">
                     <div class="cattlist_1">
                         <div class="am-g">
                             <div class="am-u-sm-4 am-u-md-5 am-u-lg-5 am-vertical-align">
                                 <div class="am-vertical-align-middle">
-                                    <img src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$value['author_name']?>">
+                                    <img src="<?=\YC\Common::getUrl($item['pic'])?>" alt="<?=$item['author_name']?>">
                                 </div>
                             </div>
                             <div class="am-u-sm-8 am-u-md-7 am-u-lg-7">
-                                <h2><?=$value['author_name']?></h2>
+                                <h2><?=$item['author_name']?></h2>
                             </div>
                         </div>
                     </div>
                     <div class="cattlist_2">
-                        <p><?=$value['description']?></p>
+                        <p><?=$item['description']?></p>
                     </div>
                     <div class="cattlist_3">
-                        <a class="am-btn am-btn-warning" title="<?=$value['author_name']?>" href="<?=$this->web_url?>/<?=$this->url_type?>/<?=$this->chapter_url_type?>_<?=$value['id']?>_1.html">开始阅读</a>
+                        <a class="am-btn am-btn-warning" title="<?=$item['author_name']?>" href="<?=$this->web_url?>/<?=$value['path']?>/<?=$value['author_url_type']?>_<?=$item['id']?>_1.html">开始阅读</a>
                     </div>
                 </div>
             </li>
         <?php }?>
     </ul>
 </div>
-
+<?php }?>
 <?php $this->display('section/footer.phtml');?>

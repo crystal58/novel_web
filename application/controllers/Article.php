@@ -32,6 +32,7 @@ class ArticleController extends AbstractController{
             $articleTypeModel = new ArticlesTypeModel();
             $articleType = $articleTypeModel->getList($params);
             $this->_view->article_type =$articleType['list'];
+            $list = array();
 
             $authorParams = array(
                 "status" => ArticleAuthorModel::AUTHOR_STATUS,
@@ -45,27 +46,60 @@ class ArticleController extends AbstractController{
             switch ($classTypeId){
                 case ArticlesTypeModel::ARTICLE_TYPE_TANG :
                     $key = "suitang";
-                    $urlType = "tangshi";
-                    $chapterUrlType = "gushi";
                     $tabName = "唐诗";
+                    if(count($articleType['list']) > 0 || count($articleAuthor['list']) >0){
+                        $list[] = array(
+                            "tab_name" => $tabName,
+                            "path" => "tangshi",
+                            "author_url_type" => "gushi",
+                            "article_type" => $articleType['list'],
+                            "author_list" => $articleAuthor['list']
+                        );
+                    }
                     break;
                 case ArticlesTypeModel::ARTICLE_TYPE_SONG:
                     $key = "songyuan";
-                    $urlType = "ciqu";
-                    $chapterUrlType = "songci";
                     $tabName = "宋词";
+                    if(count($articleType['list']) > 0 || count($articleAuthor['list']) >0){
+                        $list[] = array(
+                            "tab_name" => $tabName,
+                            "article_type" => $articleType['list'],
+                            "author_list" => $articleAuthor['list'],
+                            "path" => "ciqu",
+                            "author_url_type" => "songci"
+                        );
+                    }
+                    $yuanParams = array(
+                        "status" => ArticlesTypeModel::ARTICLE_CLASS_STATUS,
+                        "parent_id" => ArticlesTypeModel::ARTICLE_TYPE_YUAN
+                    );
+                    $yuanArticleType = $articleTypeModel->getList($yuanParams);
+
+                    $authorParams = array(
+                        "status" => ArticleAuthorModel::AUTHOR_STATUS,
+                        "class_type_id" => ArticlesTypeModel::ARTICLE_TYPE_YUAN
+                    );
+                    $yuanArticleAuthor = $articleAuthorModel->getList($authorParams);
+                    if(count($yuanArticleType['list']) > 0 || count($yuanArticleAuthor['list']) >0){
+                        $list[] = array(
+                            "tab_name" => "元曲",
+                            "article_type" => $yuanArticleType['list'],
+                            "author_list" => $yuanArticleAuthor['list'],
+                            "path" => "ciqu",
+                            "author_url_type" => "yuanqu"
+                        );
+                    }
                     break;
 
             }
-            $this->_view->url_type = $urlType?:"tangshi";
-            $this->_view->chapter_url_type = $chapterUrlType?:"gushi";
+//            $this->_view->url_type = $urlType?:"tangshi";
+//            $this->_view->chapter_url_type = $chapterUrlType?:"gushi";
             $this->_view->seo = array(
                 "title" => $this->_seo[$key]['title'],
                 "keywords" => $this->_seo[$key]['keywords'],
                 "description" => $this->_seo[$key]['description'],
             );
-            $this->_view->tab_name = $tabName;
-
+            $this->_view->list = $list;
 
             //$ph = new \YC\Page($result['cnt'], $page, self::PAGESIZE,"/xiaoshuo/list_{$novelId}_{num}.html");
             //$this->_view->pageHtml = $ph->getPageHtml();
@@ -159,6 +193,11 @@ class ArticleController extends AbstractController{
                     $key = "songyuandetail";
                     $urlType = "ciqu";
                     $chapterUrlType = "songci";
+                    break;
+                case ArticlesTypeModel::ARTICLE_TYPE_YUAN:
+                    $key = "songyuandetail";
+                    $urlType = "ciqu";
+                    $chapterUrlType = "yuanqu";
                     break;
 
             }
@@ -268,6 +307,11 @@ class ArticleController extends AbstractController{
                     $key = "songyuanchapter";
                     $urlType = "ciqu";
                     $chapterUrlType = "songci";
+                    break;
+                case ArticlesTypeModel::ARTICLE_TYPE_YUAN:
+                    $key = "songyuanchapter";
+                    $urlType = "ciqu";
+                    $chapterUrlType = "yuanqu";
                     break;
             }
             $this->_view->url_type =$urlType?:"tangshi";

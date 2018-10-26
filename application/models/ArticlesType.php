@@ -10,6 +10,9 @@ class ArticlesTypeModel extends AbstractModel {
 
     const ARTICLE_TYPE_TANG = 1;
     const ARTICLE_TYPE_SONG = 2;
+    const ARTICLE_TYPE_YUAN = 4;
+
+
 
     /**
      * isCount   是否返回count
