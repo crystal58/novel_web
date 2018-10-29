@@ -247,6 +247,7 @@ class ArticleController extends AbstractController{
                     $key = "suitangchapter";
                     $urlType = "tangshi";
                     break;
+                case ArticlesTypeModel::ARTICLE_TYPE_YUAN:
                 case ArticlesTypeModel::ARTICLE_TYPE_SONG:
                     $key = "songyuanchapter";
                     $urlType = "ciqu";
