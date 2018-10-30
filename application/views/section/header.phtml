@@ -69,7 +69,6 @@
                     <ul class="am-dropdown-content">
                         <li class="am-dropdown-header"><a href="<?=$this->web_url?>/xiaoshuo/author.html" title="小说作者" style="padding: 0;color: #e1652f"><strong>小说作者列表</strong></a ></li>
                         <?php foreach ($this->novel_class as $key=>$value){
-                                if($key == NovelModel::NOVEL_CLASS_XIANDAI)continue;
                             ?>
                         <li><a href="<?=$this->web_url?>/xiaoshuo/<?=$this->pinxie[$key]?>_<?=$key?>.html" title="<?=$value?>小说"><?=$value?>小说</a></li>
                         <?php } ?>
