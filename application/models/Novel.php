@@ -54,7 +54,7 @@ class NovelModel extends AbstractModel {
         return $this->insert($data);
     }
 
-    public function novelList($params = array(),$offset = 0, $pageSize=20, $isCount=false){
+    public function novelList($params = array(),$offset = 0, $pageSize=0, $isCount=false){
         if(empty($params) && empty($pageSize)){
             return array();
         }
