@@ -24,6 +24,11 @@ class ArticlesModel extends AbstractModel {
         }
         if($order){
             $where['ORDER'] = $order;
+        }else{
+            $where['ORDER'] = array(
+                "article_order"=>"ASC",
+                "id" => "ASC"
+            );
         }
 
         $result['list'] = $this->fetchAll($where);
