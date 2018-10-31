@@ -133,14 +133,16 @@ class ArticleController extends AbstractController{
             $params = array(
                 "status" => ArticlesModel::ARTICLE_CLASS_STATUS,
                 "id[>]" => $articleInfo['id'],
-                "class_type" => $articleInfo['class_type']
+                "class_type" => $articleInfo['class_type'],
+                "is_part" => 0
             );
             $relateArticle = $articleModel->getList($params,0,10);
             if(count($relateArticle['list']) < 10){
                 $params = array(
                     "status" => ArticlesModel::ARTICLE_CLASS_STATUS,
                     "id[<]" => $articleInfo['id'],
-                    "class_type" => $articleInfo['class_type']
+                    "class_type" => $articleInfo['class_type'],
+                    "is_part" => 0
                 );
                 $relate = $articleModel->getList($params,0,10,array("id" => "DESC"));
                 $relateArticle['list'] = array_merge($relateArticle['list'],$relate['list']);
