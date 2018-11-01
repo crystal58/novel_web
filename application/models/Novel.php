@@ -54,7 +54,7 @@ class NovelModel extends AbstractModel {
         return $this->insert($data);
     }
 
-    public function novelList($params = array(),$offset = 0, $pageSize=0, $isCount=false){
+    public function novelList($params = array(),$offset = 0, $pageSize=0, $isCount=false,$order=array()){
         if(empty($params) && empty($pageSize)){
             return array();
         }
@@ -69,9 +69,10 @@ class NovelModel extends AbstractModel {
         if($pageSize){
             $where['LIMIT'] = array($offset,$pageSize);
         }
-        $where['ORDER'] = array(
-            "id"=>"DESC"
-        );
+        if($order){
+            $where['ORDER'] = $order;
+        }
+        $where['ORDER']['id'] = "DESC";
         $result['list'] = $this->fetchAll($where);
         return $result;
     }
