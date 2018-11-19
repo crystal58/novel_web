@@ -72,5 +72,16 @@ class AbstractController extends Yaf_Controller_Abstract {
         exit;
     }
 
+    protected function filterWord($content){
+        $config = Yaf_Registry::get("dbconfig");
+        $word = $config['filter'];
+        $content = preg_replace('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', '', $content);
+        $content = preg_replace("/<a[^>]*>(.*?)<\/a*>/is", "", $content);
+        foreach ($word as $value){
+            $content = str_replace($value,"<a href='https://www.eeeaaa.cn'>文学星空</a>",$content);
+        }
+        return $content;
+    }
+
 
 }

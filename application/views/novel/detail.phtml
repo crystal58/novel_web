@@ -34,8 +34,7 @@
                         $content = "<div>".$content;
                      }
                 }
-                $content = preg_replace('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', '', $content);
-                $content = preg_replace("/<a[^>]*>(.*?)<\/a*>/is", "", $content);
+
 
                  $pNum = substr_count($content,"</p>");
                  $brNum = substr_count($content,"<br");

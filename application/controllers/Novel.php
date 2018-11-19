@@ -82,12 +82,15 @@ class NovelController extends AbstractController{
             $params = array("id" => $chapterId);
             $novelChapter = $novelChapterModel->chapter($params);
 
+            $novelChapter['content'] = $this->filterWord($novelChapter['content']);
+
             if(empty($novelChapter)){
                 throw new Exception("章节不存在!",404);
             }
 
             $novelId = $novelChapter['novel_id'];
             $novelModel = new NovelModel();
+
             $novelInfo = $novelModel->find($novelId);
 
             $novelChapter['next'] = $novelChapter['pre'] = false;
@@ -130,11 +133,13 @@ class NovelController extends AbstractController{
             $this->_view->relate_novel = $relateNovel['list'];
             $authorModel = new AuthorModel();
             $authorInfo = $authorModel->find($novelInfo['author_id']);
-            $a = $this->_view->seo = array(
+            $this->_view->seo = array(
                 "title" => (!empty($novelInfo))?str_replace(array("{author}","{novelclass}","{book}","{chaptertitle}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$novelInfo['novel_class_id']],$novelInfo['name'],$novelChapter['title']),$this->_seo['noveldetail']['title']):"",
                 "keywords" => !empty($novelInfo)?str_replace(array("{author}","{novelclass}","{book}","{chaptertitle}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$novelInfo['novel_class_id']],$novelInfo['name'],$novelChapter['title']),$this->_seo['noveldetail']['keywords']):"",
                 "description" => !empty($novelInfo)?str_replace(array("{author}","{novelclass}","{book}","{chaptertitle}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$novelInfo['novel_class_id']],$novelInfo['name'],$novelChapter['title']),$this->_seo['noveldetail']['description']):"",
             );
+
+
 
         }catch (Exception $e){
             $this->processException($this->getRequest()->getControllerName(),$this->getRequest()->getActionName(),$e);
