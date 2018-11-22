@@ -10,19 +10,20 @@
                     <div class="am-g">
                         <div class="am-u-sm-4 am-u-md-5 am-u-lg-5 am-vertical-align">
                             <div class="am-vertical-align-middle">
-                                <img src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$value['name']?>">
+                                <img src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=NovelModel::$_novel_class_type[$class_type_id]?>小说作者：<?=$value['name']?>">
                             </div>
                         </div>
                         <div class="am-u-sm-8 am-u-md-7 am-u-lg-7">
                             <h2><?=$value['name']?></h2>
+                            <h3><?=NovelModel::$_novel_class_type[$class_type_id]?>小说作者</h3>
                         </div>
                     </div>
                 </div>
                 <div class="cattlist_2">
-                    <p><?=$value['content']?></p>
+                    <p><?=$value['name']?>简介：<?=$value['content']?></p>
                 </div>
                 <div class="cattlist_3">
-                    <a class="am-btn am-btn-warning" title="<?=$value['name']?>" href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html">开始阅读</a>
+                    <a class="am-btn am-btn-warning" title="<?=NovelModel::$_novel_class_type[$class_type_id]?>小说作者：<?=$value['name']?>" href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html">开始阅读</a>
                 </div>
             </div>
         </li>

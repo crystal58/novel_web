@@ -377,32 +377,26 @@ footer a:hover{
 }
 .cattlist_1 img{
     width: 100%;
-    border-radius: 210px;
-    height: 79px;
+    height: 81px;
+    border-radius: 50%;
 }
-@media (max-width: 640px) {
+/*@media (max-width: 640px) {
     .cattlist_1 img{
         width: 90%;
     }
-}
-.cattlist_2{
-    height: 139px;
-    width: 100%;
-    padding: 10px;
-    overflow: hidden;
-}
+}*/
 .cattlist_1 h2{
-    margin: 2rem 0 0;
-    padding-top: 10%;
+    margin: 2rem 0 .5rem;
+    padding-top: 5%;
     word-wrap: normal;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     font-size: 1.6rem;
 }
-.cattlist_1 h4{
+.cattlist_1 h3{
     margin: 0px;
-    font-size: 85%;
+    font-size: 65%;
     padding-bottom: 10px;
     font-weight: 200;
 }
@@ -413,6 +407,12 @@ footer a:hover{
 .cattlist_1 p span{
     font-size: 150%;
     padding: 5px 10px;
+}
+.cattlist_2{
+    height: 139px;
+    width: 100%;
+    padding: 10px;
+    overflow: hidden;
 }
 .cattlist_3{
     height: 50px;
@@ -535,3 +535,18 @@ footer a:hover{
 #eeeaaa{color: #333;font-weight: normal}
 .gushi h2{color: #e1652f!important}
 .gushi .gushi-title{margin: 20px 0;border-bottom: 1px solid #f60}
+
+/*2018-11-20 index.html new modify*/
+.link{color: #e1652f!important}
+.am-slides img{height: 413px}
+@media only screen and (min-device-width: 320px) and (max-device-width: 414px){.am-slides img{height: 260px}}
+.index-title{border-bottom: 1px solid #f60}
+.am-titlebar-default .am-titlebar-nav a{margin-right: 3px;font-size: 14px;font-weight: bold}
+.am-thumbnails > li {padding: 0 .5rem}
+
+/*2018-11-22 content.html new share*/
+.clearfix:after {content:"."; display:block; height:0; visibility:hidden; clear:both; }
+.clearfix { *zoom:1; }
+.l{float: left;}
+.r{float: right;}
+.btn-ewm{margin: 3px 0 0 36px}

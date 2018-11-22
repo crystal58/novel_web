@@ -42,10 +42,8 @@ class ArticleController extends AbstractController{
             $articleAuthor = $articleAuthorModel->getList($authorParams);
             $this->_view->author_list = $articleAuthor['list'];
 
-            $key = "";
             switch ($classTypeId){
                 case ArticlesTypeModel::ARTICLE_TYPE_TANG :
-                    $key = "suitang";
                     $tabName = "唐诗";
                     if(count($articleType['list']) > 0 || count($articleAuthor['list']) >0){
                         $list[] = array(
@@ -58,7 +56,6 @@ class ArticleController extends AbstractController{
                     }
                     break;
                 case ArticlesTypeModel::ARTICLE_TYPE_SONG:
-                    $key = "songyuan";
                     $tabName = "宋词";
                     if(count($articleType['list']) > 0 || count($articleAuthor['list']) >0){
                         $list[] = array(
@@ -69,6 +66,9 @@ class ArticleController extends AbstractController{
                             "author_url_type" => "songci"
                         );
                     }
+                    break;
+                case ArticlesTypeModel::ARTICLE_TYPE_YUAN:
+                    $tabName = "元曲";
                     $yuanParams = array(
                         "status" => ArticlesTypeModel::ARTICLE_CLASS_STATUS,
                         "parent_id" => ArticlesTypeModel::ARTICLE_TYPE_YUAN
@@ -82,7 +82,7 @@ class ArticleController extends AbstractController{
                     $yuanArticleAuthor = $articleAuthorModel->getList($authorParams);
                     if(count($yuanArticleType['list']) > 0 || count($yuanArticleAuthor['list']) >0){
                         $list[] = array(
-                            "tab_name" => "元曲",
+                            "tab_name" => $tabName,
                             "article_type" => $yuanArticleType['list'],
                             "author_list" => $yuanArticleAuthor['list'],
                             "path" => "ciqu",
@@ -95,9 +95,9 @@ class ArticleController extends AbstractController{
 //            $this->_view->url_type = $urlType?:"tangshi";
 //            $this->_view->chapter_url_type = $chapterUrlType?:"gushi";
             $this->_view->seo = array(
-                "title" => $this->_seo[$key]['title'],
-                "keywords" => $this->_seo[$key]['keywords'],
-                "description" => $this->_seo[$key]['description'],
+                "title" => str_replace("{class}",$tabName,$this->_seo['gushi']['title']),
+                "keywords" => str_replace("{class}",$tabName,$this->_seo['gushi']['keywords']),
+                "description" => str_replace("{class}",$tabName,$this->_seo['gushi']['description']),
             );
             $this->_view->list = $list;
 
@@ -183,34 +183,31 @@ class ArticleController extends AbstractController{
             }
             $this->_view->chapter = $articleChapter;
 
-            $key = "";
             $classType = $articleType['parent_id'] == 0 ? $articleType['id']:$articleType['parent_id'];
             switch ($classType){
                 case ArticlesTypeModel::ARTICLE_TYPE_TANG :
-                    $key = "suitangdetail";
                     $urlType = "tangshi";
                     $chapterUrlType = "gushi";
                     break;
                 case ArticlesTypeModel::ARTICLE_TYPE_SONG:
-                    $key = "songyuandetail";
                     $urlType = "ciqu";
                     $chapterUrlType = "songci";
                     break;
                 case ArticlesTypeModel::ARTICLE_TYPE_YUAN:
-                    $key = "songyuandetail";
                     $urlType = "ciqu";
                     $chapterUrlType = "yuanqu";
                     break;
 
             }
+            $this->_view->class_type = $classType;
             $this->_view->url_type = $urlType?:"tangshi";
             $this->_view->chapter_url_type = $chapterUrlType?:"gushi"; //作者作品列表
 
             $content = mb_substr(strip_tags($articleInfo['content']),0,95,'utf-8');
             $this->_view->seo = array(
-                "title" => str_replace(array("{name}","{author_name}"),array($articleInfo['name'],$articleInfo['author']),$this->_seo[$key]['title']),
-                "keywords" => str_replace(array("{name}","{author_name}"),array($articleInfo['name'],$articleInfo['author']),$this->_seo[$key]['keywords']),
-                "description" => str_replace(array("{name}","{author_name}","{content}"),array($articleInfo['name'],$articleInfo['author'],$content),$this->_seo[$key]['description']),
+                "title" => str_replace(array("{name}","{author_name}"),array($articleInfo['name'],$articleInfo['author']),$this->_seo['guishidetail']['title']),
+                "keywords" => str_replace(array("{name}","{author_name}"),array($articleInfo['name'],$articleInfo['author']),$this->_seo['guishidetail']['keywords']),
+                "description" => str_replace(array("{name}","{author_name}","{content}"),array($articleInfo['name'],$articleInfo['author'],$content),$this->_seo['guishidetail']['description']),
             );
 
         }catch (Exception $e){
@@ -234,8 +231,8 @@ class ArticleController extends AbstractController{
                 "article_order"=>"ASC",
                 "id" => "ASC"
             );
-            //$chaptersList = $articleModel->getList($params,$offset,self::PAGESIZE,$order,true);
-            $chaptersList = $articleModel->getList($params);
+            $chaptersList = $articleModel->getList($params,$offset,self::PAGESIZE,$order,true);
+            //$chaptersList = $articleModel->getList($params);
             //var_dump($chaptersList);exit;
             $this->_view->list = $chaptersList['list'];
 
@@ -257,15 +254,14 @@ class ArticleController extends AbstractController{
 
             }
             $this->_view->url_type = $urlType?:"tangshi";
-//            $this->_view->page_num = ceil($chaptersList['cnt']/self::PAGESIZE);
-//            $this->_view->page_url = $this->_webUrl."/".$this->_view->url_type."/chapter_".$articleTypeId."_{page}.html";
-//            $this->_view->cur_page = $page;
-            $description = $articleType['content']?$articleType['name']."简介及资料:".strip_tags($articleType['content']) :$this->_seo[$key]['description'];
+            $this->_view->page_num = ceil($chaptersList['cnt']/self::PAGESIZE);
+            $this->_view->page_url = $this->_webUrl."/".$this->_view->url_type."/chapter_".$articleTypeId."_{page}.html";
+            $this->_view->cur_page = $page;
 
             $this->_view->seo = array(
-                "title" => str_replace("{name}",$articleType['name'],$this->_seo[$key]['title']),
-                "keywords" => str_replace("{name}",$articleType['name'],$this->_seo[$key]['keywords']),
-                "description" => mb_substr($description,0,95,'utf-8'),
+                "title" => str_replace("{name}",$articleType['name'],$this->_seo['gushichapter']['title']),
+                "keywords" => str_replace("{name}",$articleType['name'],$this->_seo['gushichapter']['keywords']),
+                "description" => str_replace("{name}",$articleType['name'],$this->_seo['gushichapter']['description']).mb_substr(strip_tags($articleType['content']),0,80,'utf-8'),
             );
 
         }catch (Exception $e){
@@ -299,20 +295,16 @@ class ArticleController extends AbstractController{
             $authorInfo = $authorModel->find($authorId);
             $this->_view->author_info = $authorInfo;
 
-            $key = "";
             switch ($authorInfo['class_type_id']){
                 case ArticlesTypeModel::ARTICLE_TYPE_TANG :
-                    $key = "suitangchapter";
                     $urlType = "tangshi";
                     $chapterUrlType = "gushi";
                     break;
                 case ArticlesTypeModel::ARTICLE_TYPE_SONG:
-                    $key = "songyuanchapter";
                     $urlType = "ciqu";
                     $chapterUrlType = "songci";
                     break;
                 case ArticlesTypeModel::ARTICLE_TYPE_YUAN:
-                    $key = "songyuanchapter";
                     $urlType = "ciqu";
                     $chapterUrlType = "yuanqu";
                     break;
@@ -321,12 +313,12 @@ class ArticleController extends AbstractController{
 //            $this->_view->page_num = ceil($chaptersList['cnt']/self::PAGESIZE);
 //            $this->_view->page_url = $this->_webUrl."/".$this->_view->url_type."/".$chapterUrlType."_".$authorId."_{page}.html";
 //            $this->_view->cur_page = $page;
-            $description = $authorInfo['description']?$authorInfo['author_name']."简介及资料:".strip_tags($authorInfo['description']) :$this->_seo[$key]['description'];
+           // $description = $authorInfo['description']?$authorInfo['author_name']."简介及资料:".strip_tags($authorInfo['description']) :$this->_seo[$key]['description'];
 
             $this->_view->seo = array(
-                "title" => str_replace("{name}",$authorInfo['author_name'],$this->_seo[$key]['title']),
-                "keywords" => str_replace("{name}",$authorInfo['author_name'],$this->_seo[$key]['keywords']),
-                "description" => mb_substr($description,0,95,'utf-8'),
+                "title" => str_replace("{name}",$authorInfo['author_name'],$this->_seo['gushichapter']['title']),
+                "keywords" => str_replace("{name}",$authorInfo['author_name'],$this->_seo['gushichapter']['keywords']),
+                "description" => str_replace("{name}",$authorInfo['author_name'],$this->_seo['gushichapter']['description']).mb_substr(strip_tags($authorInfo['description']),0,80,'utf-8'),
             );
 
         }catch (Exception $e){

@@ -11,8 +11,8 @@
                 </div>
             </div>
         </div>
-        <div class="am-u-sm-0 am-u-md-12 am-u-lg-7 am-show-lg-only userinfo_center">
-            <?=$this->novel_info['content']?>
+        <div class="am-u-sm-0 am-u-md-12 am-u-lg-7 userinfo_center">
+            <strong><?=$this->novel_info['author_name']?>小说<?=$this->novel_info['name']?>简介：</strong><?=$this->novel_info['content']?><strong><?=$this->novel_info['author_name']?>小说<?=$this->novel_info['name']?>在线阅读列表如下：</strong>
         </div>
     </div>
 </div>
@@ -40,7 +40,7 @@
                 }
 
             ?>
-            <li><a class="am-text-truncate" href="<?=$this->web_url?>/xiaoshuo/detail_<?=$value['id']?>.html" title="<?=$value['title']?>"><i class="am-icon-book am-icon-fw"></i> <?=$value['title']?></a></li>
+            <li><a class="am-text-truncate" href="<?=$this->web_url?>/xiaoshuo/detail_<?=$value['id']?>.html" title="<?=$this->novel_info['author_name']?>小说<?=$this->novel_info['name']?>在线阅读：<?=$value['title']?>"><i class="am-icon-book am-icon-fw"></i> <?=$value['title']?></a></li>
             <?php
                 unset($novelList[$key]);
             }?>

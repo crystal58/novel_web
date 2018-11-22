@@ -12,8 +12,8 @@
                 </div>
             </div>
         </div>
-        <div class="am-u-sm-0 am-u-md-12 am-u-lg-7 am-show-lg-only userinfo_center">
-            <?=$this->author_info['description']?>
+        <div class="am-u-sm-0 am-u-md-12 am-u-lg-7 userinfo_center">
+            <strong><?=$this->author_info['author_name']?>简介：</strong><?=$this->author_info['description']?><strong><?=$this->author_info['author_name']?>小说作品全集列表如下：</strong>
         </div>
     </div>
 </div>
@@ -23,15 +23,15 @@
 <?php foreach ($this->novel_list as $value){?>
             <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-bottom-left">
                 <h3 class="am-list-item-hd author_book_til">
-                    <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" title="<?=$value['name']?>"><?=$value['name']?></a>
+                    <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" title="<?=$this->author_info['author_name']?>作品：<?=$value['name']?>"><?=$value['name']?></a>
                 </h3>
                 <div class="am-u-sm-4 am-list-thumb author_book_left">
-                    <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" title="<?=$value['name']?>">
-                        <img class="am-thumbnail" src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$value['name']?>"/>
+                    <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" title="<?=$this->author_info['author_name']?>作品：<?=$value['name']?>">
+                        <img class="am-thumbnail" src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$this->author_info['author_name']?>作品：<?=$value['name']?>"/>
                     </a>
                 </div>
                 <div class="am-u-sm-8 am-list-main author_book_right">
-                    <div class="am-list-item-text author_book_info"><?=$value['content']?></div>
+                    <div class="am-list-item-text author_book_info"><?=$this->author_info['author_name']?><?=$value['name']?>简介：<?=$value['content']?></div>
                 </div>
             </li>
 <?php }?>

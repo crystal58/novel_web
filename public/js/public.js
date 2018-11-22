@@ -90,5 +90,6 @@ $(document).ready(function(){
     $("#topface li:eq(0) h3").html(temp_h3);
     $("#topface li:eq(0) p").html(temp_p);
   });
+    $('#doc-qrcode').empty().qrcode(window.location.href);
 });
 

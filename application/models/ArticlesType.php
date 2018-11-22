@@ -12,6 +12,12 @@ class ArticlesTypeModel extends AbstractModel {
     const ARTICLE_TYPE_SONG = 2;
     const ARTICLE_TYPE_YUAN = 4;
 
+    public static $ArticleType = array(
+        self::ARTICLE_TYPE_TANG => "唐诗",
+        self::ARTICLE_TYPE_SONG => "宋词",
+        self::ARTICLE_TYPE_YUAN => "元曲"
+    );
+
 
 
     /**

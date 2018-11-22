@@ -5,23 +5,38 @@
             <ol class="am-breadcrumb breadcrumb">
                 <li><a href="<?= $this->web_url ?>" title="文学星空" class="am-icon-home">首页</a></li>
                 <li>
+                    <a href="<?= $this->web_url ?>/<?=$this->url_type?>/list_<?=$this->class_type?>.html" title="<?=ArticlesTypeModel::$ArticleType[$this->class_type]?>">
+                        <?=ArticlesTypeModel::$ArticleType[$this->class_type]?>
+                    </a>
+                </li>
+                <li>
                     <?php if($this->article_type['parent_id'] == 0){?>
                         <a href="<?= $this->web_url ?>/<?=$this->url_type?>/<?=$this->chapter_url_type?>_<?= $this->article_info['author_id'] ?>_1.html" title="<?= $this->article_info['author'] ?>">
-                            <strong class="fn"><?= $this->article_info['author'] ?></strong>
+                            <strong class="fn">#<?= $this->article_info['author'] ?>#</strong>
                         </a>
                     <?php }else{?>
                         <a href="<?= $this->web_url ?>/<?=$this->url_type?>/chapter_<?= $this->article_type['id'] ?>_1.html" title="<?= $this->article_type['name'] ?>">
-                            <strong class="fn"><?= $this->article_type['name'] ?></strong>
+                            <strong class="fn">#<?= $this->article_type['name'] ?>#</strong>
                         </a>
                     <?php }?>
 
-                </li>
-                <li>
                     <a href="<?= $this->web_url ?>/<?=$this->url_type?>/detail_<?= $this->article_info['id'] ?>.html" title="<?= $this->article_info['name'] ?>"><strong class="fn">#<?= $this->article_info['name'] ?>#</strong></a>
                 </li>
             </ol>
-            <div>
-                <h1><?= $this->article_info['name'] ?></h1>
+            <div class="clearfix">
+                <h1 class="l"><?= $this->article_info['name'] ?></h1>
+                <div class="am-dropdown am-hide-sm-only l btn-ewm" data-am-dropdown>
+                    <button class="am-btn am-btn-xs am-radius am-btn-success am-dropdown-toggle">点击扫描二维码 <span class="am-icon-qrcode" style="font-size: 16px;vertical-align: middle"></span></button>
+                    <div class="am-dropdown-content">
+                        <h3 style="text-align: center">手机扫描下方二维码，移动端阅读</h3>
+                        <div id="doc-qrcode"></div>
+                    </div>
+                </div>
+                <div class="bdsharebuttonbox am-show-lg-only r">
+                    <a href=" " class="bds_more" data-cmd="more"></a >
+                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a >
+                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a >
+                </div>
             </div>
             <div>作者：<strong><?= $this->article_info['author'] ?></strong></div>
             <div class="contents">
@@ -144,4 +159,18 @@
 
         </div>
     </div>
+    <script>
+        window._bd_share_config = {
+            "common": {
+                "bdSnsKey": {},
+                "bdText": "爱好文学的你，是否在静静夜里，仰望星空？期待一个不凡的夜……",
+                "bdMini": "2",
+                "bdMiniList": false,
+                "bdPic": "https://www.eeeaaa.cn/images/logo_eeeaaa_web.png",
+                "bdStyle": "0",
+                "bdSize": "24"
+            }, "share": {}
+        };
+        with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+    </script>
 <?php $this->display('section/footer.phtml'); ?>

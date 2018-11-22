@@ -11,8 +11,8 @@
                 </div>
             </div>
         </div>
-        <div class="am-u-sm-0 am-u-md-12 am-u-lg-7 am-show-lg-only userinfo_center">
-            <?=$this->author_info['description']?>
+        <div class="am-u-sm-0 am-u-md-12 am-u-lg-7 userinfo_center">
+            <strong><?=$this->author_info['author_name']?>简介：</strong><?=$this->author_info['description']?><strong><?=$this->author_info['author_name']?>精选代表作品列表如下：</strong>
         </div>
     </div>
 </div>
@@ -40,7 +40,7 @@
                 }
 
             ?>
-            <li><a class="am-text-truncate" href="<?=$this->web_url?>/<?=$this->url_type?>/detail_<?=$value['id']?>.html" title="<?=$value['name']?>"><i class="am-icon-book am-icon-fw"></i> <?=$value['name']?></a></li>
+            <li><a class="am-text-truncate" href="<?=$this->web_url?>/<?=$this->url_type?>/detail_<?=$value['id']?>.html" title="<?=$this->author_info['author_name']?>精选作品：<?=$value['name']?>"><i class="am-icon-book am-icon-fw"></i> <?=$value['name']?></a></li>
             <?php
                 unset($novelList[$key]);
             }?>

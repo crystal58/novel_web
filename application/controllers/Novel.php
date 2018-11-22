@@ -38,9 +38,9 @@ class NovelController extends AbstractController{
             $novelList = $novelModel->novelList($params,0,0,false,array("order"=>"ASC"));
             $this->_view->novel_list = $novelList['list'];
             $this->_view->seo = array(
-                "title" => isset($authorInfo['author_name'])?str_replace(array("{author}","{novelclass}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$authorInfo['novel_class_id']]),$this->_seo['author']['title']):"",
-                "keywords" => isset($authorInfo['author_name'])?str_replace(array("{author}","{novelclass}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$authorInfo['novel_class_id']]),$this->_seo['author']['keywords']):"",
-                "description" => isset($authorInfo['author_name'])?str_replace(array("{author}","{novelclass}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$authorInfo['novel_class_id']]),$this->_seo['author']['description']):""
+                "title" => isset($authorInfo['author_name'])?str_replace(array("{author}"),array($authorInfo['author_name']),$this->_seo['author']['title']):"",
+                "keywords" => isset($authorInfo['author_name'])?str_replace(array("{author}"),array($authorInfo['author_name']),$this->_seo['author']['keywords']):"",
+                "description" => $this->_seo['author']['description'].mb_substr(strip_tags($authorInfo['description']),0,80,'utf-8')
             );
             //echo json_encode($novelList);exit;
             //$ph = new \YC\Page($result['cnt'], $page, self::PAGESIZE,"/xiaoshuo/list_{$novelId}_{num}.html");
@@ -134,9 +134,9 @@ class NovelController extends AbstractController{
             $authorModel = new AuthorModel();
             $authorInfo = $authorModel->find($novelInfo['author_id']);
             $this->_view->seo = array(
-                "title" => (!empty($novelInfo))?str_replace(array("{author}","{novelclass}","{book}","{chaptertitle}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$novelInfo['novel_class_id']],$novelInfo['name'],$novelChapter['title']),$this->_seo['noveldetail']['title']):"",
-                "keywords" => !empty($novelInfo)?str_replace(array("{author}","{novelclass}","{book}","{chaptertitle}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$novelInfo['novel_class_id']],$novelInfo['name'],$novelChapter['title']),$this->_seo['noveldetail']['keywords']):"",
-                "description" => !empty($novelInfo)?str_replace(array("{author}","{novelclass}","{book}","{chaptertitle}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$novelInfo['novel_class_id']],$novelInfo['name'],$novelChapter['title']),$this->_seo['noveldetail']['description']):"",
+                "title" => (!empty($novelInfo))?str_replace(array("{author}","{book}","{chaptertitle}"),array($authorInfo['author_name'],$novelInfo['name'],$novelChapter['title']),$this->_seo['noveldetail']['title']):"",
+                "keywords" => !empty($novelInfo)?str_replace(array("{author}","{book}","{chaptertitle}"),array($authorInfo['author_name'],$novelInfo['name'],$novelChapter['title']),$this->_seo['noveldetail']['keywords']):"",
+                "description" => !empty($novelInfo)?str_replace(array("{author}","{book}","{chaptertitle}"),array($authorInfo['author_name'],$novelInfo['name'],$novelChapter['title']),$this->_seo['noveldetail']['description']):"",
             );
 
 
@@ -174,9 +174,9 @@ class NovelController extends AbstractController{
             $this->_view->cur_page = $page;
 
             $this->_view->seo = array(
-                "title" => isset($novelInfo['name'])?str_replace(array("{author}","{novelclass}","{book}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$authorInfo['novel_class_id']],$novelInfo['name']),$this->_seo['novelchapter']['title']):"",
-                "keywords" => isset($novelInfo['name'])?str_replace(array("{author}","{novelclass}","{book}"),array($authorInfo['author_name'],NovelModel::$_novel_class_type[$authorInfo['novel_class_id']],$novelInfo['name']),$this->_seo['novelchapter']['keywords']):"",
-                "description" => $novelInfo['content']
+                "title" => isset($novelInfo['name'])?str_replace(array("{author}","{book}"),array($authorInfo['author_name'],$novelInfo['name']),$this->_seo['novelchapter']['title']):"",
+                "keywords" => isset($novelInfo['name'])?str_replace(array("{author}","{book}"),array($authorInfo['author_name'],$novelInfo['name']),$this->_seo['novelchapter']['keywords']):"",
+                "description" => (isset($novelInfo['name'])?str_replace(array("{author}","{book}"),array($authorInfo['author_name'],$novelInfo['name']),$this->_seo['novelchapter']['description']):"").mb_substr(strip_tags($novelInfo['content']),0,80,'utf-8')
             );
             //echo json_encode($chaptersList);exit;
 

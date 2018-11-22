@@ -10,19 +10,20 @@
                     <div class="am-g">
                         <div class="am-u-sm-4 am-u-md-5 am-u-lg-5 am-vertical-align">
                             <div class="am-vertical-align-middle">
-                                <img src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$value['author_name']?>">
+                                <img src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=NovelModel::$_novel_class_type[$value['novel_class_id']]?>小说作者：<?=$value['author_name']?>">
                             </div>
                         </div>
                         <div class="am-u-sm-8 am-u-md-7 am-u-lg-7">
                             <h2><?=$value['author_name']?></h2>
+                            <h3><?=NovelModel::$_novel_class_type[$value['novel_class_id']]?>小说作者</h3>
                         </div>
                     </div>
                 </div>
                 <div class="cattlist_2">
-                    <p><?=$value['description']?></p>
+                    <p><?=$value['author_name']?>简介：<?=$value['description']?></p>
                 </div>
                 <div class="cattlist_3">
-                    <a class="am-btn am-btn-warning" title="进入作者专栏" href="<?=$this->web_url?>/xiaoshuo/author_<?=$value['id']?>_1.html">进入专栏</a>
+                    <a class="am-btn am-btn-warning" title="<?=NovelModel::$_novel_class_type[$value['novel_class_id']]?>小说作者：<?=$value['author_name']?>" href="<?=$this->web_url?>/xiaoshuo/author_<?=$value['id']?>_1.html">进入专栏</a>
                 </div>
             </div>
         </li>

@@ -11,19 +11,20 @@
                     <div class="am-g">
                         <div class="am-u-sm-4 am-u-md-5 am-u-lg-5 am-vertical-align">
                             <div class="am-vertical-align-middle">
-                                <img src="<?=\YC\Common::getUrl($item['pic'])?>" alt="<?=$item['name']?>">
+                                <img src="<?=\YC\Common::getUrl($item['pic'])?>" alt="<?=$value['tab_name']?>精选：<?=$item['name']?>">
                             </div>
                         </div>
                         <div class="am-u-sm-8 am-u-md-7 am-u-lg-7">
                             <h2><?=$item['name']?></h2>
+                            <h3><?=$value['tab_name']?>精选作品</h3>
                         </div>
                     </div>
                 </div>
                 <div class="cattlist_2">
-                    <p><?=$item['content']?></p>
+                    <p><?=$item['name']?>简介：<?=$item['content']?></p>
                 </div>
                 <div class="cattlist_3">
-                    <a class="am-btn am-btn-warning" title="<?=$item['name']?>" href="<?=$this->web_url?>/<?=$value['path']?>/chapter_<?=$item['id']?>_1.html">开始阅读</a>
+                    <a class="am-btn am-btn-warning" title="<?=$value['tab_name']?>精选：<?=$item['name']?>" href="<?=$this->web_url?>/<?=$value['path']?>/chapter_<?=$item['id']?>_1.html">开始阅读</a>
                 </div>
             </div>
         </li>
@@ -35,19 +36,20 @@
                         <div class="am-g">
                             <div class="am-u-sm-4 am-u-md-5 am-u-lg-5 am-vertical-align">
                                 <div class="am-vertical-align-middle">
-                                    <img src="<?=\YC\Common::getUrl($item['pic'])?>" alt="<?=$item['author_name']?>">
+                                    <img src="<?=\YC\Common::getUrl($item['pic'])?>" alt="<?=$value['tab_name']?>精选：<?=$item['author_name']?>">
                                 </div>
                             </div>
                             <div class="am-u-sm-8 am-u-md-7 am-u-lg-7">
                                 <h2><?=$item['author_name']?></h2>
+                                <h3><?=$value['tab_name']?>精选作者</h3>
                             </div>
                         </div>
                     </div>
                     <div class="cattlist_2">
-                        <p><?=$item['description']?></p>
+                        <p><?=$item['author_name']?>简介：<?=$item['description']?></p>
                     </div>
                     <div class="cattlist_3">
-                        <a class="am-btn am-btn-warning" title="<?=$item['author_name']?>" href="<?=$this->web_url?>/<?=$value['path']?>/<?=$value['author_url_type']?>_<?=$item['id']?>_1.html">开始阅读</a>
+                        <a class="am-btn am-btn-warning" title="<?=$value['tab_name']?>精选：<?=$item['author_name']?>" href="<?=$this->web_url?>/<?=$value['path']?>/<?=$value['author_url_type']?>_<?=$item['id']?>_1.html">开始阅读</a>
                     </div>
                 </div>
             </li>

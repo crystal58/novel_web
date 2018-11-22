@@ -11,8 +11,8 @@
                 </div>
             </div>
         </div>
-        <div class="am-u-sm-0 am-u-md-12 am-u-lg-7 am-show-lg-only userinfo_center">
-            <?=$this->article_type['content']?>
+        <div class="am-u-sm-0 am-u-md-12 am-u-lg-7 userinfo_center">
+            <strong><?=$this->article_type['name']?>简介：</strong><?=$this->article_type['content']?><strong><?=$this->article_type['name']?>精选作品列表如下：</strong>
         </div>
     </div>
 </div>
@@ -40,12 +40,12 @@
                 }
 
             ?>
-            <li><a class="am-text-truncate" href="<?=$this->web_url?>/<?=$this->url_type?>/detail_<?=$value['id']?>.html" title="<?=$value['name']?>"><i class="am-icon-book am-icon-fw"></i> <?=$value['name']?></a></li>
+            <li><a class="am-text-truncate" href="<?=$this->web_url?>/<?=$this->url_type?>/detail_<?=$value['id']?>.html" title="<?=$this->article_type['name']?>精选作品：<?=$value['name']?>"><i class="am-icon-book am-icon-fw"></i> <?=$value['name']?></a></li>
             <?php
                 unset($novelList[$key]);
             }?>
         </ul>
     </div>
 </div>
-<?php //$this->display('section/page.phtml');?>
+<?php $this->display('section/page.phtml');?>
 <?php $this->display('section/footer.phtml');?>

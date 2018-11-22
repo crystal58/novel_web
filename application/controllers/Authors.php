@@ -20,14 +20,14 @@ class AuthorsController extends AbstractController {
             $params = array(
                 "status" => AuthorModel::AUTHOR_STATUS
             );
-            $this->_view->novel_class_name = "小说文学";
+            $this->_view->novel_class_name = "小说";
             if($id > 0){
                 $params['novel_class_id'] = $id;
                 $this->_view->novel_class_name = NovelModel::$_novel_class_type[$id]."小说";
                 $this->_view->seo = array(
                     "title" => isset(NovelModel::$_novel_class_type[$id])?str_replace("{novelclass}",NovelModel::$_novel_class_type[$id],$this->_seo['authorlist']['title']):"",
                     "keywords" => isset(NovelModel::$_novel_class_type[$id])?str_replace("{novelclass}",NovelModel::$_novel_class_type[$id],$this->_seo['authorlist']['keywords']):"",
-                    "description" => isset(NovelModel::$_novel_class_type[$id])?str_replace(array("{novelclass}","{authors}"),array(NovelModel::$_novel_class_type[$id],$authors),$this->_seo['authorlist']['description']):"",
+                    "description" => isset(NovelModel::$_novel_class_type[$id])?str_replace(array("{novelclass}"),array(NovelModel::$_novel_class_type[$id]),$this->_seo['authorlist']['description']):"",
                 );
             }else{
                 $this->_view->seo = array(

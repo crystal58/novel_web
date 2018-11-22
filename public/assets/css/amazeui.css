@@ -3254,6 +3254,7 @@ fieldset[disabled] .am-checkbox-inline {
   .am-topbar-nav > li.am-nav-active > a:after {
     opacity: 1;
     border-bottom-color: #ffffff;
+    display:block;
   }
 }
 @media only screen and (max-width: 640px) {

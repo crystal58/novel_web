@@ -1,130 +1,325 @@
 <?php $this->display('section/header.phtml');?>
-    <?php if(!empty($this->wenxue_list['recommend_tang'])){?>
-    <h2 class="star am-container mcenter"><span><img src="images/star.png" alt="隋唐文学">隋唐文学</span></h2>
-    <div class="am-container">
-        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-gallery-bordered" data-am-gallery="{  }" >
-            <?php foreach ($this->wenxue_list['recommend_tang'] as $value){?>
-                <li>
-                    <div class="cattlist_0">
-                        <div class="cattlist_1">
-                            <div class="am-g">
-                                <div class="am-u-sm-4 am-u-md-5 am-u-lg-5 am-vertical-align">
-                                    <div class="am-vertical-align-middle">
-                                        <img src="<?=$value['pic']?:\YC\Common::getUrl('')?>" alt="<?=$value['author_name']?>">
-                                    </div>
-                                </div>
-                                <div class="am-u-sm-8 am-u-md-7 am-u-lg-7">
-                                    <h2><?=$value['author_name']?></h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cattlist_2">
-                            <p><?=$value['description']?></p>
-                        </div>
-                        <div class="cattlist_3">
-                            <a class="am-btn am-btn-warning" title="<?=$value['author_name']?>" href="<?=$this->web_url?>/tangshi/gushi_<?=$value['id']?>_1.html">开始阅读</a>
-                        </div>
-                    </div>
-                </li>
-            <?php }?>
-
-        </ul>
-        <a class="am-btn am-btn-default am-btn-block mtb20" title="查看更多隋唐文学" href="<?=$this->web_url?>/tangshi/list_<?=ArticlesTypeModel::ARTICLE_TYPE_TANG?>.html">查看更多隋唐文学</a>
-    </div>
-    <?php }?>
-
-<h2 class="star am-container mcenter"><span><img src="images/star.png" alt="武侠小说">武侠小说</span></h2>
-<div class="am-container">
-    <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-gallery-bordered" data-am-gallery="{  }" >
-        <?php foreach ($this->wuxia_list as $value){?>
-        <li>
-            <div class="am-gallery-item">
-                <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" class="" title="<?=$value['name']?>">
-                    <img src="<?=empty($value['pic']) ? \YC\Common::getUrl($value['pic']) : $value['pic']?>" alt="<?=$value['name']?>" class="index_img"/>
-                    <h3 class="am-gallery-title"><?=$value['name']?></h3>
-                    <div class="am-gallery-desc"><?=$value['author_name']?></div>
-                </a>
+    <!--新版首页-->
+    <!--首屏1-->
+    <div class="banner">
+        <div class="am-g am-container">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-8">
+                <div data-am-widget="slider" class="am-slider am-slider-c1" data-am-slider='{"directionNav":false}'  data-am-flexslider="{playAfterPaused: 2000}">
+                    <ul class="am-slides">
+                        <li>
+                            <a href="https://www.eeeaaa.cn/xiaoshuo/chapter_144_1.html" title="三生三世十里桃花 唐七公子 文学星空">
+                                <img src="/images/index/san.gif" alt="三生三世十里桃花 唐七公子 文学星空">
+                            </a>
+                            <div class="am-slider-desc">三生三世十里桃花 - 唐七公子</div>
+                        </li>
+                        <li>
+                            <a href="https://www.eeeaaa.cn/xiaoshuo/chapter_206_1.html" title="琅琊榜 海宴 文学星空">
+                                <img src="/images/index/lyb.jpeg" alt="琅琊榜 海宴 文学星空">
+                            </a>
+                            <div class="am-slider-desc">琅琊榜 - 海宴</div>
+                        </li>
+                        <li>
+                            <a href="https://www.eeeaaa.cn/xiaoshuo/chapter_725_1.html" title="平凡的世界 路遥 文学星空">
+                                <img src="/images/index/pfdsj.jpg" alt="平凡的世界 路遥 文学星空">
+                            </a>
+                            <div class="am-slider-desc">平凡的世界 - 路遥</div>
+                        </li>
+                        <li>
+                            <a href="https://www.eeeaaa.cn/xiaoshuo/chapter_1_1.html" title="天龙八部 金庸 文学星空">
+                                <img src="/images/index/tlbb.gif" alt="天龙八部 金庸 文学星空"></a>
+                            <div class="am-slider-desc">天龙八部 - 金庸</div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </li>
-    <?php }?>
-
-    </ul>
-    <a class="am-btn am-btn-default am-btn-block mtb20" title="查看更多武侠小说" href="<?=$this->web_url?>/xiaoshuo/wuxia_<?=NovelModel::NOVEL_CLASS_WUXIA?>.html">查看更多武侠小说</a>
-</div>
-
-    <h2 class="star am-container mcenter"><span><img src="images/star.png" alt="言情小说">言情小说</span></h2>
-    <div class="am-container">
-        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-gallery-bordered" data-am-gallery="{  }" >
-            <?php foreach ($this->yanqing_list as $value){?>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" class="" title="<?=$value['name']?>">
-                            <img src="<?=empty($value['pic']) ? \YC\Common::getUrl($value['pic']) : $value['pic']?>" alt="<?=$value['name']?>" class="index_img"/>
-                            <h3 class="am-gallery-title"><?=$value['name']?></h3>
-                            <div class="am-gallery-desc"><?=$value['author_name']?></div>
-                        </a>
-                    </div>
-                </li>
-            <?php }?>
-
-        </ul>
-        <a class="am-btn am-btn-default am-btn-block mtb20" title="查看更多言情小说" href="<?=$this->web_url?>/xiaoshuo/yanqing_<?=NovelModel::NOVEL_CLASS_YANQING?>.html">查看更多言情小说</a>
+            <div class="am-u-sm-0 am-u-md-0 am-u-lg-4 padding-none">
+                <h1 class="star am-container"><span><img src="images/star.png" alt="文学星空">文学星空</span></h1>
+                <ul class="padding-none am-gallery am-avg-sm-2 am-avg-md-4 am-avg-lg-2 am-gallery-overlay" data-am-gallery="{ pureview: true }" >
+                    <li>
+                        <div class="am-gallery-item">
+                            <a href="https://www.eeeaaa.cn/xiaoshuo/author_30_1.html" title="鲁迅作品集 文学星空">
+                                <img src="https://www.eeeaaa.cn/group1/M00/00/09/rBH2TVvb-22AEUSMAAAYyCcyAU4017.jpg" alt="鲁迅作品集 文学星空" style="height: 166px"/>
+                                <h3 class="am-gallery-title">鲁迅作品集</h3>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="am-gallery-item">
+                            <a href="https://www.eeeaaa.cn/xiaoshuo/author_4_1.html" title="张爱玲作品集 文学星空">
+                                <img src="https://www.eeeaaa.cn/group1/M00/00/00/rBH2TVu7FnGAIs3dAABAHSEZre4699.jpg" alt="张爱玲作品集 文学星空" style="height: 166px"/>
+                                <h3 class="am-gallery-title">张爱玲作品集</h3>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="am-gallery-item">
+                            <a href="https://www.eeeaaa.cn/xiaoshuo/author_52_1.html" title="沈从文作品集 文学星空">
+                                <img src="https://www.eeeaaa.cn/group1/M00/00/0D/rBH2TVvlNxWAYrFmAAAczGsfP4o82.jpeg" alt="沈从文作品集 文学星空" style="height: 166px"/>
+                                <h3 class="am-gallery-title">沈从文作品集</h3>
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="am-gallery-item">
+                            <a href="https://www.eeeaaa.cn/xiaoshuo/author_41_1.html" title="老舍作品集 文学星空">
+                                <img src="https://www.eeeaaa.cn/group1/M00/00/0C/rBH2TVviugmALXDLAAAjVSI_Gsk308.jpg" alt="老舍作品集 文学星空" style="height: 166px"/>
+                                <h3 class="am-gallery-title">老舍作品集</h3>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <h2 class="star am-container mcenter"><span><img src="images/star.png" alt="校园小说">校园小说</span></h2>
+    <!--首屏2-->
     <div class="am-container">
-        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-gallery-bordered" data-am-gallery="{  }" >
-            <?php foreach ($this->xiaoyuan_list as $value){?>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" class="" title="<?=$value['name']?>">
-                            <img src="<?=empty($value['pic']) ? \YC\Common::getUrl($value['pic']) : $value['pic']?>" alt="<?=$value['name']?>" class="index_img"/>
-                            <h3 class="am-gallery-title"><?=$value['name']?></h3>
-                            <div class="am-gallery-desc"><?=$value['author_name']?></div>
-                        </a>
-                    </div>
-                </li>
-            <?php }?>
-
+        <ul class="padding-none banner2 am-gallery am-avg-sm-2 am-avg-md-4 am-avg-lg-4 am-gallery-overlay" data-am-gallery="{ pureview: true }" >
+            <li>
+                <div class="am-gallery-item">
+                    <a href="https://www.eeeaaa.cn/tangshi/chapter_17_1.html" title="唐诗三百首 文学星空">
+                        <img src="/images/index/ts.jpeg" alt="唐诗三百首 文学星空" style="height: 135px"/>
+                        <h3 class="am-gallery-title">唐诗三百首 - 文学星空</h3>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="am-gallery-item">
+                    <a href="https://www.eeeaaa.cn/ciqu/chapter_18_1.html" title="宋词三百首 文学星空">
+                        <img src="/images/index/sc.jpeg" alt="宋词三百首 文学星空" style="height: 135px"/>
+                        <h3 class="am-gallery-title">宋词三百首 - 文学星空</h3>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="am-gallery-item">
+                    <a href="https://www.eeeaaa.cn/ciqu/chapter_19_1.html" title="元曲三百首 文学星空">
+                        <img src="/images/index/yq.jpeg" alt="元曲三百首 文学星空" style="height: 135px"/>
+                        <h3 class="am-gallery-title">元曲三百首 - 文学星空</h3>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div class="am-gallery-item">
+                    <a href="https://www.eeeaaa.cn/xiaoshuo/author.html" title="小说作者聚合 文学星空">
+                        <img src="/images/index/jy.jpeg" alt="小说作者聚合 文学星空" style="height: 135px"/>
+                        <h3 class="am-gallery-title">小说作者聚合 - 文学星空</h3>
+                    </a>
+                </div>
+            </li>
         </ul>
-        <a class="am-btn am-btn-default am-btn-block mtb20" title="查看更多校园小说" href="<?=$this->web_url?>/xiaoshuo/xiaoyuan_<?=NovelModel::NOVEL_CLASS_SCHOOL?>.html">查看更多校园小说</a>
     </div>
-    <h2 class="star am-container mcenter"><span><img src="images/star.png" alt="玄幻小说">玄幻小说</span></h2>
+    <!--诗文词曲-->
     <div class="am-container">
-        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-gallery-bordered" data-am-gallery="{  }" >
-            <?php foreach ($this->xuanhuan_list as $value){?>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" class="" title="<?=$value['name']?>">
-                            <img src="<?=empty($value['pic']) ? \YC\Common::getUrl($value['pic']) : $value['pic']?>" alt="<?=$value['name']?>" class="index_img"/>
-                            <h3 class="am-gallery-title"><?=$value['name']?></h3>
-                            <div class="am-gallery-desc"><?=$value['author_name']?></div>
-                        </a>
+        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default index-title">
+            <h2 class="am-titlebar-title">诗文词曲</h2>
+            <nav class="am-titlebar-nav">
+                <a href="https://www.eeeaaa.cn/tangshi/list_1.html" title="唐诗" class="link">唐诗</a>
+                <a href="<?=$this->web_url?>/ciqu/list_2.html" title="宋词" class="link">宋词</a>
+                <a href="<?=$this->web_url?>/ciqu/list_4.html" title="元曲" class="link">元曲</a>
+                <a href="#" title="文言文" class="link">文言文</a>
+            </nav>
+        </div>
+        <div data-am-widget="tabs" class="am-tabs am-tabs-d2">
+            <ul class="am-tabs-nav am-cf">
+                <li class="am-active"><a href="[data-tab-panel-0]">唐诗</a></li>
+                <li class=""><a href="[data-tab-panel-1]">宋词</a></li>
+                <li class=""><a href="[data-tab-panel-2]">元曲</a></li>
+                <li class=""><a href="[data-tab-panel-3]">文言文</a></li>
+            </ul>
+            <div class="am-tabs-bd">
+                <div data-tab-panel-0 class="am-tab-panel am-active">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-thumbnails am-list am-list-striped mb0">
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/chapter_15_1.html" title="唐诗三百首-1"><i class="am-icon-book am-icon-fw"></i> 唐诗三百首-1</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/chapter_17_1.html" title="唐诗三百首-2"><i class="am-icon-book am-icon-fw"></i> 唐诗三百首-2</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/chapter_16_1.html" title="全唐诗"><i class="am-icon-book am-icon-fw"></i> 全唐诗</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/gushi_1_1.html" title="李白"><i class="am-icon-book am-icon-fw"></i> 李白</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/gushi_3_1.html" title="杜甫"><i class="am-icon-book am-icon-fw"></i> 杜甫</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/gushi_2_1.html" title="白居易"><i class="am-icon-book am-icon-fw"></i> 白居易</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/gushi_4_1.html" title="王维"><i class="am-icon-book am-icon-fw"></i> 王维</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/gushi_5_1.html" title="刘禹锡"><i class="am-icon-book am-icon-fw"></i> 刘禹锡</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/gushi_6_1.html" title="李商隐"><i class="am-icon-book am-icon-fw"></i> 李商隐</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/gushi_7_1.html" title="杜牧"><i class="am-icon-book am-icon-fw"></i> 杜牧</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/gushi_8_1.html" title="孟浩然"><i class="am-icon-book am-icon-fw"></i> 孟浩然</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/gushi_9_1.html" title="元稹"><i class="am-icon-book am-icon-fw"></i> 元稹</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/gushi_10_1.html" title="柳宗元"><i class="am-icon-book am-icon-fw"></i> 柳宗元</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/gushi_11_1.html" title="韩愈"><i class="am-icon-book am-icon-fw"></i> 韩愈</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/gushi_12_1.html" title="岑参"><i class="am-icon-book am-icon-fw"></i> 岑参</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/gushi_15_1.html" title="温庭筠"><i class="am-icon-book am-icon-fw"></i> 温庭筠</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/gushi_18_1.html" title="王昌龄"><i class="am-icon-book am-icon-fw"></i> 王昌龄</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/tangshi/gushi_36_1.html" title="贺知章"><i class="am-icon-book am-icon-fw"></i> 贺知章</a></li>
+                        </ul>
                     </div>
-                </li>
-            <?php }?>
-
-        </ul>
-        <a class="am-btn am-btn-default am-btn-block mtb20" title="查看更多玄幻小说" href="<?=$this->web_url?>/xiaoshuo/xuanhuan_<?=NovelModel::NOVEL_CLASS_FANTASY?>.html">查看更多玄幻小说</a>
+                </div>
+                <div data-tab-panel-1 class="am-tab-panel ">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-thumbnails am-list am-list-striped mb0">
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/chapter_18_1.html" title="宋词三百首"><i class="am-icon-book am-icon-fw"></i> 宋词三百首</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/songci_58_1.html" title="苏轼"><i class="am-icon-book am-icon-fw"></i> 苏轼</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/songci_59_1.html" title="辛弃疾"><i class="am-icon-book am-icon-fw"></i> 辛弃疾</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/songci_60_1.html" title="李清照"><i class="am-icon-book am-icon-fw"></i> 李清照</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/songci_61_1.html" title="陆游"><i class="am-icon-book am-icon-fw"></i> 陆游</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/songci_62_1.html" title="王安石"><i class="am-icon-book am-icon-fw"></i> 王安石</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/songci_63_1.html" title="欧阳修"><i class="am-icon-book am-icon-fw"></i> 欧阳修</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/songci_64_1.html" title="柳永"><i class="am-icon-book am-icon-fw"></i> 柳永</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/songci_65_1.html" title="杨万里"><i class="am-icon-book am-icon-fw"></i> 杨万里</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/songci_66_1.html" title="范仲淹"><i class="am-icon-book am-icon-fw"></i> 范仲淹</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/songci_67_1.html" title="晏殊"><i class="am-icon-book am-icon-fw"></i> 晏殊</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/songci_68_1.html" title="岳飞"><i class="am-icon-book am-icon-fw"></i> 岳飞</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/songci_69_1.html" title="晏几道"><i class="am-icon-book am-icon-fw"></i> 晏几道</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/songci_70_1.html" title="周邦彦"><i class="am-icon-book am-icon-fw"></i> 周邦彦</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/songci_71_1.html" title="秦观"><i class="am-icon-book am-icon-fw"></i> 秦观</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/songci_72_1.html" title="朱熹"><i class="am-icon-book am-icon-fw"></i> 朱熹</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/songci_73_1.html" title="吴文英"><i class="am-icon-book am-icon-fw"></i> 吴文英</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/songci_74_1.html" title="黄庭坚"><i class="am-icon-book am-icon-fw"></i> 黄庭坚</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div data-tab-panel-2 class="am-tab-panel ">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-thumbnails am-list am-list-striped mb0">
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/chapter_19_1.html" title="元曲三百首"><i class="am-icon-book am-icon-fw"></i> 元曲三百首</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/yuanqu_87_1.html" title="马致远"><i class="am-icon-book am-icon-fw"></i> 马致远</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/yuanqu_88_1.html" title="白朴"><i class="am-icon-book am-icon-fw"></i> 白朴</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/yuanqu_89_1.html" title="王冕"><i class="am-icon-book am-icon-fw"></i> 王冕</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/yuanqu_90_1.html" title="张可久"><i class="am-icon-book am-icon-fw"></i> 张可久</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/yuanqu_91_1.html" title="张养浩"><i class="am-icon-book am-icon-fw"></i> 张养浩</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/yuanqu_92_1.html" title="关汉卿"><i class="am-icon-book am-icon-fw"></i> 关汉卿</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/yuanqu_93_1.html" title="徐再思"><i class="am-icon-book am-icon-fw"></i> 徐再思</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/yuanqu_94_1.html" title="乔吉"><i class="am-icon-book am-icon-fw"></i> 乔吉</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/yuanqu_95_1.html" title="贯云石"><i class="am-icon-book am-icon-fw"></i> 贯云石</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/yuanqu_96_1.html" title="薛昂夫"><i class="am-icon-book am-icon-fw"></i> 薛昂夫</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/yuanqu_97_1.html" title="李致远"><i class="am-icon-book am-icon-fw"></i> 李致远</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/yuanqu_98_1.html" title="周文质"><i class="am-icon-book am-icon-fw"></i> 周文质</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/yuanqu_99_1.html" title="卢挚"><i class="am-icon-book am-icon-fw"></i> 卢挚</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/yuanqu_100_1.html" title="施耐庵"><i class="am-icon-book am-icon-fw"></i> 施耐庵</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/yuanqu_101_1.html" title="王实甫"><i class="am-icon-book am-icon-fw"></i> 王实甫</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/yuanqu_104_1.html" title="王和卿"><i class="am-icon-book am-icon-fw"></i> 王和卿</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/ciqu/yuanqu_109_1.html" title="罗贯中"><i class="am-icon-book am-icon-fw"></i> 罗贯中</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div data-tab-panel-3 class="am-tab-panel ">
+                </div>
+            </div>
+        </div>
     </div>
-    <h2 class="star am-container mcenter"><span><img src="images/star.png" alt="网络小说">网络小说</span></h2>
+    <!--短文小说-->
     <div class="am-container">
-        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-gallery-bordered" data-am-gallery="{  }" >
-            <?php foreach ($this->wangluo_list as $value){?>
-                <li>
-                    <div class="am-gallery-item">
-                        <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" class="" title="<?=$value['name']?>">
-                            <img src="<?=empty($value['pic']) ? \YC\Common::getUrl($value['pic']) : $value['pic']?>" alt="<?=$value['name']?>" class="index_img"/>
-                            <h3 class="am-gallery-title"><?=$value['name']?></h3>
-                            <div class="am-gallery-desc"><?=$value['author_name']?></div>
-                        </a>
+        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default index-title">
+            <h2 class="am-titlebar-title">短文小说</h2>
+            <nav class="am-titlebar-nav">
+                <a href="https://www.eeeaaa.cn/xiaoshuo/wuxia_1.html" title="武侠小说" class="link">武侠</a>
+                <a href="https://www.eeeaaa.cn/xiaoshuo/yanqing_2.html" title="言情小说" class="link">言情</a>
+                <a href="https://www.eeeaaa.cn/xiaoshuo/xiaoyuan_4.html" title="校园小说" class="link">校园</a>
+                <a href="https://www.eeeaaa.cn/xiaoshuo/xuanhuan_5.html" title="玄幻小说" class="link">玄幻</a>
+                <a href="https://www.eeeaaa.cn/xiaoshuo/wangluo_6.html" title="网络小说" class="link">网络</a>
+                <a href="https://www.eeeaaa.cn/xiaoshuo/xiandai_3.html" title="现代小说" class="link">现代</a>
+            </nav>
+        </div>
+        <div data-am-widget="tabs" class="am-tabs am-tabs-d2">
+            <ul class="am-tabs-nav am-cf">
+                <li class="am-active"><a href="[data-tab-panel-0]">武侠</a></li>
+                <li class=""><a href="[data-tab-panel-1]">言情</a></li>
+                <li class=""><a href="[data-tab-panel-2]">校园</a></li>
+                <li class=""><a href="[data-tab-panel-3]">玄幻</a></li>
+                <li class=""><a href="[data-tab-panel-4]">网络</a></li>
+                <li class=""><a href="[data-tab-panel-5]">现代</a></li>
+            </ul>
+            <div class="am-tabs-bd">
+                <div data-tab-panel-0 class="am-tab-panel am-active">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-thumbnails am-list am-list-striped mb0">
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_1_1.html" title="金庸"><i class="am-icon-book am-icon-fw"></i> 金庸</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_2_1.html" title="古龙"><i class="am-icon-book am-icon-fw"></i> 古龙</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_6_1.html" title="梁羽生"><i class="am-icon-book am-icon-fw"></i> 梁羽生</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_18_1.html" title="松柏生"><i class="am-icon-book am-icon-fw"></i> 松柏生</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_21_1.html" title="卧龙生"><i class="am-icon-book am-icon-fw"></i> 卧龙生</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_25_1.html" title="柳残阳"><i class="am-icon-book am-icon-fw"></i> 柳残阳</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_28_1.html" title="诸葛青云"><i class="am-icon-book am-icon-fw"></i> 诸葛青云</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_31_1.html" title="陈青云"><i class="am-icon-book am-icon-fw"></i> 陈青云</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_32_1.html" title="云中岳"><i class="am-icon-book am-icon-fw"></i> 云中岳</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_33_1.html" title="曹若冰"><i class="am-icon-book am-icon-fw"></i> 曹若冰</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_34_1.html" title="李凉"><i class="am-icon-book am-icon-fw"></i> 李凉</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_35_1.html" title="萧逸"><i class="am-icon-book am-icon-fw"></i> 萧逸</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_36_1.html" title="独孤红"><i class="am-icon-book am-icon-fw"></i> 独孤红</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_37_1.html" title="宫白羽"><i class="am-icon-book am-icon-fw"></i> 宫白羽</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_38_1.html" title="石玉昆"><i class="am-icon-book am-icon-fw"></i> 石玉昆</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_46_1.html" title="墨余生"><i class="am-icon-book am-icon-fw"></i> 墨余生</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_47_1.html" title="平江不肖生"><i class="am-icon-book am-icon-fw"></i> 平江不肖生</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_48_1.html" title="秋梦痕"><i class="am-icon-book am-icon-fw"></i> 秋梦痕</a></li>
+                        </ul>
                     </div>
-                </li>
-            <?php }?>
-
-        </ul>
-        <a class="am-btn am-btn-default am-btn-block mtb20" title="查看更多网络小说" href="<?=$this->web_url?>/xiaoshuo/wangluo_<?=NovelModel::NOVEL_CLASS_NET?>.html">查看更多网络小说</a>
+                </div>
+                <div data-tab-panel-1 class="am-tab-panel ">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-thumbnails am-list am-list-striped mb0">
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_4_1.html" title="张爱玲"><i class="am-icon-book am-icon-fw"></i> 张爱玲</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_3_1.html" title="席绢"><i class="am-icon-book am-icon-fw"></i> 席绢</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_5_1.html" title="辛夷坞"><i class="am-icon-book am-icon-fw"></i> 辛夷坞</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_7_1.html" title="唐七公子"><i class="am-icon-book am-icon-fw"></i> 唐七公子</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_15_1.html" title="匪我思存"><i class="am-icon-book am-icon-fw"></i> 匪我思存</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_17_1.html" title="亦舒"><i class="am-icon-book am-icon-fw"></i> 亦舒</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_23_1.html" title="古灵"><i class="am-icon-book am-icon-fw"></i> 古灵</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_27_1.html" title="八月长安"><i class="am-icon-book am-icon-fw"></i> 八月长安</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div data-tab-panel-2 class="am-tab-panel ">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-thumbnails am-list am-list-striped mb0">
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_8_1.html" title="郭敬明"><i class="am-icon-book am-icon-fw"></i> 郭敬明</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_9_1.html" title="顾漫"><i class="am-icon-book am-icon-fw"></i> 顾漫</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_16_1.html" title="三毛"><i class="am-icon-book am-icon-fw"></i> 三毛</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_39_1.html" title="韩寒"><i class="am-icon-book am-icon-fw"></i> 韩寒</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div data-tab-panel-3 class="am-tab-panel ">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-thumbnails am-list am-list-striped mb0">
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_10_1.html" title="唐家三少"><i class="am-icon-book am-icon-fw"></i> 唐家三少</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_11_1.html" title="萧鼎"><i class="am-icon-book am-icon-fw"></i> 萧鼎</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div data-tab-panel-4 class="am-tab-panel ">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-thumbnails am-list am-list-striped mb0">
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_20_1.html" title="天蚕土豆"><i class="am-icon-book am-icon-fw"></i> 天蚕土豆</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_14_1.html" title="海宴"><i class="am-icon-book am-icon-fw"></i> 海宴</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_13_1.html" title="烽火戏诸侯"><i class="am-icon-book am-icon-fw"></i> 烽火戏诸侯</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_12_1.html" title="流潋紫"><i class="am-icon-book am-icon-fw"></i> 流潋紫</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div data-tab-panel-5 class="am-tab-panel ">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-thumbnails am-list am-list-striped mb0">
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_30_1.html" title="鲁迅"><i class="am-icon-book am-icon-fw"></i> 鲁迅</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_52_1.html" title="沈从文"><i class="am-icon-book am-icon-fw"></i> 沈从文</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_41_1.html" title="老舍"><i class="am-icon-book am-icon-fw"></i> 老舍</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_19_1.html" title="王朔"><i class="am-icon-book am-icon-fw"></i> 王朔</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_22_1.html" title="莫言"><i class="am-icon-book am-icon-fw"></i> 莫言</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_24_1.html" title="路遥"><i class="am-icon-book am-icon-fw"></i> 路遥</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_29_1.html" title="贾平凹"><i class="am-icon-book am-icon-fw"></i> 贾平凹</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_58_1.html" title="茅盾"><i class="am-icon-book am-icon-fw"></i> 茅盾</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_59_1.html" title="巴金"><i class="am-icon-book am-icon-fw"></i> 巴金</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_60_1.html" title="汪曾祺"><i class="am-icon-book am-icon-fw"></i> 汪曾祺</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_53_1.html" title="陈忠实"><i class="am-icon-book am-icon-fw"></i> 陈忠实</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_54_1.html" title="苏童"><i class="am-icon-book am-icon-fw"></i> 苏童</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_55_1.html" title="阿城"><i class="am-icon-book am-icon-fw"></i> 阿城</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_57_1.html" title="铁凝"><i class="am-icon-book am-icon-fw"></i> 铁凝</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_61_1.html" title="王安忆"><i class="am-icon-book am-icon-fw"></i> 王安忆</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_43_1.html" title="凌力"><i class="am-icon-book am-icon-fw"></i> 凌力</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_42_1.html" title="张恨水"><i class="am-icon-book am-icon-fw"></i> 张恨水</a></li>
+                            <li><a class="am-text-truncate" href="https://www.eeeaaa.cn/xiaoshuo/author_45_1.html" title="高阳"><i class="am-icon-book am-icon-fw"></i> 高阳</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 
 
 <?php $this->display('section/footer.phtml');?>
