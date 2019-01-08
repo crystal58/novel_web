@@ -3,6 +3,7 @@
 
 class NovelController extends AbstractController{
     const PAGESIZE = 48;
+    const AUTHOR_NOVEL_PAGESIZE = 50;
 
     public function init()
     {
@@ -13,14 +14,14 @@ class NovelController extends AbstractController{
 
 
     /**
-     * 作者小说列表
+     * 作者的小说列表
      */
     public function authorlistAction(){
 
         try {
             $page = $this->get("page", 1);
             $page = $page > 0 ? $page : 1;
-            $offset = ($page - 1) * self::PAGESIZE;
+            $offset = ($page - 1) * self::AUTHOR_NOVEL_PAGESIZE;
             $authorId = $this->get("author_id");
             if($authorId <= 0){
                 throw new Exception("出错了");
@@ -35,13 +36,18 @@ class NovelController extends AbstractController{
                 "status"=>NovelModel::NOVEL_STATUS_OK,
                 "record_status" => NovelModel::NOVEL_RECORDING_FINISH
             );
-            $novelList = $novelModel->novelList($params,0,0,false,array("order"=>"ASC"));
+            $novelList = $novelModel->novelList($params,$offset,self::AUTHOR_NOVEL_PAGESIZE,true,array("order"=>"ASC"));
             $this->_view->novel_list = $novelList['list'];
+
             $this->_view->seo = array(
                 "title" => isset($authorInfo['author_name'])?str_replace(array("{author}"),array($authorInfo['author_name']),$this->_seo['author']['title']):"",
                 "keywords" => isset($authorInfo['author_name'])?str_replace(array("{author}"),array($authorInfo['author_name']),$this->_seo['author']['keywords']):"",
                 "description" => $this->_seo['author']['description'].mb_substr(strip_tags($authorInfo['description']),0,80,'utf-8')
             );
+            $this->_view->page_num = ceil($novelList['cnt']/self::AUTHOR_NOVEL_PAGESIZE);
+            $this->_view->page_url = $this->_webUrl."/xiaoshuo/author_".$authorId."_{page}.html";
+            $this->_view->cur_page = $page;
+           // var_dump($this->_view);exit;
             //echo json_encode($novelList);exit;
             //$ph = new \YC\Page($result['cnt'], $page, self::PAGESIZE,"/xiaoshuo/list_{$novelId}_{num}.html");
             //$this->_view->pageHtml = $ph->getPageHtml();

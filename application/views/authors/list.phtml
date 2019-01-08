@@ -30,5 +30,9 @@
     <?php }?>
     </ul>
 </div>
-
+<?php
+if($_GET['id'] > 0) {
+    $this->display('section/page.phtml');
+}
+?>
 <?php $this->display('section/footer.phtml');?>

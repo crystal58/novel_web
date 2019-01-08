@@ -6,6 +6,7 @@
  * Time: 下午3:04
  */
 class AuthorsController extends AbstractController {
+    const PAGESIZE = 48;
 
     public function init()
     {
@@ -22,6 +23,12 @@ class AuthorsController extends AbstractController {
             );
             $this->_view->novel_class_name = "小说";
             if($id > 0){
+                $page = $this->get("page");
+                $page = $page > 0 ? $page : 1;
+                $offset = ($page-1)*self::PAGESIZE;
+                $pageSize = self::PAGESIZE;
+                $isCount = true;
+
                 $params['novel_class_id'] = $id;
                 $this->_view->novel_class_name = NovelModel::$_novel_class_type[$id]."小说";
                 $this->_view->seo = array(
@@ -30,6 +37,9 @@ class AuthorsController extends AbstractController {
                     "description" => isset(NovelModel::$_novel_class_type[$id])?str_replace(array("{novelclass}"),array(NovelModel::$_novel_class_type[$id]),$this->_seo['authorlist']['description']):"",
                 );
             }else{
+                $offset = 0;
+                $pageSize = 0;
+                $isCount = false;
                 $this->_view->seo = array(
                     "title" => $this->_seo['allauthorlist']['title'],
                     "keywords" => $this->_seo['allauthorlist']['keywords'],
@@ -37,11 +47,18 @@ class AuthorsController extends AbstractController {
                 );
             }
 
-            $authorList = $authorModel->getList($params);
+
+            $authorList = $authorModel->getList($params,$offset,$pageSize,$isCount);
             $this->_view->author_list = $authorList['list'];
             $authors = "";
             foreach ($authorList['list'] as $value){
                 $authors .= $value['author_name'];
+            }
+
+            if($id > 0){
+                $this->_view->page_num = ceil($authorList['cnt']/self::PAGESIZE);
+                $this->_view->page_url = $this->_webUrl."/xiaoshuo/".NovelModel::$_novel_class_pinxie[$id]."_".$id.".html";
+                $this->_view->cur_page = $page;
             }
 
 
