@@ -32,35 +32,56 @@ class ArticleController extends AbstractController{
             $articleTypeModel = new ArticlesTypeModel();
             $articleType = $articleTypeModel->getList($params);
             $this->_view->article_type =$articleType['list'];
-            $list = array();
+            $articleAuthor = $list = array();
+            $typeCount = count($articleType['list']);
 
             $authorParams = array(
                 "status" => ArticleAuthorModel::AUTHOR_STATUS,
                 "class_type_id" => $classTypeId
             );
+            $articleOffset = $articlePageSize = 0;
+//            if($typeCount < self::PAGESIZE){
+//                $articleOffset = 0;
+//                $articlePageSize = self::PAGESIZE - $typeCount;
+//
+//            }else{
+                if(($typeCount/self::PAGESIZE) < $page){
+                    $articleOffset = ceil($typeCount/self::PAGESIZE) == $page ? 0 :$offset  - $typeCount;
+                    $articlePageSize = ceil($typeCount/self::PAGESIZE) == $page ? self::PAGESIZE-($typeCount%self::PAGESIZE) : self::PAGESIZE;
+                }
+            //}
             $articleAuthorModel = new ArticleAuthorModel();
-            $articleAuthor = $articleAuthorModel->getList($authorParams);
-            $this->_view->author_list = $articleAuthor['list'];
+            if($articlePageSize){
+                $articleAuthor = $articleAuthorModel->getList($authorParams,$articleOffset,$articlePageSize,true);
+            }else{
+                $articleAuthor['cnt'] = $articleAuthorModel->count(array("AND" => $authorParams));
+            }
+            $articleAuthorCount = empty($articleAuthor['cnt']) ? 0 : $articleAuthor['cnt'];
+            $authorList = empty($articleAuthor['list'])?array():$articleAuthor['list'];
+           // echo json_encode($articleAuthor);exit;
+            $this->_view->author_list = $authorList;
 
             switch ($classTypeId){
                 case ArticlesTypeModel::ARTICLE_TYPE_TANG :
                     $tabName = "唐诗";
+                    $tabNameP = "tangshi";
                     if(count($articleType['list']) > 0 || count($articleAuthor['list']) >0){
                         $list[] = array(
                             "tab_name" => $tabName,
                             "path" => "tangshi",
                             "author_url_type" => "gushi",
-                            "article_type" => $articleType['list'],
+                            "article_type" => array_slice($articleType['list'],$offset,self::PAGESIZE),
                             "author_list" => $articleAuthor['list']
                         );
                     }
                     break;
                 case ArticlesTypeModel::ARTICLE_TYPE_SONG:
                     $tabName = "宋词";
+                    $tabNameP = "ciqu";
                     if(count($articleType['list']) > 0 || count($articleAuthor['list']) >0){
                         $list[] = array(
                             "tab_name" => $tabName,
-                            "article_type" => $articleType['list'],
+                            "article_type" => array_slice($articleType['list'],$offset,self::PAGESIZE),
                             "author_list" => $articleAuthor['list'],
                             "path" => "ciqu",
                             "author_url_type" => "songci"
@@ -69,6 +90,7 @@ class ArticleController extends AbstractController{
                     break;
                 case ArticlesTypeModel::ARTICLE_TYPE_YUAN:
                     $tabName = "元曲";
+                    $tabNameP = "ciqu";
                     $yuanParams = array(
                         "status" => ArticlesTypeModel::ARTICLE_CLASS_STATUS,
                         "parent_id" => ArticlesTypeModel::ARTICLE_TYPE_YUAN
@@ -92,6 +114,11 @@ class ArticleController extends AbstractController{
                     break;
 
             }
+            // $this->_view->url_type = $urlType?:"tangshi";
+            $this->_view->page_num = ceil(($typeCount + $articleAuthorCount)/self::PAGESIZE);
+            $this->_view->page_url = $this->_webUrl."/".$tabNameP."/list_".$classTypeId."_{page}.html";
+            $this->_view->cur_page = $page;
+
 //            $this->_view->url_type = $urlType?:"tangshi";
 //            $this->_view->chapter_url_type = $chapterUrlType?:"gushi";
             $this->_view->seo = array(
@@ -100,6 +127,8 @@ class ArticleController extends AbstractController{
                 "description" => str_replace("{class}",$tabName,$this->_seo['gushi']['description']),
             );
             $this->_view->list = $list;
+
+
 
             //$ph = new \YC\Page($result['cnt'], $page, self::PAGESIZE,"/xiaoshuo/list_{$novelId}_{num}.html");
             //$this->_view->pageHtml = $ph->getPageHtml();
@@ -264,6 +293,7 @@ class ArticleController extends AbstractController{
                 "description" => str_replace("{name}",$articleType['name'],$this->_seo['gushichapter']['description']).mb_substr(strip_tags($articleType['content']),0,80,'utf-8'),
             );
 
+
         }catch (Exception $e){
             $this->processException($this->getRequest()->getControllerName(),$this->getRequest()->getActionName(),$e);
         }
@@ -286,8 +316,8 @@ class ArticleController extends AbstractController{
                 "article_order"=>"ASC",
                 "id" => "ASC"
             );
-            //$chaptersList = $articleModel->getList($params,$offset,self::PAGESIZE,$order,true);
-            $chaptersList = $articleModel->getList($params);
+            $chaptersList = $articleModel->getList($params,$offset,self::PAGESIZE,$order,true);
+            //$chaptersList = $articleModel->getList($params);
             //var_dump($chaptersList);exit;
             $this->_view->list = $chaptersList['list'];
 
@@ -310,9 +340,9 @@ class ArticleController extends AbstractController{
                     break;
             }
             $this->_view->url_type =$urlType?:"tangshi";
-//            $this->_view->page_num = ceil($chaptersList['cnt']/self::PAGESIZE);
-//            $this->_view->page_url = $this->_webUrl."/".$this->_view->url_type."/".$chapterUrlType."_".$authorId."_{page}.html";
-//            $this->_view->cur_page = $page;
+            $this->_view->page_num = ceil($chaptersList['cnt']/self::PAGESIZE);
+            $this->_view->page_url = $this->_webUrl."/".$this->_view->url_type."/".$chapterUrlType."_".$authorId."_{page}.html";
+            $this->_view->cur_page = $page;
            // $description = $authorInfo['description']?$authorInfo['author_name']."简介及资料:".strip_tags($authorInfo['description']) :$this->_seo[$key]['description'];
 
             $this->_view->seo = array(

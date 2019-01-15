@@ -61,7 +61,7 @@ class AbstractController extends Yaf_Controller_Abstract {
         if($this->_json){
             return $result;
         }
-        $this->_view->message = "出错了";
+        $this->_view->message = "出错了！！！";
         Yaf_Dispatcher::getInstance()->autoRender(FALSE);
         $this->getView()->display($this->getView()->getScriptPath() . "/error/error.phtml");
     }

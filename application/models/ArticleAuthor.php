@@ -45,6 +45,7 @@ class ArticleAuthorModel extends AbstractModel {
         $where['ORDER'] = array(
             "id"=>"ASC"
         );
+        //echo json_encode($where);exit;
         $result['list'] = $this->fetchAll($where);
         return $result;
     }
