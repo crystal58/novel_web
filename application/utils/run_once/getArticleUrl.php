@@ -62,14 +62,14 @@ try{
 
         foreach ($articleAuthor['list'] as $authorValue){
             $articleParams = array(
-                "class_type" => (int)$authorValue['id'],
+                "author_id" => (int)$authorValue['id'],
                 "status" => 1
             );
             $chaptersList = $articleModel->getList($articleParams);
             $articleCount = count($chaptersList['list']);
             $articlePage = ceil($articleCount/ArticleController::PAGESIZE);
             for($j=1;$j<=$articlePage;$j++){
-                $url .= "https://www.eeeaaa.cn/".$value."/".$pathType[$key]."_".$typeValue['id']."_".$j.".html\r\n";
+                $url .= "https://www.eeeaaa.cn/".$value."/".$pathType[$key]."_".$authorValue['id']."_".$j.".html\r\n";
                 $sumCount++;
             }
             foreach($chaptersList['list'] as $chapterValue){
