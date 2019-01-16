@@ -21,7 +21,7 @@ try{
     $articleAuthorModel = new ArticleAuthorModel();
     $articleModel = new ArticlesModel();
     foreach ($articleType as $key=>$value){
-        $url = "https://www.eeeaaa.cn/".$value."/list_1.html\r\n";
+        $url = "https://www.eeeaaa.cn/".$value."/list_".$key.".html\r\n";
         $sumCount++;
         $params = array(
             "status" => ArticlesTypeModel::ARTICLE_CLASS_STATUS,
@@ -67,9 +67,10 @@ try{
             );
             $chaptersList = $articleModel->getList($articleParams);
             $articleCount = count($chaptersList['list']);
+
             $articlePage = ceil($articleCount/ArticleController::PAGESIZE);
-            for($j=1;$j<=$articlePage;$j++){
-                $url .= "https://www.eeeaaa.cn/".$value."/".$pathType[$key]."_".$authorValue['id']."_".$j.".html\r\n";
+            for($k=1;$k<=$articlePage;$k++){
+                $url .= "https://www.eeeaaa.cn/".$value."/".$pathType[$key]."_".$authorValue['id']."_".$k.".html\r\n";
                 $sumCount++;
             }
             foreach($chaptersList['list'] as $chapterValue){
