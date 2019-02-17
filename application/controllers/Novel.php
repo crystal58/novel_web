@@ -192,4 +192,42 @@ class NovelController extends AbstractController{
 
     }
 
+    /**
+     * 古典小说
+     */
+    public function classicalAction(){
+        try{
+
+            $page = $this->get("page");
+            $page = $page > 0 ? $page : 1;
+            $offset = ($page-1)*self::PAGESIZE;
+
+            $novelModel = new NovelModel();
+            $params = array(
+                "novel_class_id" => 7,
+                "status" => 1
+            );
+            $novelList = $novelModel->novelList($params,$offset,self::PAGESIZE,true);
+            $this->_view->novel_list = $novelList['list'];
+
+            $this->_view->page_num = ceil($novelList['cnt']/self::PAGESIZE);
+            $this->_view->page_url = $this->_webUrl."/xiaoshuo/gudian_7_{page}.html";
+            $this->_view->cur_page = $page;
+
+            $this->_view->gudian = array(
+
+            );
+
+            $this->_view->seo = array(
+                "title" => "古典小说在线阅读_文学星空",
+                "keywords" => "古典小说,古典小说在线阅读",
+                "description" => "文学星空古典小说频道，提供经典好看的古典小说免费在线阅读和下载。"
+            );
+            //echo json_encode($chaptersList);exit;
+
+        }catch (Exception $e){
+            $this->processException($this->getRequest()->getControllerName(),$this->getRequest()->getActionName(),$e);
+        }
+    }
+
 }

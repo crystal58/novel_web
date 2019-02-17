@@ -1,0 +1,45 @@
+<?php $this->display('section/header.phtml');?>
+
+<div class="category2top">
+    <div class="am-g am-container userinfo">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-5 userinfo_left">
+            <div class="am-g">
+                <div class="am-u-md-12 am-u-lg-6 userface">
+                    <img src="/images/gudian.jpg" alt="古典小说">
+                </div>
+                <div class="am-u-md-12 am-u-lg-6 userin">
+                    <h1>
+                        古典小说
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="am-u-sm-0 am-u-md-12 am-u-lg-7 userinfo_center">
+            <strong>古典小说简介：</strong>
+            “古典小说”顾名思义是主要以描写人物故事，塑造多种多样的人物形象，是一种拥有完整布局、发展及主题的文学作品。<br>
+            <strong>古典小说作品全集列表如下：</strong>
+        </div>
+    </div>
+</div>
+
+    <div class="am-list-news-bd am-container">
+        <ul class="am-avg-sm-1 am-avg-md-3 am-avg-lg-5 am-thumbnails am-list">
+<?php foreach ($this->novel_list as $value){?>
+            <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-bottom-left">
+                <h3 class="am-list-item-hd author_book_til">
+                    <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" title="<?=$value['author_name']?>作品：<?=$value['name']?>"><?=$value['name']?></a>
+                </h3>
+                <div class="am-u-sm-4 am-list-thumb author_book_left">
+                    <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" title="<?=$value['author_name']?>作品：<?=$value['name']?>">
+                        <img class="am-thumbnail" src="<?=\YC\Common::getUrl($value['pic'])?>" alt="<?=$value['author_name']?>作品：<?=$value['name']?>"/>
+                    </a>
+                </div>
+                <div class="am-u-sm-8 am-list-main author_book_right">
+                    <div class="am-list-item-text author_book_info"><?=$value['author_name']?><?=$value['name']?>简介：<?=$value['content']?></div>
+                </div>
+            </li>
+<?php }?>
+        </ul>
+    </div>
+<?php $this->display('section/page.phtml'); ?>
+<?php $this->display('section/footer.phtml');?>

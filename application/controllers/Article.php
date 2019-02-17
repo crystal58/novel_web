@@ -234,9 +234,9 @@ class ArticleController extends AbstractController{
 
             $content = mb_substr(strip_tags($articleInfo['content']),0,95,'utf-8');
             $this->_view->seo = array(
-                "title" => str_replace(array("{name}","{author_name}"),array($articleInfo['name'],$articleInfo['author']),$this->_seo['guishidetail']['title']),
-                "keywords" => str_replace(array("{name}","{author_name}"),array($articleInfo['name'],$articleInfo['author']),$this->_seo['guishidetail']['keywords']),
-                "description" => str_replace(array("{name}","{author_name}","{content}"),array($articleInfo['name'],$articleInfo['author'],$content),$this->_seo['guishidetail']['description']),
+                "title" => str_replace(array("{name}","{author_name}"),array(trim($articleInfo['name']),trim($articleInfo['author'])),$this->_seo['guishidetail']['title']),
+                "keywords" => str_replace(array("{name}","{author_name}"),array(trim($articleInfo['name']),trim($articleInfo['author'])),$this->_seo['guishidetail']['keywords']),
+                "description" => str_replace(array("{name}","{author_name}","{content}"),array(trim($articleInfo['name']),trim($articleInfo['author']),$content),$this->_seo['guishidetail']['description']),
             );
 
         }catch (Exception $e){
@@ -280,7 +280,9 @@ class ArticleController extends AbstractController{
                     $key = "songyuanchapter";
                     $urlType = "ciqu";
                     break;
-
+                case ArticlesTypeModel::ARTICLE_TYPE_WENYANWEN:
+                    $urlType = "wenyanwen";
+                    break;
             }
             $this->_view->url_type = $urlType?:"tangshi";
             $this->_view->page_num = ceil($chaptersList['cnt']/self::PAGESIZE);
@@ -288,9 +290,9 @@ class ArticleController extends AbstractController{
             $this->_view->cur_page = $page;
 
             $this->_view->seo = array(
-                "title" => str_replace("{name}",$articleType['name'],$this->_seo['gushichapter']['title']),
-                "keywords" => str_replace("{name}",$articleType['name'],$this->_seo['gushichapter']['keywords']),
-                "description" => str_replace("{name}",$articleType['name'],$this->_seo['gushichapter']['description']).mb_substr(strip_tags($articleType['content']),0,80,'utf-8'),
+                "title" => str_replace("{name}",trim($articleType['name']),$this->_seo['gushichapter']['title']),
+                "keywords" => str_replace("{name}",trim($articleType['name']),$this->_seo['gushichapter']['keywords']),
+                "description" => str_replace("{name}",trim($articleType['name']),$this->_seo['gushichapter']['description']).mb_substr(strip_tags($articleType['content']),0,80,'utf-8'),
             );
 
 
