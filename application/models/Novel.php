@@ -74,8 +74,10 @@ class NovelModel extends AbstractModel {
         }
         if($order){
             $where['ORDER'] = $order;
+        }else{
+            $where['ORDER']['id'] = "DESC";
         }
-        $where['ORDER']['id'] = "DESC";
+
         $result['list'] = $this->fetchAll($where);
         return $result;
     }
