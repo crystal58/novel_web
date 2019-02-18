@@ -207,7 +207,7 @@ class NovelController extends AbstractController{
                 "novel_class_id" => 7,
                 "status" => 1
             );
-            $novelList = $novelModel->novelList($params,$offset,self::PAGESIZE,true,array("id" => "DESC"));
+            $novelList = $novelModel->novelList($params,$offset,self::PAGESIZE,true,array("id" => "ASC"));
             $this->_view->novel = $novelList['list'];
 
             $this->_view->page_num = ceil($novelList['cnt']/self::PAGESIZE);
