@@ -63,7 +63,7 @@
                     <div class="gushi">
                         <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default gushi-title">
                             <h2 class="am-titlebar-title">
-                                <span><?= $this->article_info['name'] ?>简介</span>
+                                <span><?= trim($this->article_info['name']) ?>简介</span>
                             </h2>
                         </div>
                         <div>
@@ -74,7 +74,7 @@
                 <?php if ($this->article_info['translate']) { ?>
                     <div class="gushi">
                         <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default gushi-title">
-                            <h2 class="am-titlebar-title"><?= $this->article_info['name'] ?>翻译</h2>
+                            <h2 class="am-titlebar-title"><?= trim($this->article_info['name']) ?>翻译</h2>
                         </div>
                         <div>
                             <?= $this->article_info['translate'] ?>
@@ -84,7 +84,7 @@
                 <?php if ($this->article_info['notes']) { ?>
                     <div class="gushi">
                         <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default gushi-title">
-                            <h2 class="am-titlebar-title"><?= $this->article_info['name'] ?>注释</h2>
+                            <h2 class="am-titlebar-title"><?= trim($this->article_info['name']) ?>注释</h2>
                         </div>
                         <div>
                             <?= $this->article_info['notes'] ?>
@@ -94,7 +94,7 @@
                 <?php if ($this->article_info['shangxi']) { ?>
                     <div class="gushi">
                         <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default gushi-title">
-                            <h2 class="am-titlebar-title"><?= $this->article_info['name'] ?>赏析</h2>
+                            <h2 class="am-titlebar-title"><?= trim($this->article_info['name']) ?>赏析</h2>
                         </div>
                         <div>
                             <?= $this->article_info['shangxi'] ?>

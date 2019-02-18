@@ -170,7 +170,7 @@ class NovelController extends AbstractController{
 
             $novelModel = new NovelModel();
             $novelInfo = $novelModel->find($novelId);
-            $this->_view->novel_info = $novelInfo;
+            $this->_view->novel = $novelInfo;
 
             $authorModel = new AuthorModel();
             $authorInfo = $authorModel->find($novelInfo['author_id']);
@@ -207,8 +207,8 @@ class NovelController extends AbstractController{
                 "novel_class_id" => 7,
                 "status" => 1
             );
-            $novelList = $novelModel->novelList($params,$offset,self::PAGESIZE,true);
-            $this->_view->novel_list = $novelList['list'];
+            $novelList = $novelModel->novelList($params,$offset,self::PAGESIZE,true,array("id" => "DESC"));
+            $this->_view->novel = $novelList['list'];
 
             $this->_view->page_num = ceil($novelList['cnt']/self::PAGESIZE);
             $this->_view->page_url = $this->_webUrl."/xiaoshuo/gudian_7_{page}.html";

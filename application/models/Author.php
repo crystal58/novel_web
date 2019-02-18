@@ -25,7 +25,7 @@ class AuthorModel extends AbstractModel {
     /**
      * isCount   是否返回count
      */
-    public function getList($params,$offset = 0,$pageSize = null,$isCount = false) {
+    public function getList($params,$offset = 0,$pageSize = null,$isCount = false,$order=array()) {
         if(empty($params) && empty($pageSize)){
             return array();
         }
@@ -41,9 +41,14 @@ class AuthorModel extends AbstractModel {
         if($pageSize){
             $where['LIMIT'] = array($offset,$pageSize);
         }
-        $where['ORDER'] = array(
-            "id"=>"DESC"
-        );
+        if(empty($order)){
+            $where['ORDER'] = array(
+                "id"=>"DESC"
+            );
+        }else{
+            $where['ORDER'] = $order;
+        }
+
         $result['list'] = $this->fetchAll($where);
         return $result;
     }

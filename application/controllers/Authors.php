@@ -48,7 +48,7 @@ class AuthorsController extends AbstractController {
             }
 
 
-            $authorList = $authorModel->getList($params,$offset,$pageSize,$isCount);
+            $authorList = $authorModel->getList($params,$offset,$pageSize,$isCount,array("id"=>"ASC"));
             $this->_view->author_list = $authorList['list'];
             $authors = "";
             foreach ($authorList['list'] as $value){

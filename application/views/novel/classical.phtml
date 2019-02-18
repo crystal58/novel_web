@@ -24,7 +24,7 @@
 
     <div class="am-list-news-bd am-container">
         <ul class="am-avg-sm-1 am-avg-md-3 am-avg-lg-5 am-thumbnails am-list">
-<?php foreach ($this->novel_list as $value){?>
+<?php foreach ($this->novel as $value){?>
             <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-bottom-left">
                 <h3 class="am-list-item-hd author_book_til">
                     <a href="<?=$this->web_url?>/xiaoshuo/chapter_<?=$value['id']?>_1.html" title="<?=$value['author_name']?>作品：<?=$value['name']?>"><?=$value['name']?></a>

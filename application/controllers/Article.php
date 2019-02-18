@@ -285,12 +285,14 @@ class ArticleController extends AbstractController{
                     $urlType = "ciqu";
                     break;
             }
+            $chapterType = "chapter";
             if($articleTypeId == ArticlesTypeModel::ARTICLE_TYPE_WENYANWEN){
                 $urlType = "wenyanwen";
+                $chapterType = "list";
             }
             $this->_view->url_type = $urlType?:"tangshi";
             $this->_view->page_num = ceil($chaptersList['cnt']/self::PAGESIZE);
-            $this->_view->page_url = $this->_webUrl."/".$this->_view->url_type."/chapter_".$articleTypeId."_{page}.html";
+            $this->_view->page_url = $this->_webUrl."/".$this->_view->url_type."/".$chapterType."_".$articleTypeId."_{page}.html";
             $this->_view->cur_page = $page;
 
             $this->_view->seo = array(
