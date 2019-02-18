@@ -42,7 +42,7 @@ class NovelController extends AbstractController{
             $this->_view->seo = array(
                 "title" => isset($authorInfo['author_name'])?str_replace(array("{author}"),array($authorInfo['author_name']),$this->_seo['author']['title']):"",
                 "keywords" => isset($authorInfo['author_name'])?str_replace(array("{author}"),array($authorInfo['author_name']),$this->_seo['author']['keywords']):"",
-                "description" => $this->_seo['author']['description'].mb_substr(strip_tags($authorInfo['description']),0,80,'utf-8')
+                "description" => str_replace(array("{author}"),array($authorInfo['author_name']),$this->_seo['author']['description']).mb_substr(strip_tags($authorInfo['description']),0,80,'utf-8')
             );
             $this->_view->page_num = ceil($novelList['cnt']/self::AUTHOR_NOVEL_PAGESIZE);
             $this->_view->page_url = $this->_webUrl."/xiaoshuo/author_".$authorId."_{page}.html";

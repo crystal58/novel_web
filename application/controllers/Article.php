@@ -158,6 +158,7 @@ class ArticleController extends AbstractController{
             $articleType = $articleTypeModel->find($classId);
 
             $this->_view->article_type = $articleType;
+            $this->_view->article_type_id = $classId;
 
             $params = array(
                 "status" => ArticlesModel::ARTICLE_CLASS_STATUS,
@@ -226,6 +227,9 @@ class ArticleController extends AbstractController{
                     $urlType = "ciqu";
                     $chapterUrlType = "yuanqu";
                     break;
+                case ArticlesTypeModel::ARTICLE_TYPE_WENYANWEN:
+                    $urlType = "wenyanwen";
+                    break;
 
             }
             $this->_view->class_type = $classType;
@@ -280,9 +284,9 @@ class ArticleController extends AbstractController{
                     $key = "songyuanchapter";
                     $urlType = "ciqu";
                     break;
-                case ArticlesTypeModel::ARTICLE_TYPE_WENYANWEN:
-                    $urlType = "wenyanwen";
-                    break;
+            }
+            if($articleTypeId == ArticlesTypeModel::ARTICLE_TYPE_WENYANWEN){
+                $urlType = "wenyanwen";
             }
             $this->_view->url_type = $urlType?:"tangshi";
             $this->_view->page_num = ceil($chaptersList['cnt']/self::PAGESIZE);

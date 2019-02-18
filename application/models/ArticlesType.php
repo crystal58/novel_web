@@ -16,7 +16,8 @@ class ArticlesTypeModel extends AbstractModel {
     public static $ArticleType = array(
         self::ARTICLE_TYPE_TANG => "唐诗",
         self::ARTICLE_TYPE_SONG => "宋词",
-        self::ARTICLE_TYPE_YUAN => "元曲"
+        self::ARTICLE_TYPE_YUAN => "元曲",
+        self::ARTICLE_TYPE_WENYANWEN => "文言文"
     );
 
 
