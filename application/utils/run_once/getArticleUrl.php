@@ -37,7 +37,7 @@ try{
 
         $page = ceil((count($articleType['list']) + count($articleAuthor['list']))/ArticleController::PAGESIZE);
         for($i = 2; $i<=$page;$i++){
-            $url .= "https://www.eeeaaa.cn/".$value."/list_1_".$i.".html\r\n";
+            $url .= "https://www.eeeaaa.cn/".$value."/list_".$key."_".$i.".html\r\n";
             $sumCount++;
         }
 
@@ -88,6 +88,38 @@ try{
         file_put_contents($fileName,$url,FILE_APPEND);
 
     }
+
+    //文言文
+    $classType = 5;
+    $url = "https://www.eeeaaa.cn/wenyanwen/list_".$classType.".html\r\n";
+    $sumCount++;
+
+    $articleParams = array(
+        "class_type" => $classType,
+        "status" => 1
+    );
+    $chaptersList = $articleModel->getList($articleParams);
+    $articleCount = count($chaptersList['list']);
+
+    $articlePage = ceil($articleCount/ArticleController::PAGESIZE);
+    for($k=1;$k<=$articlePage;$k++){
+        $url .= "https://www.eeeaaa.cn/wenyanwen/list_".$classType."_".$k.".html\r\n";
+        $sumCount++;
+    }
+    foreach($chaptersList['list'] as $chapterValue){
+        if($chapterValue['is_part'] == 1)continue;
+        $url .= "https://www.eeeaaa.cn/wenyanwen/detail_".$chapterValue['id'].".html\r\n";
+        $sumCount++;
+    }
+
+        $fileNameNew = $file.ceil($sumCount/50000).".txt";
+        if($fileName != $fileNameNew){
+            $fileName = $fileNameNew;
+            file_put_contents($fileName,"");
+        }
+
+        file_put_contents($fileName,$url,FILE_APPEND);
+
 
 }catch (Exception $e){
     \YC\LoggerHelper::ERR('write_baidu_url', $e->__toString());

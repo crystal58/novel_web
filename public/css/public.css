@@ -282,6 +282,9 @@ footer a:hover{
 .contents{
     margin: 30px auto;
 }
+@media only screen and (min-device-width: 320px) and (max-device-width: 1024px){
+    .contents{font-size: 1.8rem;line-height: 1.8}
+}
 .shang{
     width: 100%;
     text-align: center;
