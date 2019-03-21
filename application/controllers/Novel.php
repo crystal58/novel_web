@@ -121,7 +121,7 @@ class NovelController extends AbstractController{
                 ),
                 "ORDER" => array(
                     "chapter_order" => "DESC",
-                    "id" => "DESC"
+                    "id" => "ASC"
                 )
             );
             $preNovel = $novelChapterModel->fetchRow($params,array("id","chapter_order"));
