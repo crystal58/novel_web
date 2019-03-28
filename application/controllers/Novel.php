@@ -90,18 +90,16 @@ class NovelController extends AbstractController{
 
             $novelChapter['content'] = $this->filterWord($novelChapter['content']);
 
-            if(empty($novelChapter)){
+            $novelId = $novelChapter['novel_id'];
+            $novelModel = new NovelModel();
+
+            $novelInfo = $novelModel->find($novelId);
+            if(empty($novelInfo) || $novelInfo['status']!=1){
                 header("Location:https://www.eeeaaa.cn");
                 exit;
                 throw new Exception("章节不存在!",404);
 
             }
-
-            $novelId = $novelChapter['novel_id'];
-            $novelModel = new NovelModel();
-
-            $novelInfo = $novelModel->find($novelId);
-
             $novelChapter['next'] = $novelChapter['pre'] = false;
             $params = array(
                 "AND" => array(
@@ -169,14 +167,14 @@ class NovelController extends AbstractController{
             );
             $chaptersList = $novelChapters->chaptersList($params,$offset,self::PAGESIZE,true);
             //$chaptersList = $novelChapters->chaptersList($params);
-            if(empty($chaptersList['list']) || count($chaptersList['count']) == 0){
-                header("Location:https://www.eeeaaa.cn");
-                exit;
-            }
             $this->_view->list = $chaptersList['list'];
 
             $novelModel = new NovelModel();
             $novelInfo = $novelModel->find($novelId);
+            if(empty($novelInfo) || $novelInfo['status']!=1){
+                header("Location:https://www.eeeaaa.cn");
+                exit;
+            }
             $this->_view->novel = $novelInfo;
 
             $authorModel = new AuthorModel();
