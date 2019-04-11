@@ -116,11 +116,7 @@ footer a:hover{
 }
 .btnlogo{
     margin: 20px 0;
-    max-width: 500px;
     text-align: center;
-}
-.btnlogo img{
-    width: 300px;
 }
 .w2div{
     width: 350px;
