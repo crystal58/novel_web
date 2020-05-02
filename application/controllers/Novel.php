@@ -181,7 +181,7 @@ class NovelController extends AbstractController{
             $authorInfo = $authorModel->find($novelInfo['author_id']);
 
             $this->_view->page_num = ceil($chaptersList['cnt']/self::PAGESIZE);
-            $this->_view->page_url = $this->_webUrl."/xiaoshuo/chapter_".$novelId."_{page}.html";
+            $this->_view->page_url = $this->_webUrl."/gudian/chapter_".$novelId."_{page}.html";
             $this->_view->cur_page = $page;
 
             $this->_view->seo = array(
@@ -216,7 +216,7 @@ class NovelController extends AbstractController{
             $this->_view->novel = $novelList['list'];
 
             $this->_view->page_num = ceil($novelList['cnt']/self::PAGESIZE);
-            $this->_view->page_url = $this->_webUrl."/xiaoshuo/gudian_7_{page}.html";
+            $this->_view->page_url = $this->_webUrl."/gudian/gudian_7_{page}.html";
             $this->_view->cur_page = $page;
 
             $this->_view->gudian = array(
