@@ -171,6 +171,7 @@ class NovelController extends AbstractController{
 
             $novelModel = new NovelModel();
             $novelInfo = $novelModel->find($novelId);
+
             if(empty($novelInfo) || $novelInfo['status']!=1){
                 header("Location:https://www.eeeaaa.cn");
                 exit;

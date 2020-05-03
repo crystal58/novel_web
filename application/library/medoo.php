@@ -792,7 +792,6 @@ class medoo
 				$where_clause .= ' ' . $where;
 			}
 		}
-
 		return $where_clause;
 	}
 
