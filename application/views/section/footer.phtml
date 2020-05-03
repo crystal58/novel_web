@@ -14,30 +14,43 @@
 </footer>
 <script>
     var href = location.href;
-
-    if( href.search("tangshi") > 0 || href.search("ciqu") > 0 || href.search("wenyanwen") > 0){
-        $("#tangshi").removeClass("am-dropdown");
+    if( href.search("tangshi") > 0){
         $("#tangshi").addClass("am-nav-active");
-        $("#tangshi").addClass("am-dropdown");
-    }else if(href.search("gudian") >0){
-        $("#gudian").removeClass("am-dropdown");
+    }else if(href.search("songci") > 0){
+        $("#songci").addClass("am-nav-active");
+    }else if(href.search("wenyanwen") > 0){
+        $("#wenyanwen").addClass("am-nav-active");
+    } else if(href.search("yuanqu") >0){
         $("#gudian").addClass("am-nav-active");
-        $("#gudian").addClass("am-dropdown");
-    }else if(href.search("xiaoshuo") >0){
-        var cls = "<?=$this->novel['novel_class_id']?:''?>";
-        if(cls == "7"){
-            $("#gudian").removeClass("am-dropdown");
-            $("#gudian").addClass("am-nav-active");
-            $("#gudian").addClass("am-dropdown");
-        }else{
-            $("#novel").removeClass("am-dropdown");
-            $("#novel").addClass("am-nav-active");
-            $("#novel").addClass("am-dropdown");
-        }
-
+    }else if(href.search("novel") >0){
+        $("#novel").addClass("am-nav-active");
     }else{
         $("#index").addClass("am-nav-active");
     }
+
+    //if( href.search("tangshi") > 0 || href.search("ciqu") > 0 || href.search("wenyanwen") > 0){
+    //    $("#tangshi").removeClass("am-dropdown");
+    //    $("#tangshi").addClass("am-nav-active");
+    //    $("#tangshi").addClass("am-dropdown");
+    //}else if(href.search("gudian") >0){
+    //    $("#gudian").removeClass("am-dropdown");
+    //    $("#gudian").addClass("am-nav-active");
+    //    $("#gudian").addClass("am-dropdown");
+    //}else if(href.search("xiaoshuo") >0){
+    //    var cls = "<?//=$this->novel['novel_class_id']?:''?>//";
+    //    if(cls == "7"){
+    //        $("#gudian").removeClass("am-dropdown");
+    //        $("#gudian").addClass("am-nav-active");
+    //        $("#gudian").addClass("am-dropdown");
+    //    }else{
+    //        $("#novel").removeClass("am-dropdown");
+    //        $("#novel").addClass("am-nav-active");
+    //        $("#novel").addClass("am-dropdown");
+    //    }
+    //
+    //}else{
+    //    $("#index").addClass("am-nav-active");
+    //}
 
 </script>
 </body>
