@@ -1,0 +1,11 @@
+{
+  "require": {
+    "elasticsearch/elasticsearch": "^7.2"
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://mirrors.aliyun.com/composer/"
+    }
+  }
+}
