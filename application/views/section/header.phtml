@@ -2,9 +2,9 @@
 <html class="no-js">
 <head>
     <meta charset="utf-8">
-    <title><?=!empty($this->seo['title'])?$this->seo['title']:"小说|诗歌|散文|文学网 - 做你最喜爱的小说在线阅读,文学网"?></title>
-    <meta name="keywords" content="<?=!empty($this->seo['keywords'])?$this->seo['keywords']:"文学星空,文学网,小说,小说网,武侠小说,言情小说,校园小说,玄幻小说,恐怖小说,先秦文学,两汉文学,魏晋文学,隋唐文学,宋元文学,明清文学,近代文学,现代文学,外国文学,唐诗,宋词,元曲,诗歌,散文"?>" />
-    <meta name="description" content="<?=!empty($this->seo['description'])?$this->seo['description']:"文学星空 - 中国最优质的小说，美文，文学网。做你最喜爱的在线阅读小说网，文学网。提供最人性化的阅读体验，诗歌小说散文，名人名言大全的文学网。让人们在宣泄的都市中体验阅读的乐趣，享受文学的熏陶。找诗歌散文小说美文在线阅读，上文学星空小说文学网。"?>" />
+    <title><?=!empty($this->seo['title'])?$this->seo['title']:"文学网 - 做你最喜爱的国学在线阅读,文学网"?></title>
+    <meta name="keywords" content="<?=!empty($this->seo['keywords'])?$this->seo['keywords']:"文学星空,文学网,唐诗,宋词,元曲,诗歌,散文"?>" />
+    <meta name="description" content="<?=!empty($this->seo['description'])?$this->seo['description']:"文学星空 - 中国最优质的国学，美文，文学网，提供最人性化的阅读体验，诗歌小说散文，名人名言大全的文学网。让人们在宣泄的都市中体验阅读的乐趣，享受文学的熏陶。找诗歌散文美文在线阅读，上文学星空文学网。"?>" />
     <meta name="author" content="www.eeeaaa.cn">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
@@ -44,7 +44,6 @@
             s.parentNode.insertBefore(hm, s);
         })();
     </script>
-
 </head>
 <body>
 <header class="am-topbar am-topbar-fixed-top wos-header">
@@ -58,51 +57,58 @@
             <span class="am-icon-bars"></span>
         </button>
         <div class="am-collapse am-topbar-collapse" id="collapse-head">
-            <ul class="am-nav am-nav-pills am-topbar-nav">
+            <ul class="am-nav am-nav-pills am-topbar-nav" id="nav_ul">
                 <li id="index"><a href="<?=$this->web_url?>" title="文学星空">首页</a></li>
-                <li id="tangshi" class="am-dropdown" data-am-dropdown>
-                    <a class="am-dropdown-toggle" title="诗文词曲" data-am-dropdown-toggle href="javascript:;">
-                        诗文词曲 <span class="am-icon-caret-down"></span>
-                    </a>
-                    <ul class="am-dropdown-content">
-                        <li><a href="<?=$this->web_url?>/tangshi/list_1.html" title="唐诗">唐诗</a></li>
-                        <li><a href="<?=$this->web_url?>/ciqu/list_2.html" title="宋词">宋词</a></li>
-                        <li><a href="<?=$this->web_url?>/ciqu/list_4.html" title="元曲">元曲</a></li>
-                        <li><a href="<?=$this->web_url?>/wenyanwen/list_5.html" title="文言文">文言文</a></li>
-                    </ul>
-                </li>
-                <li id="gudian" class="am-dropdown" data-am-dropdown>
-                    <a class="am-dropdown-toggle" title="古文典籍" data-am-dropdown-toggle href="javascript:;">
-                        古文典籍 <span class="am-icon-caret-down"></span>
-                    </a>
-                    <ul class="am-dropdown-content">
-                        <li><a href="#" title="典籍精选">典籍精选</a></li>
-                        <li><a href="<?=$this->web_url?>/xiaoshuo/gudian_7.html" title="古典小说">古典小说</a></li>
-                    </ul>
-                </li>
-                <li id="novel" class="am-dropdown" data-am-dropdown>
-                    <a class="am-dropdown-toggle" title="小说" data-am-dropdown-toggle href="javascript:;">
-                        短文小说 <span class="am-icon-caret-down"></span>
-                    </a>
-                    <ul class="am-dropdown-content">
-                        <li class="am-dropdown-header"><a href="<?=$this->web_url?>/xiaoshuo/author.html" title="小说作者聚合" style="padding: 0;color: #e1652f"><strong>小说作者聚合</strong></a ></li>
-                        <?php foreach ($this->novel_class as $key=>$value){
-                            if($key == NovelModel::NOVEL_CLASS_GUDIAN)continue;
-                            ?>
-                            <li><a href="<?=$this->web_url?>/xiaoshuo/<?=$this->pinxie[$key]?>_<?=$key?>.html" title="<?=$value?>小说"><?=$value?>小说</a></li>
-                        <?php } ?>
-                    </ul>
-                </li>
-                <li class="am-dropdown" data-am-dropdown>
-                    <a class="am-dropdown-toggle" title="散文随笔" data-am-dropdown-toggle href="javascript:;">
-                        散文随笔 <span class="am-icon-caret-down"></span>
-                    </a>
-                    <ul class="am-dropdown-content">
-                        <li><a href="#" title="名家名篇">名家名篇</a></li>
-                        <li><a href="#" title="散文美文">散文美文</a></li>
-                        <li><a href="#" title="随笔摘抄">随笔摘抄</a></li>
-                    </ul>
-                </li>
+                <li id="tangshi"><a href="<?=$this->web_url?>/tangshi/list_1.html" title="唐诗">唐诗</a></li>
+                <li id="songci"><a href="<?=$this->web_url?>/ciqu/list_2.html" title="宋词">宋词</a></li>
+                <li id="yuanqu"><a href="<?=$this->web_url?>/ciqu/list_4.html" title="元曲">元曲</a></li>
+                <li id="wenyanwen"><a href="<?=$this->web_url?>/wenyanwen/list_5.html" title="文言文">文言文</a></li>
+                <li id="novel"><a href="<?=$this->web_url?>/gudian/gudian_7.html" title="古典小说">古典小说</a></li>
+
+<!--                <li id="tangshi" class="am-dropdown" data-am-dropdown>-->
+<!--                    <a class="am-dropdown-toggle" title="诗文词曲" data-am-dropdown-toggle href="javascript:;">-->
+<!--                        诗文词曲 <span class="am-icon-caret-down"></span>-->
+<!--                    </a>-->
+<!--                    <ul class="am-dropdown-content">-->
+<!--                        <li><a href="--><?//=$thisweb_url?><!--/tangshi/list_1.html" title="唐诗">唐诗</a></li>-->
+<!--                        <li><a href="--><?//=$thisweb_url?><!--/ciqu/list_2.html" title="宋词">宋词</a></li>-->
+<!--                        <li><a href="--><?//=$thisweb_url?><!--/ciqu/list_4.html" title="元曲">元曲</a></li>-->
+<!---->
+<!--                    </ul>-->
+<!--                </li>-->
+<!--                <li id="gudian" class="am-dropdown" data-am-dropdown>-->
+<!--                    <a class="am-dropdown-toggle" title="古文典籍" data-am-dropdown-toggle href="javascript:;">-->
+<!--                        古文典籍 <span class="am-icon-caret-down"></span>-->
+<!--                    </a>-->
+<!--                    <ul class="am-dropdown-content">-->
+<!--                        <li><a href="#" title="典籍精选">典籍精选</a></li>-->
+<!--                        <li><a href="--><?//=$thisweb_url?><!--/wenyanwen/list_5.html" title="文言文">文言文</a></li>-->
+<!--                        <li><a href="--><?//=$thisweb_url?><!--/xiaoshuo/gudian_7.html" title="古典小说">古典小说</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+<!--                <li id="novel" class="am-dropdown" data-am-dropdown>-->
+<!--                    <a class="am-dropdown-toggle" title="小说" data-am-dropdown-toggle href="javascript:;">-->
+<!--                        短文小说 <span class="am-icon-caret-down"></span>-->
+<!--                    </a>-->
+<!--                    <ul class="am-dropdown-content">-->
+<!--                        <li class="am-dropdown-header"><a href="--><?//=$thisweb_url?><!--/xiaoshuo/author.html" title="小说作者聚合" style="padding: 0;color: #e1652f"><strong>小说作者聚合</strong></a ></li>-->
+<!--                        --><?php //foreach ($this->novel_class as $key=>$value){
+//                            if($key == NovelModel::NOVEL_CLASS_GUDIAN)continue;
+//                            ?>
+<!--                            <li><a href="--><?//=$thisweb_url?><!--/xiaoshuo/--><?//=$thispinxie[$key]?><!--_--><?//=$key?><!--.html" title="--><?//=$value?><!--小说">--><?//=$value?><!--小说</a></li>-->
+<!--                        --><?php //} ?>
+<!--                    </ul>-->
+<!--                </li>-->
+<!--                <li class="am-dropdown" data-am-dropdown>-->
+<!--                    <a class="am-dropdown-toggle" title="散文随笔" data-am-dropdown-toggle href="javascript:;">-->
+<!--                        散文随笔 <span class="am-icon-caret-down"></span>-->
+<!--                    </a>-->
+<!--                    <ul class="am-dropdown-content">-->
+<!--                        <li><a href="#" title="名家名篇">名家名篇</a></li>-->
+<!--                        <li><a href="#" title="散文美文">散文美文</a></li>-->
+<!--                        <li><a href="#" title="随笔摘抄">随笔摘抄</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
             </ul>
         </div>
     </div>

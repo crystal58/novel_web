@@ -9,35 +9,48 @@
     <div class="content">
         <p><strong>爱好<a href="https://www.eeeaaa.cn" title="文学">文学</a>的你，是否在静静夜里，仰望星空，期待一个不凡的夜~</strong></p>
         <div class="btnlogo"><img src="/images/logo_footer.png" width="300" alt="文学星空"/></div>
-        <p><a href="https://www.eeeaaa.cn" title="文学星空">文学星空</a> <a href="https://www.eeeaaa.cn" title="文学星空">www.eeeaaa.cn</a> © 京ICP备17057981号-1</p>
+        <p><a href="https://www.eeeaaa.cn" title="文学星空">文学星空</a> <a href="https://www.eeeaaa.cn" title="文学星空">www.eeeaaa.cn</a> © <a href="http://www.beian.miit.gov.cn">京ICP备17057981号-1</a></p>
     </div>
 </footer>
 <script>
     var href = location.href;
-
-    if( href.search("tangshi") > 0 || href.search("ciqu") > 0 || href.search("wenyanwen") > 0){
-        $("#tangshi").removeClass("am-dropdown");
+    if( href.search("tangshi") > 0){
         $("#tangshi").addClass("am-nav-active");
-        $("#tangshi").addClass("am-dropdown");
+    }else if(href.search("list_2") > 0){
+        $("#songci").addClass("am-nav-active");
+    }else if(href.search("wenyanwen") > 0){
+        $("#wenyanwen").addClass("am-nav-active");
+    } else if(href.search("list_4") >0){
+        $("#yuanqu").addClass("am-nav-active");
     }else if(href.search("gudian") >0){
-        $("#gudian").removeClass("am-dropdown");
-        $("#gudian").addClass("am-nav-active");
-        $("#gudian").addClass("am-dropdown");
-    }else if(href.search("xiaoshuo") >0){
-        var cls = "<?=$this->novel['novel_class_id']?:''?>";
-        if(cls == "7"){
-            $("#gudian").removeClass("am-dropdown");
-            $("#gudian").addClass("am-nav-active");
-            $("#gudian").addClass("am-dropdown");
-        }else{
-            $("#novel").removeClass("am-dropdown");
-            $("#novel").addClass("am-nav-active");
-            $("#novel").addClass("am-dropdown");
-        }
-
+        $("#novel").addClass("am-nav-active");
     }else{
         $("#index").addClass("am-nav-active");
     }
+
+    //if( href.search("tangshi") > 0 || href.search("ciqu") > 0 || href.search("wenyanwen") > 0){
+    //    $("#tangshi").removeClass("am-dropdown");
+    //    $("#tangshi").addClass("am-nav-active");
+    //    $("#tangshi").addClass("am-dropdown");
+    //}else if(href.search("gudian") >0){
+    //    $("#gudian").removeClass("am-dropdown");
+    //    $("#gudian").addClass("am-nav-active");
+    //    $("#gudian").addClass("am-dropdown");
+    //}else if(href.search("xiaoshuo") >0){
+    //    var cls = "<?//=$this->novel['novel_class_id']?:''?>//";
+    //    if(cls == "7"){
+    //        $("#gudian").removeClass("am-dropdown");
+    //        $("#gudian").addClass("am-nav-active");
+    //        $("#gudian").addClass("am-dropdown");
+    //    }else{
+    //        $("#novel").removeClass("am-dropdown");
+    //        $("#novel").addClass("am-nav-active");
+    //        $("#novel").addClass("am-dropdown");
+    //    }
+    //
+    //}else{
+    //    $("#index").addClass("am-nav-active");
+    //}
 
 </script>
 </body>
