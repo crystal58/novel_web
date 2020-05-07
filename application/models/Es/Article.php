@@ -8,17 +8,14 @@ class ArticleModel extends AbstractEsModel
 
     public function createIndex()
     {
-        $result = $this->addIndex();
+        $result = $this->addIndex($this->updateMappingData());
         return $result;
 
     }
 
-    public function updateMappingData(){
+    private function updateMappingData(){
         $mapping = array(
-            'index' => $this->_index,
-  //          'type' => $this->_type,
             'body' => [
-//                '_doc' => [
                     '_source' => [
                         'enabled' => true
                     ],
@@ -37,13 +34,15 @@ class ArticleModel extends AbstractEsModel
                         'author' => [
                             'type' => 'text',
                             'analyzer' => 'ik_max_word'
+                        ],
+                        'author_id' => [
+                            'type' => 'integer'
                         ]
 
                     ]
-  //              ]
             ]
         );
-        return $this->updateMapping($mapping);
+        return $mapping;
 
     }
 

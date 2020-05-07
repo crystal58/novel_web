@@ -13,7 +13,7 @@ class AbstractEsModel{
     public function __construct()
     {
         $this->_hosts = \Yaf_Registry::get('dbconfig')['es']; 
-	$clientBuilder = ClientBuilder::create();   // Instantiate a new ClientBuilder
+	    $clientBuilder = ClientBuilder::create();   // Instantiate a new ClientBuilder
         $clientBuilder->setHosts($this->_hosts)->setRetries(2);    // Set the hosts
         $this->_client = $clientBuilder->build();
         if(!$this->_index){
@@ -21,11 +21,14 @@ class AbstractEsModel{
         }
     }
 
-    public function addIndex(){
+    public function addIndex($mapping=array()){
         if(empty($this->_index)){
             return false;
         }
         $params['index'] = $this->_index;
+        if(!empty($mapping)){
+            $params['body'] = $mapping['body'];
+        }
 //        $params['type'] = $this->_type;
         $result = $this->_client->indices()->create($params);
 	return $result['acknowledged'];
@@ -35,11 +38,11 @@ class AbstractEsModel{
         return $this->_client->indices()->putMapping($params);
     }
 
-    public function delIndex($params){
-        if(empty($params['index'])){
+    public function delIndex(){
+        if(empty($this->_index)){
             throw new \Exception("no index name");
         }
-        $result = $this->_client->indices()->delete($params);
+        $result = $this->_client->indices()->delete(array('index'=>$this->_index));
         return $result['acknowledged'];
     }
     public function putIndexMapping($params){
