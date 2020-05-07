@@ -3,7 +3,7 @@ namespace Es;
 class ArticleModel extends AbstractEsModel
 {
     protected $_index = "article_index";
-    protected $_type = "article_type";
+//    protected $_type = "article_type";
 
 
     public function createIndex()
@@ -16,9 +16,9 @@ class ArticleModel extends AbstractEsModel
     public function updateMappingData(){
         $mapping = array(
             'index' => $this->_index,
-            'type' => $this->_type,
+  //          'type' => $this->_type,
             'body' => [
-                'article_type' => [
+//                '_doc' => [
                     '_source' => [
                         'enabled' => true
                     ],
@@ -40,7 +40,7 @@ class ArticleModel extends AbstractEsModel
                         ]
 
                     ]
-                ]
+  //              ]
             ]
         );
         return $this->updateMapping($mapping);

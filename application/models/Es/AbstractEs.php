@@ -12,11 +12,11 @@ class AbstractEsModel{
 
     public function __construct()
     {
-        $this->_hosts = \Yaf_Registry::get('config')['es'];
-        $clientBuilder = ClientBuilder::create();   // Instantiate a new ClientBuilder
+        $this->_hosts = \Yaf_Registry::get('dbconfig')['es']; 
+	$clientBuilder = ClientBuilder::create();   // Instantiate a new ClientBuilder
         $clientBuilder->setHosts($this->_hosts)->setRetries(2);    // Set the hosts
         $this->_client = $clientBuilder->build();
-        if(!$this->_type || !$this->_index){
+        if(!$this->_index){
             exit("index or type is not empty");
         }
     }
@@ -26,9 +26,9 @@ class AbstractEsModel{
             return false;
         }
         $params['index'] = $this->_index;
-        $params['type'] = $this->_type;
+//        $params['type'] = $this->_type;
         $result = $this->_client->indices()->create($params);
-        return $result['acknowledged'];
+	return $result['acknowledged'];
     }
 
     public function updateMapping($params){
