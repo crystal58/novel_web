@@ -27,7 +27,7 @@ class AbstractEsModel{
         }
         $params['index'] = $this->_index;
         if(!empty($mapping)){
-            $params['body'] = $mapping['body'];
+            $params['body']['mappings'] = $mapping['body'];
         }
 //        $params['type'] = $this->_type;
         $result = $this->_client->indices()->create($params);

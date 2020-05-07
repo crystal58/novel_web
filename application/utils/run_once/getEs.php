@@ -10,7 +10,16 @@ require __DIR__."/../autoload.php";
 
 try{
 
-    $article = new \Es\ArticleModel();
+    $articleEs = new \Es\ArticleModel();
+    $articleModel = new ArticlesModel();
+    $where = array(
+        "LIMIT" => array(0,10),
+        "ORDER" => array(
+            "id" => "ASC"
+        )
+    );
+    $list = $articleModel->fetchAll($where);
+    echo json_encode($list);
 
 
 }catch (Exception $e){
