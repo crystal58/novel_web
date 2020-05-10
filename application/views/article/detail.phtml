@@ -1,190 +1,206 @@
 <?php $this->display('section/header.phtml'); ?>
 
-    <div class="am-g am-container">
-        <div class="am-u-sm-12 am-u-md-12 am-u-lg-8">
-            <ol class="am-breadcrumb breadcrumb">
-                <li><a href="<?= $this->web_url ?>" title="文学星空" class="am-icon-home">首页</a></li>
-                <li>
-                    <a href="<?= $this->web_url ?>/<?=$this->url_type?>/list_<?=$this->class_type?>.html" title="<?=ArticlesTypeModel::$ArticleType[$this->class_type]?>">
-                        <?=ArticlesTypeModel::$ArticleType[$this->class_type]?>
+<div class="am-g am-container">
+    <div class="am-u-sm-12 am-u-md-12 am-u-lg-8">
+        <ol class="am-breadcrumb breadcrumb">
+            <li><a href="<?= $this->web_url ?>" title="文学星空" class="am-icon-home">首页</a></li>
+            <li>
+                <a href="<?= $this->web_url ?>/<?=$this->url_type?>/list_<?=$this->class_type?>.html" title="<?=ArticlesTypeModel::$ArticleType[$this->class_type]?>">
+                    <?=ArticlesTypeModel::$ArticleType[$this->class_type]?>
+                </a>
+            </li>
+            <li>
+                <?php if($this->article_type_id != 5){?>
+                <?php if($this->article_type['parent_id'] == 0){?>
+                    <a href="<?= $this->web_url ?>/<?=$this->url_type?>/<?=$this->chapter_url_type?>_<?= $this->article_info['author_id'] ?>_1.html" title="<?= $this->article_info['author'] ?>">
+                        <strong class="fn">#<?= $this->article_info['author'] ?>#</strong>
                     </a>
-                </li>
-                <li>
-                    <?php if($this->article_type_id != 5){?>
-                    <?php if($this->article_type['parent_id'] == 0){?>
-                        <a href="<?= $this->web_url ?>/<?=$this->url_type?>/<?=$this->chapter_url_type?>_<?= $this->article_info['author_id'] ?>_1.html" title="<?= $this->article_info['author'] ?>">
-                            <strong class="fn">#<?= $this->article_info['author'] ?>#</strong>
-                        </a>
-                    <?php }else{?>
-                        <a href="<?= $this->web_url ?>/<?=$this->url_type?>/chapter_<?= $this->article_type['id'] ?>_1.html" title="<?= $this->article_type['name'] ?>">
-                            <strong class="fn">#<?= $this->article_type['name'] ?>#</strong>
-                        </a>
-                    <?php }?>
-                    <?php }?>
+                <?php }else{?>
+                    <a href="<?= $this->web_url ?>/<?=$this->url_type?>/chapter_<?= $this->article_type['id'] ?>_1.html" title="<?= $this->article_type['name'] ?>">
+                        <strong class="fn">#<?= $this->article_type['name'] ?>#</strong>
+                    </a>
+                <?php }?>
+                <?php }?>
 
-                    <a href="<?= $this->web_url ?>/<?=$this->url_type?>/detail_<?= $this->article_info['id'] ?>.html" title="<?= $this->article_info['name'] ?>"><strong class="fn">#<?= trim($this->article_info['name']) ?>#</strong></a>
-                </li>
-            </ol>
-            <div class="clearfix">
-                <h1 class="l"><?= $this->article_info['name'] ?></h1>
-                <div class="am-dropdown am-hide-sm-only l btn-ewm" data-am-dropdown>
-                    <button class="am-btn am-btn-xs am-radius am-btn-success am-dropdown-toggle">点击扫描二维码 <span class="am-icon-qrcode" style="font-size: 16px;vertical-align: middle"></span></button>
-                    <div class="am-dropdown-content">
-                        <h3 style="text-align: center">手机扫描下方二维码，移动端阅读</h3>
-                        <div id="doc-qrcode"></div>
-                    </div>
-                </div>
-                <div class="bdsharebuttonbox am-show-lg-only r">
-                    <a href=" " class="bds_more" data-cmd="more"></a >
-                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a >
-                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a >
+                <a href="<?= $this->web_url ?>/<?=$this->url_type?>/detail_<?= $this->article_info['id'] ?>.html" title="<?= $this->article_info['name'] ?>"><strong class="fn">#<?= trim($this->article_info['name']) ?>#</strong></a>
+            </li>
+        </ol>
+        <div class="clearfix">
+            <h1 class="l"><?= $this->article_info['name'] ?></h1>
+            <div class="am-dropdown am-hide-sm-only l btn-ewm" data-am-dropdown>
+                <button class="am-btn am-btn-xs am-radius am-btn-success am-dropdown-toggle">点击扫描二维码 <span class="am-icon-qrcode" style="font-size: 16px;vertical-align: middle"></span></button>
+                <div class="am-dropdown-content">
+                    <h3 style="text-align: center">手机扫描下方二维码，移动端阅读</h3>
+                    <div id="doc-qrcode"></div>
                 </div>
             </div>
-            <div>作者：<strong><?= $this->article_info['author'] ?></strong></div>
-            <div class="contents">
-                <div class="gushi">
-                    <?php
-                    $content = $this->article_info['content'];
-                    $search = array(
-                        '<font color="#800080" face="黑体">[注解]</font>',
-                        '<font color="#800080" face="黑体">[韵译]</font>',
-                        '<font color="#800080" face="黑体">[评析]</font>'
-                    );
-                    $replace = array(
-                        '<strong style="color: #e1652f">[注解]</strong>',
-                        '<strong style="color: #e1652f">[韵译]</strong>',
-                        '<strong style="color: #e1652f">[评析]</strong>'
-                    );
-                    $content = str_replace($search, $replace, $content);
-                    echo $content;
-                    ?>
-                </div>
-                <?php if (isset($this->article_info['description']) && $this->article_info['description']) { ?>
-                    <div class="gushi">
-                        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default gushi-title">
-                            <h2 class="am-titlebar-title">
-                                <span><?= trim($this->article_info['name']) ?>简介</span>
-                            </h2>
-                        </div>
-                        <div>
-                            <?= $this->article_info['description'] ?>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if ($this->article_info['translate']) { ?>
-                    <div class="gushi">
-                        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default gushi-title">
-                            <h2 class="am-titlebar-title"><?= trim($this->article_info['name']) ?>翻译</h2>
-                        </div>
-                        <div>
-                            <?= $this->article_info['translate'] ?>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if ($this->article_info['notes']) { ?>
-                    <div class="gushi">
-                        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default gushi-title">
-                            <h2 class="am-titlebar-title"><?= trim($this->article_info['name']) ?>注释</h2>
-                        </div>
-                        <div>
-                            <?= $this->article_info['notes'] ?>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if ($this->article_info['shangxi']) { ?>
-                    <div class="gushi">
-                        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default gushi-title">
-                            <h2 class="am-titlebar-title"><?= trim($this->article_info['name']) ?>赏析</h2>
-                        </div>
-                        <div>
-                            <?= $this->article_info['shangxi'] ?>
-                        </div>
-                    </div>
-                <?php } ?>
+            <div class="bdsharebuttonbox am-show-lg-only r">
+                <a href=" " class="bds_more" data-cmd="more"></a >
+                <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a >
+                <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a >
             </div>
-
-            <ul data-am-widget="pagination" class="am-pagination am-pagination-default">
-                <?php if ($this->chapter['pre']) { ?>
-                    <li class="am-pagination-prev ">
-                        <a href="<?= $this->web_url ?>/<?=$this->url_type?>/detail_<?= $this->chapter['pre'] ?>.html" class="">上一章</a>
-                    </li>
-                <?php } ?>
-                <li class="">
-                    <?php if($this->article_type_id == ArticlesTypeModel::ARTICLE_TYPE_WENYANWEN){?>
-                        <a href="<?= $this->web_url ?>/<?=$this->url_type?>/list_<?= $this->article_type_id ?>_1.html" class="">回目录</a>
-                    <?php }elseif ($this->article_type['parent_id'] == 0) { ?>
-                        <a href="<?= $this->web_url ?>/<?=$this->url_type?>/<?=$this->chapter_url_type?>_<?= $this->article_info['author_id'] ?>_1.html" class="">回目录</a>
-                    <?php }else{?>
-                        <a href="<?= $this->web_url ?>/<?=$this->url_type?>/chapter_<?= $this->article_info['class_type'] ?>_1.html" class="">回目录</a>
-                    <?php }?>
-                </li>
-                <?php if ($this->chapter['next']) { ?>
-                    <li class="am-pagination-next ">
-                        <a href="<?= $this->web_url ?>/<?=$this->url_type?>/detail_<?= $this->chapter['next'] ?>.html" class="">下一章</a>
-                    </li>
-                <?php } ?>
-            </ul>
         </div>
-        <div class="am-u-sm-0 am-u-md-0 am-u-lg-4">
-            <!--<div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
-                <h2 class="am-titlebar-title ">
-                    扫描二维码关注微信公众号『星阅』
-                </h2>
+        <div>作者：<strong><?= $this->article_info['author'] ?></strong></div>
+        <div class="contents">
+            <div class="gushi">
+                <?php
+                $content = $this->article_info['content'];
+                $search = array(
+                    '<font color="#800080" face="黑体">[注解]</font>',
+                    '<font color="#800080" face="黑体">[韵译]</font>',
+                    '<font color="#800080" face="黑体">[评析]</font>'
+                );
+                $replace = array(
+                    '<strong style="color: #e1652f">[注解]</strong>',
+                    '<strong style="color: #e1652f">[韵译]</strong>',
+                    '<strong style="color: #e1652f">[评析]</strong>'
+                );
+                $content = str_replace($search, $replace, $content);
+                echo $content;
+                ?>
             </div>
-            <div data-am-widget="list_news" class="am-list-news am-list-news-default right-bg">
-                <div class="tc"><img style="width: 258px;height: 258px" src="/images/qrcode_258.jpg"/></div>
-            </div>-->
+            <?php if (isset($this->article_info['description']) && $this->article_info['description']) { ?>
+                <div class="gushi">
+                    <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default gushi-title">
+                        <h2 class="am-titlebar-title">
+                            <span><?= trim($this->article_info['name']) ?>简介</span>
+                        </h2>
+                    </div>
+                    <div>
+                        <?= $this->article_info['description'] ?>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if ($this->article_info['translate']) { ?>
+                <div class="gushi">
+                    <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default gushi-title">
+                        <h2 class="am-titlebar-title"><?= trim($this->article_info['name']) ?>翻译</h2>
+                    </div>
+                    <div>
+                        <?= $this->article_info['translate'] ?>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if ($this->article_info['notes']) { ?>
+                <div class="gushi">
+                    <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default gushi-title">
+                        <h2 class="am-titlebar-title"><?= trim($this->article_info['name']) ?>注释</h2>
+                    </div>
+                    <div>
+                        <?= $this->article_info['notes'] ?>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if ($this->article_info['shangxi']) { ?>
+                <div class="gushi">
+                    <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default gushi-title">
+                        <h2 class="am-titlebar-title"><?= trim($this->article_info['name']) ?>赏析</h2>
+                    </div>
+                    <div>
+                        <?= $this->article_info['shangxi'] ?>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
 
-            <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
-                <h2 class="am-titlebar-title ">
-                    相关作品
-                </h2>
-                <nav class="am-titlebar-nav">
-                    <?php if($this->article_type_id == ArticlesTypeModel::ARTICLE_TYPE_WENYANWEN){?>
-                        <a href="<?= $this->web_url ?>/<?=$this->url_type?>/list_<?= $this->article_type_id ?>_1.html" class="">more</a>
-                    <?php }elseif ($this->article_type['parent_id'] == 0) { ?>
-                        <a href="<?= $this->web_url ?>/<?=$this->url_type?>/<?=$this->chapter_url_type?>_<?= $this->article_info['author_id'] ?>_1.html">more &raquo;</a>
-                    <?php } else { ?>
-                        <a href="<?= $this->web_url ?>/<?=$this->url_type?>/chapter_<?= $this->article_type['id'] ?>_1.html">more &raquo;</a>
-                    <?php } ?>
-                </nav>
-            </div>
+        <ul data-am-widget="pagination" class="am-pagination am-pagination-default">
+            <?php if ($this->chapter['pre']) { ?>
+                <li class="am-pagination-prev ">
+                    <a href="<?= $this->web_url ?>/<?=$this->url_type?>/detail_<?= $this->chapter['pre'] ?>.html" class="">上一章</a>
+                </li>
+            <?php } ?>
+            <li class="">
+                <?php if($this->article_type_id == ArticlesTypeModel::ARTICLE_TYPE_WENYANWEN){?>
+                    <a href="<?= $this->web_url ?>/<?=$this->url_type?>/list_<?= $this->article_type_id ?>_1.html" class="">回目录</a>
+                <?php }elseif ($this->article_type['parent_id'] == 0) { ?>
+                    <a href="<?= $this->web_url ?>/<?=$this->url_type?>/<?=$this->chapter_url_type?>_<?= $this->article_info['author_id'] ?>_1.html" class="">回目录</a>
+                <?php }else{?>
+                    <a href="<?= $this->web_url ?>/<?=$this->url_type?>/chapter_<?= $this->article_info['class_type'] ?>_1.html" class="">回目录</a>
+                <?php }?>
+            </li>
+            <?php if ($this->chapter['next']) { ?>
+                <li class="am-pagination-next ">
+                    <a href="<?= $this->web_url ?>/<?=$this->url_type?>/detail_<?= $this->chapter['next'] ?>.html" class="">下一章</a>
+                </li>
+            <?php } ?>
+        </ul>
 
-            <div data-am-widget="list_news" class="am-list-news am-list-news-default right-bg">
-                <ul class="am-list">
-                    <?php foreach ($this->relate_article as $value) {
-                        if ($value['id'] == $this->article_info['id']) continue;
-                        ?>
-                        <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">
-
-                            <div class=" am-u-sm-8 am-list-main">
-                                <h3 class="am-list-item-hd">
-                                    <a href="<?= $this->web_url ?>/<?=$this->url_type?>/detail_<?= $value['id'] ?>.html" title="<?= empty($value['author']) ?"" : $value['author']."/"?><?= $value['name'] ?>"><?= empty($value['author']) ?"" : $value['author']."/"?><?= $value['name'] ?></a>
-                                </h3>
-
-<!--                                <div class="am-list-item-text">--><!--</div>-->
-                            </div>
-                        </li>
-                        <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
-                    <?php } ?>
-
-                </ul>
-            </div>
-
+        <!--detail left pc-->
+        <div>
+            <div class="_6bsmrnfvoby"></div>
+            <script type="text/javascript">
+                if(!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+                    (window.slotbydup = window.slotbydup || []).push({
+                        id: "u6035041",
+                        container: "_6bsmrnfvoby",
+                        async: true
+                    });
+                }
+            </script>
         </div>
     </div>
-    <script>
-        window._bd_share_config = {
-            "common": {
-                "bdSnsKey": {},
-                "bdText": "爱好文学的你，是否在静静夜里，仰望星空？期待一个不凡的夜……",
-                "bdMini": "2",
-                "bdMiniList": false,
-                "bdPic": "https://www.eeeaaa.cn/images/logo_eeeaaa_web.png",
-                "bdStyle": "0",
-                "bdSize": "24"
-            }, "share": {}
-        };
-        with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = '/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
-    </script>
+    <div class="am-u-sm-0 am-u-md-0 am-u-lg-4">
+        <!--<div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+            <h2 class="am-titlebar-title ">
+                扫描二维码关注微信公众号『星阅』
+            </h2>
+        </div>
+        <div data-am-widget="list_news" class="am-list-news am-list-news-default right-bg">
+            <div class="tc"><img style="width: 258px;height: 258px" src="/images/qrcode_258.jpg"/></div>
+        </div>-->
+
+        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+            <h2 class="am-titlebar-title ">
+                相关作品
+            </h2>
+            <nav class="am-titlebar-nav">
+                <?php if($this->article_type_id == ArticlesTypeModel::ARTICLE_TYPE_WENYANWEN){?>
+                    <a href="<?= $this->web_url ?>/<?=$this->url_type?>/list_<?= $this->article_type_id ?>_1.html" class="">more</a>
+                <?php }elseif ($this->article_type['parent_id'] == 0) { ?>
+                    <a href="<?= $this->web_url ?>/<?=$this->url_type?>/<?=$this->chapter_url_type?>_<?= $this->article_info['author_id'] ?>_1.html">more &raquo;</a>
+                <?php } else { ?>
+                    <a href="<?= $this->web_url ?>/<?=$this->url_type?>/chapter_<?= $this->article_type['id'] ?>_1.html">more &raquo;</a>
+                <?php } ?>
+            </nav>
+        </div>
+
+        <div data-am-widget="list_news" class="am-list-news am-list-news-default right-bg">
+            <ul class="am-list">
+                <?php foreach ($this->relate_article as $value) {
+                    if ($value['id'] == $this->article_info['id']) continue;
+                    ?>
+                    <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">
+
+                        <div class=" am-u-sm-8 am-list-main">
+                            <h3 class="am-list-item-hd">
+                                <a href="<?= $this->web_url ?>/<?=$this->url_type?>/detail_<?= $value['id'] ?>.html" title="<?= empty($value['author']) ?"" : $value['author']."/"?><?= $value['name'] ?>"><?= empty($value['author']) ?"" : $value['author']."/"?><?= $value['name'] ?></a>
+                            </h3>
+
+<!--                                <div class="am-list-item-text">--><!--</div>-->
+                        </div>
+                    </li>
+                    <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
+                <?php } ?>
+
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "爱好文学的你，是否在静静夜里，仰望星空？期待一个不凡的夜……",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "https://www.eeeaaa.cn/images/logo_eeeaaa_web.png",
+            "bdStyle": "0",
+            "bdSize": "24"
+        }, "share": {}
+    };
+    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = '/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
 <?php $this->display('section/footer.phtml'); ?>
