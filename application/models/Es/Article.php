@@ -5,12 +5,10 @@ class ArticleModel extends AbstractEsModel
     protected $_index = "article_index";
 //    protected $_type = "article_type";
 
-
     public function createIndex()
     {
         $result = $this->addIndex($this->updateMappingData());
         return $result;
-
     }
 
     private function updateMappingData(){
@@ -50,11 +48,8 @@ class ArticleModel extends AbstractEsModel
         if(empty($params['index'])){
             $params['index'] = $this->_index;
         }
-        if(empty($params['type'])){
-            $params['type'] = $this->_type;
-        }
+        //var_dump($params);
         $result = $this->_client->search($params);
-        // echo var_dump($result);exit;
         $hits = array();
         if(isset($result['hits'])){
             $hits = $result['hits'];

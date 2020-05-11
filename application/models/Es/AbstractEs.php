@@ -8,7 +8,7 @@ class AbstractEsModel{
     private $_hosts;
 
     protected $_index ="";
-    protected $_type = "";
+    //protected $_type = "";
 
     public function __construct()
     {
@@ -29,13 +29,8 @@ class AbstractEsModel{
         if(!empty($mapping)){
             $params['body']['mappings'] = $mapping['body'];
         }
-//        $params['type'] = $this->_type;
         $result = $this->_client->indices()->create($params);
-	return $result['acknowledged'];
-    }
-
-    public function updateMapping($params){
-        return $this->_client->indices()->putMapping($params);
+	    return $result['acknowledged'];
     }
 
     public function delIndex(){
@@ -45,6 +40,11 @@ class AbstractEsModel{
         $result = $this->_client->indices()->delete(array('index'=>$this->_index));
         return $result['acknowledged'];
     }
+    /**
+     * @param $params
+     * @return array
+     * 此方法没有验证通过
+     */
     public function putIndexMapping($params){
         if(empty($params['index'])){
             return false;
@@ -75,16 +75,16 @@ class AbstractEsModel{
      * @throws Exception
      */
     public function insertBatchData($params,$return = 1){
-        if(empty($params['body'])){
+        if(empty($params)){
             throw new \Exception("batch insert params body empty");
         }
         $batchParams = array();
-        foreach ($params['body'] as $value){
+        foreach ($params as $value){
 
             $batchParams['body'][] = array(
                 'index' => [
                     '_index' =>empty($params['index'])?$this->_index:$params['index'],
-                    '_type'  => empty($params['type'])?$this->_type:$params['type'],
+                    //'_type'  => empty($params['type'])?$this->_type:$params['type'],
                 ]
             );
 
