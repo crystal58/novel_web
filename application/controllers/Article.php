@@ -185,7 +185,8 @@ class ArticleController extends AbstractController{
             $params = array(
                 "AND" => array(
                     "id[>]" =>$articleId,
-                    "class_type" => $articleInfo['class_type']
+                    "class_type" => $articleInfo['class_type'],
+                    "is_part" => 0
                 ),
                 "ORDER" => array(
                     "id" => "ASC"
@@ -201,7 +202,8 @@ class ArticleController extends AbstractController{
             $params = array(
                 "AND" => array(
                     "id[<]" =>$articleId,
-                    "class_type" => $articleInfo['class_type']
+                    "class_type" => $articleInfo['class_type'],
+                    "is_part" => 0
                 ),
                 "ORDER" => array(
                     "id" => "DESC"
