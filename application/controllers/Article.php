@@ -166,7 +166,9 @@ class ArticleController extends AbstractController{
                 "class_type" => $articleInfo['class_type'],
                 "is_part" => 0
             );
+
             $relateArticle = $articleModel->getList($params,0,10);
+
             if(count($relateArticle['list']) < 10){
                 $params = array(
                     "status" => ArticlesModel::ARTICLE_CLASS_STATUS,
@@ -178,12 +180,7 @@ class ArticleController extends AbstractController{
                 $relateArticle['list'] = array_merge($relateArticle['list'],$relate['list']);
             }
             $this->_view->relate_article = $relateArticle['list'];
-            $paramsExtra = array();
-            if($articleType['parent_id'] != 0 && $articleInfo['author_id'] > 0){
-                $paramsExtra = array(
-                    "author_id" => $articleInfo['author_id']
-                );
-            }
+
             $articleChapter['next'] = $articleChapter['pre'] = false;
             $params = array(
                 "AND" => array(
@@ -194,7 +191,10 @@ class ArticleController extends AbstractController{
                     "id" => "ASC"
                 )
             );
-            $nextArticle = $articleModel->fetchRow(array_merge($params,$paramsExtra),array("id"));
+            if($articleType['parent_id'] == 0 && $articleInfo['author_id'] > 0){
+                $params['AND']['author_id'] = $articleInfo['author_id'];
+            }
+            $nextArticle = $articleModel->fetchRow($params,array("id"));
             if($nextArticle){
                 $articleChapter['next'] = $nextArticle['id'];
             }
@@ -207,7 +207,10 @@ class ArticleController extends AbstractController{
                     "id" => "DESC"
                 )
             );
-            $preArticle = $articleModel->fetchRow(array_merge($params,$paramsExtra),array("id"));
+            if($articleType['parent_id'] == 0 && $articleInfo['author_id'] > 0){
+                $params['AND']['author_id'] = $articleInfo['author_id'];
+            }
+            $preArticle = $articleModel->fetchRow($params,array("id"));
             if($preArticle){
                 $articleChapter['pre'] = $preArticle['id'];
             }
